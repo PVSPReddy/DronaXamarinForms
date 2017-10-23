@@ -1,0 +1,24 @@
+﻿<Properties StartupConfiguration="{5AC4DB10-7946-4426-A3BC-5178DB7828B1}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="XamarinViews/App.xaml.cs">
+    <Files>
+      <File FileName="XamarinViews/Views/ActivityIndicator/ActivityIndicatorDemo.xaml" Line="1" Column="1" />
+      <File FileName="XamarinViews/Views/ActivityIndicator/ActivityIndicatorDemo.xaml.cs" Line="65" Column="1" />
+      <File FileName="XamarinViews/App.xaml.cs" Line="11" Column="40" />
+      <File FileName="Droid/MainActivity.cs" Line="30" Column="1" />
+      <File FileName="iOS/AppDelegate.cs" Line="24" Column="1" />
+      <File FileName="XamarinViews/obj/Debug/XamarinViews.Views.ActivityIndicator.ActivityIndicatorDemo.xaml.g.cs" Line="1" Column="1" />
+      <File FileName="XamarinViews/Views/Image/ImageDemo.xaml" Line="1" Column="1" />
+      <File FileName="XamarinViews/Views/Image/ImageDemo.xaml.cs" Line="18" Column="16" />
+      <File FileName="XamarinViews/Views/TableView/TableViewDemo.xaml" Line="1" Column="1" />
+      <File FileName="XamarinViews/Views/TableView/TableViewDemo.xaml.cs" Line="37" Column="14" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.XamarinViews.Droid PreferredExecutionTarget="Android.Android_Accelerated_x86" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.XamarinViews.iOS PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.181B3DA1-30B6-4A59-9D79-331C3C344171" />
+</Properties>

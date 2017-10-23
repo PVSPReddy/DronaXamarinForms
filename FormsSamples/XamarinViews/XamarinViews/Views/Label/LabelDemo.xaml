@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+	xmlns="http://xamarin.com/schemas/2014/forms" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+	x:Class="XamarinViews.LabelDemo">
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness">
+            <On Platform="iOS" Value="0,20,0,0" />
+            <On Platform="Android, WinPhone, Windows" Value="0,0,0,0" />
+        </OnPlatform>
+    </ContentPage.Padding>
+    <ContentPage.Content>
+		
+        <AbsoluteLayout BackgroundColor="Maroon" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+			
+            <StackLayout x:Name="headerStack" BackgroundColor="Gray" AbsoluteLayout.LayoutBounds="0,0,1,0.1" AbsoluteLayout.LayoutFlags="All" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <StackLayout.Padding>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <On Platform="iOS" Value="0,0,0,0" />
+                        <On Platform="Android, WinPhone, Windows" Value="0,0,0,0" />
+                    </OnPlatform>
+                </StackLayout.Padding>
+                <Label Text="This is a Label Demo" Margin="0,20,0,0" VerticalOptions="Center" HorizontalOptions="Center" />
+            </StackLayout>
+			
+            <StackLayout x:Name="bodyStack" BackgroundColor="White" Padding="20,0,20,0" AbsoluteLayout.LayoutBounds="0,0.5,1,0.8" AbsoluteLayout.LayoutFlags="All" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <StackLayout Orientation="Vertical" BackgroundColor="White" Spacing="20" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Padding="0,30,0,0">
+
+					<Label x:Name="lbl1" Text="This is Label one, font size: 10, Attribute: Bold, Alignment:Start" TextColor="Red" FontSize="10" FontAttributes="Bold" BackgroundColor="Gray" HorizontalTextAlignment="Start" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" >
+						<Label.GestureRecognizers>
+							<TapGestureRecognizer NumberOfTapsRequired="1" Tapped="lbl1Tapped" />
+						</Label.GestureRecognizers>
+					</Label>
+					
+					<Label x:Name="lbl2" Text="This is Label Two, font size: 12, Attribute: Italic, Alignment:End" TextColor="Blue" FontSize="12" FontAttributes="Italic" BackgroundColor="Gray" HorizontalTextAlignment="End" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" >
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="lbl1Tapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+					
+					<Label x:Name="lbl3" Text="This is Label Three, font size: Medium, Attribute: Bold &amp; Italic, Alignment:Center" FontAttributes="Bold, Italic" TextColor="Green" FontSize="Medium" HorizontalTextAlignment="Center" BackgroundColor="Gray" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" >
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="lbl1Tapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+					
+					<Label x:Name="lbl4" Text="This is Label Four, font size: Large, Attribute: None, Alignment:Center" LineBreakMode="WordWrap" TextColor="Teal" FontAttributes="None" FontSize="Large" HorizontalTextAlignment="Center" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" >
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="lbl1Tapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+					
+                </StackLayout>
+            </StackLayout>
+			
+            <StackLayout x:Name="footerStack" Orientation="Horizontal" BackgroundColor="Gray" AbsoluteLayout.LayoutBounds="0,1,1,0.1" AbsoluteLayout.LayoutFlags="All" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+				<Button x:Name="backBtn" Text="Back" IsEnabled="false" Opacity="0.3"  HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Clicked="backBtnClicked" />
+                <Button x:Name="startPageBtn" Text="Go to Start" IsEnabled="false" Opacity="0.3"  HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Clicked="startPageBtnClicked" />
+				<Button x:Name="nextBtn" Text="Next" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Clicked="nextBtnClicked" />
+            </StackLayout>
+			
+        </AbsoluteLayout>
+		
+    </ContentPage.Content>
+</ContentPage>

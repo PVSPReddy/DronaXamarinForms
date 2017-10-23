@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+	xmlns="http://xamarin.com/schemas/2014/forms" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+	xmlns:local="clr-namespace:XamarinViews;assembly=XamarinViews"
+	x:Class="XamarinViews.PickerDemo">
+	<ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness">
+            <On Platform="iOS" Value="0,20,0,0" />
+            <On Platform="Android, WinPhone, Windows" Value="0,0,0,0" />
+        </OnPlatform>
+    </ContentPage.Padding>
+    <ContentPage.Content>
+		<AbsoluteLayout BackgroundColor="Maroon" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            
+            <StackLayout x:Name="headerStack" BackgroundColor="Gray" AbsoluteLayout.LayoutBounds="0,0,1,0.1" AbsoluteLayout.LayoutFlags="All" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <StackLayout.Padding>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <On Platform="iOS" Value="0,0,0,0" />
+                        <On Platform="Android, WinPhone, Windows" Value="0,0,0,0" />
+                    </OnPlatform>
+                </StackLayout.Padding>
+                <Label Text="This is a Picker Demo" Margin="0,20,0,0" VerticalOptions="Center" HorizontalOptions="Center" />
+            </StackLayout>
+            
+            <StackLayout x:Name="bodyStack" BackgroundColor="White" Padding="20,0,20,0" AbsoluteLayout.LayoutBounds="0,0.5,1,0.8" AbsoluteLayout.LayoutFlags="All" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <ScrollView>
+				<StackLayout Orientation="Vertical" BackgroundColor="White" Spacing="40" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Padding="0,30,0,0">
+
+
+					<StackLayout Orientation="Vertical" BackgroundColor="White" Spacing="10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                        <Label x:Name="label1" BindingContext="{x:Reference Name=picker1}" Text="{Binding SelectedItem, StringFormat='Picker with &quot;C#&quot; binding - items individually to picker. Selected Color is {0}' }" HorizontalTextAlignment="Start" VerticalOptions="Center" HorizontalOptions="StartAndExpand" />
+
+						<Picker x:Name="picker1" Title="Touch to select" TextColor="Teal" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" >
+                        </Picker>
+                    </StackLayout>
+
+					<StackLayout Orientation="Vertical" BackgroundColor="White" Spacing="10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                        <Label x:Name="label2" BindingContext="{x:Reference Name=picker2}" Text="{Binding SelectedItem, StringFormat='Picker with &quot;xaml&quot; binding - items individually to picker. Selected option is {0}' }" HorizontalTextAlignment="Start" VerticalOptions="Center" HorizontalOptions="StartAndExpand" />
+
+						<Picker x:Name="picker2" Title="Touch to select" TextColor="Red" BackgroundColor="Gray" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" >
+                        <Picker.Items>
+                            <x:String>India</x:String>
+                            <x:String>Russia</x:String>
+                            <x:String>America</x:String>
+                            <x:String>China</x:String>
+                            <x:String>Australia</x:String>
+                            <x:String>Rome</x:String>
+                            <x:String>Egypt</x:String>
+                            <x:String>Greece</x:String>
+                            <x:String>Atlantis</x:String>
+                        </Picker.Items>
+                    </Picker>
+                    </StackLayout>
+					
+                    <StackLayout Orientation="Vertical" BackgroundColor="White" Spacing="10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                        <Label x:Name="label3" BindingContext="{x:Reference Name=picker3}" Text="{Binding SelectedItem, StringFormat='Picker with binding - collective ItemSource to picker. Selected option is {0}' }" HorizontalTextAlignment="Start" VerticalOptions="Center" HorizontalOptions="StartAndExpand" />
+
+                        <Picker x:Name="picker3" Title="Touch to select" TextColor="Teal" BackgroundColor="Gray" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" >
+                        </Picker>
+                    </StackLayout>
+
+					<!--<StackLayout Orientation="Vertical" BackgroundColor="White" Spacing="10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                        <Label x:Name="label4" Text="Picker with &quot;C#&quot; binding" VerticalOptions="Center" HorizontalOptions="Center" />
+
+                        <Picker x:Name="picker4" BindingContext="{x:Reference Name=picker3Source}" ItemsSource="{Binding picker3Source}" ItemDisplayBinding="{Binding item}" Title="Touch to select" TextColor="Teal" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" >
+                        </Picker>
+                    </StackLayout>-->
+                    
+                    <!--<DatePicker x:Name="datePicker" TextColor="Blue" BackgroundColor="Gray" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" >
+                    </DatePicker>
+                    
+                    <TimePicker x:Name="timePicker" TextColor="Green" BackgroundColor="Gray" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" >
+                    </TimePicker>-->
+                    
+                </StackLayout>
+				</ScrollView>
+            </StackLayout>
+            
+            <StackLayout x:Name="footerStack" Orientation="Horizontal" BackgroundColor="Gray" AbsoluteLayout.LayoutBounds="0,1,1,0.1" AbsoluteLayout.LayoutFlags="All" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <Button x:Name="backBtn" Text="Back" IsEnabled="true" Opacity="1"  HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Clicked="backBtnClicked" />
+                <Button x:Name="startPageBtn" Text="Go to Start" IsEnabled="true" Opacity="1"  HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Clicked="startPageBtnClicked" />
+                <Button x:Name="nextBtn" Text="Next" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Clicked="nextBtnClicked" />
+            </StackLayout>
+            
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>

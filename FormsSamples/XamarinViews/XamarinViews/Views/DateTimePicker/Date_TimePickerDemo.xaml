@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+	xmlns="http://xamarin.com/schemas/2014/forms" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+	x:Class="XamarinViews.Date_TimePickerDemo">
+	<ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness">
+            <On Platform="iOS" Value="0,20,0,0" />
+            <On Platform="Android, WinPhone, Windows" Value="0,0,0,0" />
+        </OnPlatform>
+    </ContentPage.Padding>
+    <ContentPage.Content>
+		<AbsoluteLayout BackgroundColor="Maroon" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            
+            <StackLayout x:Name="headerStack" BackgroundColor="Gray" AbsoluteLayout.LayoutBounds="0,0,1,0.1" AbsoluteLayout.LayoutFlags="All" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <StackLayout.Padding>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <On Platform="iOS" Value="0,0,0,0" />
+                        <On Platform="Android, WinPhone, Windows" Value="0,0,0,0" />
+                    </OnPlatform>
+                </StackLayout.Padding>
+                <Label Text="This is a Picker Demo" Margin="0,20,0,0" VerticalOptions="Center" HorizontalOptions="Center" />
+            </StackLayout>
+            
+            <StackLayout x:Name="bodyStack" BackgroundColor="White" Padding="20,0,20,0" AbsoluteLayout.LayoutBounds="0,0.5,1,0.8" AbsoluteLayout.LayoutFlags="All" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <ScrollView>
+                <StackLayout Orientation="Vertical" BackgroundColor="White" Spacing="40" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Padding="0,30,0,30">
+
+                    <StackLayout Orientation="Vertical" BackgroundColor="White" Spacing="10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                        <Label x:Name="label1" BindingContext="{x:Reference Name=datePicker1}" Text="{Binding Date, StringFormat='Selected date is {0}' }" HorizontalTextAlignment="Start" VerticalOptions="Center" HorizontalOptions="StartAndExpand" />
+
+                        <DatePicker x:Name="datePicker1" Format = "dd-MM-yyyy" TextColor="Blue" BackgroundColor="Gray" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" >
+						</DatePicker>
+                    </StackLayout>
+
+					<StackLayout Orientation="Vertical" BackgroundColor="White" Spacing="10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                        <Label x:Name="label2" Text="Here comes the formated/refined date from this DatePicker: " HorizontalTextAlignment="Start" VerticalOptions="Center" HorizontalOptions="StartAndExpand" />
+
+                        <DatePicker x:Name="datePicker2" DateSelected="DatePicked" TextColor="Blue" BackgroundColor="Gray" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" >
+                        </DatePicker>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Vertical" BackgroundColor="White" Spacing="10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                        <Label x:Name="label3" BindingContext="{x:Reference Name=timePicker1}" Text="{Binding Time, StringFormat='Selected time is {0}' }" HorizontalTextAlignment="Start" VerticalOptions="Center" HorizontalOptions="StartAndExpand" />
+
+                        <TimePicker x:Name="timePicker1" Format = "hh:mm" TextColor="Blue" BackgroundColor="Gray" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" >
+                        </TimePicker>
+                    </StackLayout>
+
+					<StackLayout Orientation="Vertical" BackgroundColor="White" Spacing="10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                        <Label x:Name="label4" BindingContext="{x:Reference Name=timePicker2}" Text="{Binding Time, StringFormat='Selected time is {0}' }" HorizontalTextAlignment="Start" VerticalOptions="Center" HorizontalOptions="StartAndExpand" />
+
+                        <TimePicker x:Name="timePicker2" Format = "HH:mm" TextColor="Blue" BackgroundColor="Gray" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" >
+                        </TimePicker>
+                    </StackLayout>
+                    
+                </StackLayout>
+                </ScrollView>
+            </StackLayout>
+            
+            <StackLayout x:Name="footerStack" Orientation="Horizontal" BackgroundColor="Gray" AbsoluteLayout.LayoutBounds="0,1,1,0.1" AbsoluteLayout.LayoutFlags="All" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <Button x:Name="backBtn" Text="Back" IsEnabled="true" Opacity="1"  HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Clicked="backBtnClicked" />
+                <Button x:Name="startPageBtn" Text="Go to Start" IsEnabled="true" Opacity="1"  HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Clicked="startPageBtnClicked" />
+                <Button x:Name="nextBtn" Text="Next" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Clicked="nextBtnClicked" />
+            </StackLayout>
+            
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>

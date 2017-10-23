@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="XamarinViews.TableViewDemo">
+
+	<ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness">
+            <On Platform="iOS" Value="0,20,0,0" />
+            <On Platform="Android, WinPhone, Windows" Value="0,0,0,0" />
+        </OnPlatform>
+    </ContentPage.Padding>
+    <ContentPage.Content>
+        <AbsoluteLayout BackgroundColor="Maroon" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            
+            <StackLayout x:Name="headerStack" BackgroundColor="Gray" AbsoluteLayout.LayoutBounds="0,0,1,0.1" AbsoluteLayout.LayoutFlags="All" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <StackLayout.Padding>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <On Platform="iOS" Value="0,0,0,0" />
+                        <On Platform="Android, WinPhone, Windows" Value="0,0,0,0" />
+                    </OnPlatform>
+                </StackLayout.Padding>
+                <Label Text="This is a TableView Demo" Margin="0,20,0,0" VerticalOptions="Center" HorizontalOptions="Center" />
+            </StackLayout>
+
+            <StackLayout x:Name="bodyStack" BackgroundColor="White" Padding="20,0,20,0" AbsoluteLayout.LayoutBounds="0,0.5,1,0.8" AbsoluteLayout.LayoutFlags="All" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <ScrollView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+					<StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="Start">
+						<TableView Intent="Settings">
+							<TableView.Root>
+								<TableSection Title="Hello World">
+									<TextCell Text="TextCell" Detail="TextCell Detail" />
+									<EntryCell Label="Entry Label" Placeholder="EntryCell Text" LabelColor="Teal" />
+									<SwitchCell Text="SwitchCell Text" On="true"/>
+									<ImageCell Text="ImageCell Text" Detail="ImageCell Detail" ImageSource="Icon.png" />
+								</TableSection>
+								<TableSection Title="Second Section">
+									<TextCell Text="TextCell" Detail="TextCell Detail" />
+									<EntryCell Label="Entry Label" Text="EntryCell Text" />
+									<SwitchCell Text="SwitchCell Text" />
+									<ImageCell Text="ImageCell Text" Detail="ImageCell Detail" ImageSource="icon.png" />
+								</TableSection>
+								<TableSection Title="Third Section">
+                                    <TextCell Text="TextCell" Detail="TextCell Detail" />
+                                    <EntryCell Label="Entry Label" Text="EntryCell Text" />
+                                    <SwitchCell Text="SwitchCell Text" />
+                                    <ImageCell Text="ImageCell Text" Detail="ImageCell Detail" ImageSource="icon.png" />
+                                </TableSection>
+							</TableView.Root>
+						</TableView>
+						<TableView Intent="Data">
+                            <TableView.Root>
+                                <TableSection Title="Hello World">
+                                    <TextCell Text="TextCell" Detail="TextCell Detail" />
+                                    <EntryCell Label="Entry Label" Placeholder="EntryCell Text" LabelColor="Teal" />
+                                    <SwitchCell Text="SwitchCell Text" On="true"/>
+                                    <ImageCell Text="ImageCell Text" Detail="ImageCell Detail" ImageSource="Icon.png" />
+                                </TableSection>
+                                <TableSection Title="Second Section">
+                                    <TextCell Text="TextCell" Detail="TextCell Detail" />
+                                    <EntryCell Label="Entry Label" Text="EntryCell Text" />
+                                    <SwitchCell Text="SwitchCell Text" />
+                                    <ImageCell Text="ImageCell Text" Detail="ImageCell Detail" ImageSource="icon.png" />
+                                </TableSection>
+                                <TableSection Title="Third Section">
+                                    <TextCell Text="TextCell" Detail="TextCell Detail" />
+                                    <EntryCell Label="Entry Label" Text="EntryCell Text" />
+                                    <SwitchCell Text="SwitchCell Text" />
+                                    <ImageCell Text="ImageCell Text" Detail="ImageCell Detail" ImageSource="icon.png" />
+                                </TableSection>
+                            </TableView.Root>
+                        </TableView>
+						<TableView Intent="Form">
+                            <TableView.Root>
+                                <TableSection Title="Hello World">
+                                    <TextCell Text="TextCell" Detail="TextCell Detail" />
+                                    <EntryCell Label="Entry Label" Placeholder="EntryCell Text" LabelColor="Teal" />
+                                    <SwitchCell Text="SwitchCell Text" On="true"/>
+                                    <ImageCell Text="ImageCell Text" Detail="ImageCell Detail" ImageSource="Icon.png" />
+                                </TableSection>
+                                <TableSection Title="Second Section">
+                                    <TextCell Text="TextCell" Detail="TextCell Detail" />
+                                    <EntryCell Label="Entry Label" Text="EntryCell Text" />
+                                    <SwitchCell Text="SwitchCell Text" />
+                                    <ImageCell Text="ImageCell Text" Detail="ImageCell Detail" ImageSource="icon.png" />
+                                </TableSection>
+                                <TableSection Title="Third Section">
+                                    <TextCell Text="TextCell" Detail="TextCell Detail" />
+                                    <EntryCell Label="Entry Label" Text="EntryCell Text" />
+                                    <SwitchCell Text="SwitchCell Text" />
+                                    <ImageCell Text="ImageCell Text" Detail="ImageCell Detail" ImageSource="icon.png" />
+                                </TableSection>
+                            </TableView.Root>
+                        </TableView>
+						<TableView Intent="Menu">
+                            <TableView.Root>
+                                <TableSection Title="Hello World">
+                                    <TextCell Text="TextCell" Detail="TextCell Detail" />
+                                    <EntryCell Label="Entry Label" Placeholder="EntryCell Text" LabelColor="Teal" />
+                                    <SwitchCell Text="SwitchCell Text" On="true"/>
+                                    <ImageCell Text="ImageCell Text" Detail="ImageCell Detail" ImageSource="Icon.png" />
+                                </TableSection>
+                                <TableSection Title="Second Section">
+                                    <TextCell Text="TextCell" Detail="TextCell Detail" />
+                                    <EntryCell Label="Entry Label" Text="EntryCell Text" />
+                                    <SwitchCell Text="SwitchCell Text" />
+                                    <ImageCell Text="ImageCell Text" Detail="ImageCell Detail" ImageSource="icon.png" />
+                                </TableSection>
+                                <TableSection Title="Third Section">
+                                    <TextCell Text="TextCell" Detail="TextCell Detail" />
+                                    <EntryCell Label="Entry Label" Text="EntryCell Text" />
+                                    <SwitchCell Text="SwitchCell Text" />
+                                    <ImageCell Text="ImageCell Text" Detail="ImageCell Detail" ImageSource="icon.png" />
+                                </TableSection>
+                            </TableView.Root>
+                        </TableView>
+						<TableView Intent="Menu">
+                            <TableView.Root>
+                                <TableSection Title="Hello World">
+                                    <ViewCell>
+										<StackLayout>
+											<Label Text="TextCell"/>
+											<Entry Text="EntryCell Text" />
+											<Switch/>
+											<Image Source="icon.png" />
+										</StackLayout>
+									</ViewCell>
+                                </TableSection>
+                            </TableView.Root>
+                        </TableView>
+					</StackLayout>
+				</ScrollView>
+            </StackLayout>
+            
+            <StackLayout x:Name="footerStack" Orientation="Horizontal" BackgroundColor="Gray" AbsoluteLayout.LayoutBounds="0,1,1,0.1" AbsoluteLayout.LayoutFlags="All" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <Button x:Name="backBtn" Text="Back" IsEnabled="true" Opacity="1"  HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Clicked="backBtnClicked" />
+                <Button x:Name="startPageBtn" Text="Go to Start" IsEnabled="true" Opacity="1"  HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Clicked="startPageBtnClicked" />
+                <Button x:Name="nextBtn" Text="Next" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Clicked="nextBtnClicked" />
+            </StackLayout>
+            
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+	xmlns="http://xamarin.com/schemas/2014/forms" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+	x:Class="XamarinViews.EditorDemo">
+	<ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness">
+            <On Platform="iOS" Value="0,20,0,0" />
+            <On Platform="Android, WinPhone, Windows" Value="0,0,0,0" />
+        </OnPlatform>
+    </ContentPage.Padding>
+    <ContentPage.Content>
+		<AbsoluteLayout BackgroundColor="Maroon" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            
+            <StackLayout x:Name="headerStack" BackgroundColor="Gray" AbsoluteLayout.LayoutBounds="0,0,1,0.1" AbsoluteLayout.LayoutFlags="All" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <StackLayout.Padding>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <On Platform="iOS" Value="0,0,0,0" />
+                        <On Platform="Android, WinPhone, Windows" Value="0,0,0,0" />
+                    </OnPlatform>
+                </StackLayout.Padding>
+                <Label Text="This is a Editor Demo" Margin="0,20,0,0" VerticalOptions="Center" HorizontalOptions="Center" />
+            </StackLayout>
+            
+            <StackLayout x:Name="bodyStack" BackgroundColor="White" Padding="20,0,20,0" AbsoluteLayout.LayoutBounds="0,0.5,1,0.8" AbsoluteLayout.LayoutFlags="All" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <StackLayout Orientation="Vertical" BackgroundColor="White" Spacing="20" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Padding="0,30,0,0">
+                <!--editor does not have any placeholder, Text Alignments also  -->
+                    <Editor x:Name="editor1" Keyboard="Text" Text="Enter any text" TextColor="Red" HeightRequest="40" FontSize="10" FontAttributes="Bold" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" >
+                    </Editor>
+                    
+                    <Editor x:Name="editor2" Keyboard="Numeric" Text="Enter any number" HeightRequest="50" TextColor="Blue" FontSize="12" FontAttributes="Italic" BackgroundColor="Gray" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" >
+                    </Editor>
+                    
+                    <Editor x:Name="editor3" Keyboard="Telephone" Text="Enter a mobile number" FontAttributes="Bold, Italic" TextColor="Green" FontSize="Medium" BackgroundColor="Gray" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" >
+                    </Editor>
+                    
+                    <Editor x:Name="editor4" Keyboard="Url" Text="Enter an url" TextColor="Teal" FontAttributes="None" FontSize="Large"  BackgroundColor="Gray" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" >
+                    </Editor>
+                    
+                </StackLayout>
+            </StackLayout>
+            
+            <StackLayout x:Name="footerStack" Orientation="Horizontal" BackgroundColor="Gray" AbsoluteLayout.LayoutBounds="0,1,1,0.1" AbsoluteLayout.LayoutFlags="All" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <Button x:Name="backBtn" Text="Back" IsEnabled="true" Opacity="1"  HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Clicked="backBtnClicked" />
+                <Button x:Name="startPageBtn" Text="Go to Start" IsEnabled="true" Opacity="1"  HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Clicked="startPageBtnClicked" />
+                <Button x:Name="nextBtn" Text="Next" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Clicked="nextBtnClicked" />
+            </StackLayout>
+            
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>

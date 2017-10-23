@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+	xmlns="http://xamarin.com/schemas/2014/forms" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+	x:Class="XamarinViews.SwitchDemo">
+	<ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness">
+            <On Platform="iOS" Value="0,20,0,0" />
+            <On Platform="Android, WinPhone, Windows" Value="0,0,0,0" />
+        </OnPlatform>
+    </ContentPage.Padding>
+    <ContentPage.Content>
+		<AbsoluteLayout BackgroundColor="Maroon" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            
+            <StackLayout x:Name="headerStack" BackgroundColor="Gray" AbsoluteLayout.LayoutBounds="0,0,1,0.1" AbsoluteLayout.LayoutFlags="All" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <StackLayout.Padding>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <On Platform="iOS" Value="0,0,0,0" />
+                        <On Platform="Android, WinPhone, Windows" Value="0,0,0,0" />
+                    </OnPlatform>
+                </StackLayout.Padding>
+                <Label Text="This is a Switch Demo" Margin="0,20,0,0" VerticalOptions="Center" HorizontalOptions="Center" />
+            </StackLayout>
+            
+            <StackLayout x:Name="bodyStack" BackgroundColor="White" Padding="20,0,20,0" AbsoluteLayout.LayoutBounds="0,0.5,1,0.8" AbsoluteLayout.LayoutFlags="All" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <Grid BackgroundColor="White" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Padding="0,30,0,0">
+                    <Grid.RowDefinitions>
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="Auto" />
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="8*" />
+						<ColumnDefinition Width="2*" />
+					</Grid.ColumnDefinitions>
+					
+					<Label x:Name="testLbl1" BindingContext="{x:Reference Name=switch1}" IsVisible="{Binding Path=IsToggled}" Text="Testing switch with visibility_xaml_bind" Grid.Row="0" Grid.Column="0" HorizontalTextAlignment="Start" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand"/>
+                    
+                    <Switch x:Name="switch1" IsToggled="true" Grid.Row="0" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" >
+                    </Switch>
+                    
+                    <Label x:Name="textLbl2" Text="Testing switch with visibility_c#_bind" Grid.Row="1" Grid.Column="0" HorizontalTextAlignment="Start"  HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand"/>
+
+                    <Switch x:Name="switch2" IsToggled="false" Grid.Row="1" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" >
+                    </Switch>
+
+					<Label x:Name="textLbl3" Text="Testing switch with color" Grid.Row="2" Grid.Column="0" HorizontalTextAlignment="Start"  HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand"/>
+
+                    <Switch x:Name="switch3" IsToggled="true" Grid.Row="2" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" >
+                    </Switch>
+
+					<Button x:Name="button4" BindingContext="{x:Reference Name=switch4}" IsEnabled="{Binding Path=IsToggled}" Clicked="button4Clicked" Text="Testing switch with Enabling button" Grid.Row="3" Grid.Column="0" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"/>
+
+                    <Switch x:Name="switch4" IsToggled="false" Grid.Row="3" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" >
+                    </Switch>
+                    
+                </Grid>
+            </StackLayout>
+            
+            <StackLayout x:Name="footerStack" Orientation="Horizontal" BackgroundColor="Gray" AbsoluteLayout.LayoutBounds="0,1,1,0.1" AbsoluteLayout.LayoutFlags="All" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <Button x:Name="backBtn" Text="Back" IsEnabled="true" Opacity="1"  HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Clicked="backBtnClicked" />
+                <Button x:Name="startPageBtn" Text="Go to Start" IsEnabled="true" Opacity="1"  HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Clicked="startPageBtnClicked" />
+                <Button x:Name="nextBtn" Text="Next" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Clicked="nextBtnClicked" />
+            </StackLayout>
+            
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>
