@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Xamarin.Forms;
 using System.Runtime.Serialization;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace XamarinViews
 {
@@ -49,7 +50,7 @@ namespace XamarinViews
                 }
                 ((ListView)sender).SelectedItem = null;
             };
-            lvSearchBar.TextChanged += (object sender, TextChangedEventArgs e) =>
+            lvSearchBar.TextChanged += async (object sender, TextChangedEventArgs e) =>
             {
                 lvListView.BeginRefresh();
                 try
@@ -57,6 +58,7 @@ namespace XamarinViews
                     if (!string.IsNullOrEmpty(lvSearchBar.Text))
                     {
                         var newSource = empDetails.Where(X => X.empName.Contains(lvSearchBar.Text) || X.empDesignation.Contains(lvSearchBar.Text) || X.empExperienc.Contains(lvSearchBar.Text)).ToList();
+                        await Task.Delay(1000);
                         lvListView.ItemsSource = newSource;
                     }
                     else

@@ -17,7 +17,7 @@
                         <On Platform="Android, WinPhone, Windows" Value="0,0,0,0" />
                     </OnPlatform>
                 </StackLayout.Padding>
-                <Label Text="This is a BoxView Demo" Margin="0,20,0,0" VerticalOptions="Center" HorizontalOptions="Center" />
+                <Label Text="This is a Activity-Indicator Demo" Margin="0,20,0,0" VerticalOptions="Center" HorizontalOptions="Center" />
             </StackLayout>
 
 			<StackLayout x:Name="bodyStack" BackgroundColor="White" Padding="20,0,20,0" AbsoluteLayout.LayoutBounds="0,0.5,1,0.8" AbsoluteLayout.LayoutFlags="All" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">

@@ -132,7 +132,7 @@
             <StackLayout x:Name="footerStack" Orientation="Horizontal" BackgroundColor="Gray" AbsoluteLayout.LayoutBounds="0,1,1,0.1" AbsoluteLayout.LayoutFlags="All" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                 <Button x:Name="backBtn" Text="Back" IsEnabled="true" Opacity="1"  HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Clicked="backBtnClicked" />
                 <Button x:Name="startPageBtn" Text="Go to Start" IsEnabled="true" Opacity="1"  HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Clicked="startPageBtnClicked" />
-                <Button x:Name="nextBtn" Text="Next" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Clicked="nextBtnClicked" />
+                <Button x:Name="nextBtn" Text="Next" IsEnabled="false" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Clicked="nextBtnClicked" />
             </StackLayout>
             
         </AbsoluteLayout>
