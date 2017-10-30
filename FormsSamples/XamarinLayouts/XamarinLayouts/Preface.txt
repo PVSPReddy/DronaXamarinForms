@@ -1,0 +1,513 @@
+﻿Here are the different layouts that are used in xamarin.
+These layouts holds another layouts and views of xamarin as children making the UI part of the application.
+Each of the layout have their own special abilities that come in to use in different scenarios in application development.
+Some layouts can only hold one member as children while some other can handle more than one member as children but can only arragne them in one direction while some other can hold more than one member as children and can also arrange them in all the possible directions(3-D).
+
+
+Let us start with order of highly used layouts in descending order
+
+StackLayout :
+
+This is most frequently usable layout.
+It allows any number of children.
+in c#
+------
+StackLayout stacklayout = new Stacklayout
+{
+    Children = {child1, child2,....},
+
+};
+
+stackLayout.Children.Add(child3);
+stackLayout.Children.Add(child3);
+.
+.
+.
+.
+
+in XAML
+-------
+<StackLayout>
+    <Child1/>
+    <Child2></Child2>
+    .
+    .
+    .
+    .
+</StackLayout>
+
+It allows children to arrange in any one of two dimensions i.e., either in vertical direction(default arrangement no need to mention for vertical direction arrangement of children ) or in Horizontal direction. To mention in horizontal direction it has to be mentioned using a keyword "Orientation". if orientation is not mantioned it arranges children in vertical direction
+in c#
+------
+StackLayout stacklayout = new Stacklayout
+{
+    Orientation = StackOrientation.Horizontal,
+
+};
+
+in XAML
+-------
+<StackLayout Orientation="Horizontal">
+</StackLayout>
+
+for more details on StackLayout visit the official site link stated below
+https://developer.xamarin.com/guides/xamarin-forms/user-interface/layouts/stack-layout/
+
+
+Grid :
+
+This can be used when Children of the layout has to to be arranged in a systematic order in any direction simply it can be stated as this can be used when children has to be arranged in rows and columns, which is not possible by stack layout as it allows to arrange in only one direction.
+Here in this example i want to arrange 6 children in two columns and each column containing 3 rows which provides (3x2=6)6 cells for 6 children.
+This is similar to a matrix in our schooling.
+Here we have to create instance for Grid and then we have to define definitions for rows and columns like ordering spaces/cells for the child items.
+
+Kinds of RowDefinitions
+RowDefinitions =
+{
+    new RowDefinition{Height = GridLength.Auto}, //static value to give the row height as the height of the children(the child having the highest amount of height in that particular row is considered)
+    new RowDefinition{Height = GridLength.Star}, //Star takes the rest of the height value of the grid(if mentioned) or the height of child which has the highest value or the default inbuilt height(if height for grid is not mentioned and if also the default inbuilt height is more than the child height)
+    new RowDefinition{Height = new GridLength(130, GridUnitType.Absolute)},//Here the cell height will be 130 units/pixels/dpi the value will be absolute and static
+    new RowDefinition{Height = new GridLength(1, GridUnitType.Star)},//The height will be taken in ratio of total height of the grid. 
+    new RowDefinition{Height = new GridLength(1, GridUnitType.Auto)}//The height will be taken as per the child with highest Height value in that particular row
+}
+Kinds of ColumnDefinitions
+ColumnDefinitions =
+{
+    new ColumnDefinition{Width = GridLength.Auto}, //static value to give the column Width as the Width of the children(the child having the highest amount of Width in that particular row is considered)
+    new ColumnDefinition{Width = GridLength.Star}, //Star takes the rest of the Width value of the grid(if mentioned) or the Width of child which has the highest value or the default inbuilt Width(if Width for grid is not mentioned and if also the default inbuilt Width is more than the child Width)
+    new ColumnDefinition{Width = new GridLength(130, GridUnitType.Absolute)},//Here the cell Width will be 130 units/pixels/dpi the value will be absolute and static
+    new ColumnDefinition{Width = new GridLength(1, GridUnitType.Star)},//The Width will be taken in ratio of total Width of the grid. 
+    new ColumnDefinition{Width = new GridLength(1, GridUnitType.Auto)}//The Width will be taken as per the child with highest Width value in that particular column
+}
+
+Children for a gris is added as
+
+grid.Children.Add(childName, columnNumber, rowNumber);//This is generally used format
+or
+grid.Children.Add(childName, columnNumber, columnSpacing, rowNumber, rowSpacing);//This is used when we want a child to occupy more than one row  or column then we have to mention spacings for child to occupy in number of columns or rows to occupy.
+
+In this below example i am arranging children in the following ways
+
+child1  child4
+child2  child5
+child3  child6
+
+which as described in matrix format as
+
+00  10
+01  11
+02  12
+
+in c#
+------
+Grid grid = new Grid
+{
+    RowDefinitions = 
+    {
+        new RowDefinition{Height = GridLength.Auto}, //static value to give the row height as the height of the children(the child having the highest amount of height is considered)
+        new RowDefinition{Height = GridLength.Auto}, //Star takes the rest of the height value of the grid(if mentioned) or the height of child which has the highest value or the default inbuilt height(if height for grid is not mentioned and if also the default inbuilt height is more than the child height)
+        new RowDefinition{Height = GridLength.Auto}
+    },
+    ColumnDefinitions =
+    {
+        new ColumnDefinition{Width = GridLength.Auto},
+        new ColumnDefinition{Width = GridLength.Auto}
+    },
+    .
+    .
+    .
+    .
+};
+grid.Children.Add(child1, 0, 0);
+grid.Children.Add(child2, 0, 1);
+grid.Children.Add(child3, 0, 2);
+grid.Children.Add(child4, 1, 0);
+grid.Children.Add(child5, 1, 1);
+grid.Children.Add(child6, 1, 2);
+
+in XAML
+-------
+<Grid>
+    <Grid.RowDefinitions>
+        <RowDefinition Height="Auto" /><!--auto-->
+        <RowDefinition Height="1*" /><!--star-->
+        <RowDefinition Height="130" /><!--absolute-->
+    </Grid.RowDefinitions>
+    <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+    </Grid.ColumnDefinitions>
+    <Child1 Grid.Row="0" Grid.Column="0"/>
+    <Child2 Grid.Row="1" Grid.Column="0"></Child2>
+    <Child3 Grid.Row="2" Grid.Column="0"/>
+    <Child4 Grid.Row="0" Grid.Column="1"/>
+    <Child5 Grid.Row="1" Grid.Column="1"/>
+    <Child6 Grid.Row="2" Grid.Column="1"/>
+</Grid>
+
+If more children have been declared in same cell then they are arranges in 3-D format last add children overlays the previous children
+grid.Children.Add(child1, 0, 0);
+grid.Children.Add(child2, 0, 0);
+then child1 and child2 occupies same space @ 00 in the grid matrix but child2 overlays child1.
+
+for more details on Grid visit the official site link stated below
+https://developer.xamarin.com/guides/xamarin-forms/user-interface/layouts/grid/
+
+AbsoluteLayout :
+
+This is also similar to grid can allows any number of children in any all the 3 possible directions.
+To set children in to this layout one has to mention dimensions of children and also has to set the positions where to hold the children in the layout.
+If dimensions and positions are not defined then AbsoluteLayout takes its default inbuilt size and acts as a Grid with single cell arranges all the children over one another in z-axis or the 3rd dimension. so every new child added overlays the previous children.
+To set position and dimensions we have to use "AbsoluteLayoutFlags" and "AbsoluteLayoutBounds"
+AbsoluteLayoutBounds provides the values for positions ans Dimensions of the children where
+AboluteLayoutFlags provides the information or command to AbsoluteLayout to consider the following values provided to consider as absolute values or as Proportional values to total layout.
+
+AbsoluteLayout.SetLayoutBounds(instance of the child, new Rectangle(x Value, y value, Width of child, Height of Child));
+
+in c#
+------
+AbsoluteLayout absoluteLayout = new AbsoluteLayout
+{
+    HeightRequest = 480,
+    WidthRequest = 320
+};
+
+//Different ways to add children in AbsoluteLayout
+
+//Here every value in bounds are considered as proportionate to the absoluteLayout
+AbsoluteLayout.SetLayoutFlags(Child1, AbsoluteLayoutFlags.All);
+AbsoluteLayout.SetLayoutBounds(Child1, new Rectangle(0,0,1,1));
+absoluteLayout.Children.Add(Child1);
+
+//Here x,y values in bounds are considered as proportionate to the absoluteLayout where width and height values are absolute
+AbsoluteLayout.SetLayoutFlags(Child1, AbsoluteLayoutFlags.PositionProportional);
+AbsoluteLayout.SetLayoutBounds(Child1, new Rectangle(0,0,100,200));
+absoluteLayout.Children.Add(Child1);
+
+//Here x,y values in bounds are absolute where width and height values are considered as proportionate to the absoluteLayout
+AbsoluteLayout.SetLayoutFlags(Child1, AbsoluteLayoutFlags.SizeProportional);
+AbsoluteLayout.SetLayoutBounds(Child1, new Rectangle(50,60,1,1));
+absoluteLayout.Children.Add(Child1);
+
+//Here x value is 50 units from left of the screen, y value is 60 units from top of the screen, width will be 100 units, height is 200 units.
+AbsoluteLayout.SetLayoutFlags(Child1, AbsoluteLayoutFlags.None);
+AbsoluteLayout.SetLayoutBounds(Child1, new Rectangle(50,60,100,200));
+absoluteLayout.Children.Add(Child1);
+
+//Only x value is proportional
+//AbsoluteLayout.SetLayoutFlags(Child1, AbsoluteLayoutFlags.XProportional);
+
+//Only y value is proportional
+//AbsoluteLayout.SetLayoutFlags(Child1, AbsoluteLayoutFlags.YProportional);
+
+//Only width value is proportional
+//AbsoluteLayout.SetLayoutFlags(Child1, AbsoluteLayoutFlags.WidthProportional);
+
+//Only height value is proportional
+//AbsoluteLayout.SetLayoutFlags(Child1, AbsoluteLayoutFlags.HeightProportional);
+
+
+
+in XAML
+-------
+<AbsoluteLayout HeightRequest="480" WidthRequest="320">
+    <Child1 AbsoluteLayout.LayoutBounds="1,1,1,1" AbsoluteLayout.LayoutFlags="All"/>
+    <Child2 AbsoluteLayout.LayoutBounds="0,0,100,200" AbsoluteLayout.LayoutFlags="PositionProportional"></Child2>
+    <Child3 AbsoluteLayout.LayoutBounds="50,36,0.5,0.5" AbsoluteLayout.LayoutFlags="SizeProportional"/>
+    <Child4 AbsoluteLayout.LayoutBounds="50,30,100,200" AbsoluteLayout.LayoutFlags="None"/>
+    <Child5 AbsoluteLayout.LayoutBounds="0,30,100,200" AbsoluteLayout.LayoutFlags="XProportional"/>
+    <Child6 AbsoluteLayout.LayoutBounds="50,0,100,200" AbsoluteLayout.LayoutFlags="YProportional"/>
+    <Child5 AbsoluteLayout.LayoutBounds="50,30,0.3,200" AbsoluteLayout.LayoutFlags="WidthProportional"/>
+    <Child6 AbsoluteLayout.LayoutBounds="50,30,100,0.6" AbsoluteLayout.LayoutFlags="HeightProportional"/>
+</AbsoluteLayout>
+
+
+for more details on AbsoluteLayout visit the official site link stated below
+https://developer.xamarin.com/guides/xamarin-forms/user-interface/layouts/absolute-layout/
+
+
+RelativeLayout :
+
+This layout also have similar functionality and declaration processess as AbsoluteLayout the thing that differs is
+    AbsoluteLayout compares and sets proportional size of Children to its own size where Relative layout compares and sets the size proportionality of its children to other children or to itself.
+    In AbsoluteLayout we are able to provide x, y values with in the AbsoluteLayout itself where RelativeLayout allows its children to set their x, y position outside of the layout.
+To add children to a RelativeLayout we have to set Constraints.
+
+relativeLayout.Children.Add(child1, x-position Constraint value, y-position Constraint value, Width Constraint value, Height Constraint value);
+
+Constraint.RelativeToParent ((parent) => {return parent.X;}) //here the x-value is proportional/relative to parent i.e., the relativeLayout
+Constraint.RelativeToView (child3, (Parent, sibling) => {return sibling.Height + 20;}) //here the height of the respective is proportional/relative to other previously added children of the relativeLayout
+Constraint.Constant(50) // here the respective value of the respective child will be taking 50 units.
+
+
+in c#
+------
+RelativeLayout relativeLayout = new RelativeLayout
+{
+    HeightRequest = 480,
+    WidthRequest = 320
+};
+
+//Different ways to add children in RelativeLayout
+
+//Here every value is considered as proportional/relative to the RelativeLayout 
+relativeLayout.Children.Add (child1, 
+    Constraint.RelativeToParent ((parent) => {
+        return parent.X;
+    }),
+    Constraint.RelativeToParent ((parent) => {
+        return parent.Y * .15;
+    }),
+    Constraint.RelativeToParent((parent) => {
+        return parent.Width;
+    }),
+    Constraint.RelativeToParent((parent) => {
+        return parent.Height * .8;
+    })
+);
+
+//Here position values are considered as proportional/relative to the RelativeLayout where X and y positions are taken proportional/relative to some other child layout which is already added to the layout.
+relativeLayout.Children.Add (child2, 
+    Constraint.RelativeToView (parent) => {
+        return parent.X + 20;
+    }),
+    Constraint.RelativeToView (parent) => {
+        return parent.Y + 20;
+    }),
+    Constraint.Constant(50),//declaring width as 50 units. here we are nit taking any proportionality we are using static values
+    Constraint.RelativeToParent((parent) => {
+        return parent.Height * .5;
+    })
+);
+
+//Here position values are considered as proportional/relative to the RelativeLayout where X and y positions are taken proportional/relative to some other child layout which is already added to the layout.
+relativeLayout.Children.Add (child2, 
+    Constraint.RelativeToView (child3, (Parent, sibling) => {
+        return sibling.X + 20;
+    }),
+    Constraint.RelativeToView (child3, (parent, sibling) => {
+        return sibling.Y + 20;
+    }),
+    Constraint.RelativeToParent((parent) => {
+        return parent.Width * .5;
+    }),
+    Constraint.RelativeToParent((parent) => {
+        return parent.Height * .5;
+    })
+);
+
+in XAML
+-------
+<RelativeLayout HeightRequest="480" WidthRequest="320">
+    <Child1 x:Name="child1"
+        RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Y, Factor=0,Constant=0}"
+        RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=X, Factor=0, Constant=0}"
+        RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.1,Constant=0}"
+        RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width,Factor=1,Constant=0}"
+    />
+    <Child2  x:Name="child2"
+        RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Y, Factor=0,Constant=0}"
+        RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=X, Factor=0, Constant=0}"
+        RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.1,Constant=0}"
+        RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width,Factor=1,Constant=0}"
+    ></Child2>
+    <Child3  x:Name="child3"
+        RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=child2, Property=Y, Factor=0,Constant=0}"
+        RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToView, ElementName=child2, Property=X, Factor=0, Constant=0}"
+        RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.1,Constant=0}"
+        RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width,Factor=1,Constant=0}"
+    />
+</RelativeLayout>
+
+In XAML we have to declare Factor and Constant
+Factor is the of value of the respective constraint value
+and
+Constant is the amount to be deducted or add to the respective constraint value
+this can be explained using th following formula
+((x or y or width or height value from where we are taking the relativeness)*Factor)+Constant
+
+eg:
+ in c#
+ -----
+ relativeLayout.Children.Add (child4, 
+    Constraint.RelativeToView (parent) => {
+        return (parent.X * 0.1) + 20;//here 0.1 is Factor and +20 is Constant
+    }),
+    Constraint.RelativeToView (parent) => {
+        return - 20;
+    }),
+    Constraint.Constant(200),
+    Constraint.RelativeToParent((parent) => {
+        return parent.Height;
+    })
+);
+
+is equal to 
+in XAML
+--------
+<Child3  x:Name="child3"
+    RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent Property=X, Factor=0.1,Constant=20}"
+    RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Y, Factor=0, Constant=-20}"
+    RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0,Constant=200}"
+    RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width,Factor=1,Constant=0}"
+/>
+
+
+Frame :
+
+This is a layout which can only have/contain only one child as content.
+This has a speciality ability unlike any other layout, this can take shape of rectangle rounded corners on all 4 corners.
+Frame also has a ability to drop shadow as border, this can be access using DropShadow property.
+So it has his unique abilities and uses.
+
+in c#
+-----
+
+Frame frame = new Frame
+{
+    Content = Child1,
+    CornerRadius = 5,
+    HasShadow = true,
+    OutlineColor = Color.Green,
+    BackgroundColor = Color.Yellow
+};
+
+in XAML
+--------
+<Frame CornerRadius="5" HasShadow="true" OutlineColor="Green" BackgroundColor="Yellow" >
+    <Child1>
+        <Child2 />
+        <Child3 />
+    </Child1>
+</Frame>
+
+
+ScrollView :
+
+ScrollView also accepts only one child as a content.
+It ability is that the content can expand in both height-wise and width-wise, the data will be displayed on scroll.
+It allows user to restrict the scroll Direction througt the parameter Orientaion.
+
+Default scroll directin is in vertical direction.
+
+Orientation = ScrollOrientation.Vertical // allows to scroll in vertical direction only.
+Orientation = ScrollOrientation.Horizontal // allows to scroll in horizontal direction only.
+Orientation = ScrollOrientation.Both // allows to scroll in both the directions.
+
+in c#
+-----
+ScrollView scrollView = new ScrollView
+{
+    Content = child1,
+    Orientation = ScrollOrientation.Vertical
+};
+
+in XAML
+--------
+<ScrollView Orientation="Horizontal" >
+    <Child1>
+        <Child2 />
+        <Child3 />
+    </Child1>
+</ScrollView>
+
+
+ContentView :
+
+ContentView also allows only one child as Content.
+It has very less use.
+It can be used as a base class for user defined Custom Views.
+
+in c#
+-----
+Button button = new Button();
+ContentView contentView = new ContentView
+{
+    Content = button
+};
+StackLayout stackLayout = new StackLayout()
+{
+    Children = contentView
+};
+
+
+in XAML
+-------
+<StackLayout>
+    <ContentView>
+        <Button />
+    </ContentView>
+    <ContentView>
+        <Button />
+    </ContentView>
+    <ContentView>
+        <Button />
+    </ContentView>
+</StackLayout>
+
+ControlTemplate and ContentPresenter :
+
+ControlTemplate is used to create a template of a view in resources folder and this can be used throught the project by using its resource name it acts as a template where 
+the changable part is to be represented using ContentPresenter.
+
+lets make it more clear through the following example
+
+in XAML:
+--------
+<Application.Resources>
+    <ResourceDictionary>
+        <ControlTemplate x:Key="GrayTemplate">
+            <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <StackLayout BackgroundColor="Gray" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,0.1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    <Label Text="This is a ControlTemplate Demo" TextColor="Black" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                    </Label>
+                </StackLayout>
+                <StackLayout AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="1,1,1,0.9" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    <ContentPresenter HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    </ContentPresenter>
+                </StackLayout>
+            </AbsoluteLayout>
+        </ControlTemplate>
+    </ResourceDictionary>
+</Application.Resources>
+
+in the above example we have to place this cod in App.xaml page.
+Here is the ControlTemplate and place for ContentPresenter, in the content presenter we can use display our dynamically changing layouts.
+
+and it is used as following
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    x:Class="XamarinLayouts.ContentPresenterDemo">
+
+    <ContentPage.Resources>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <ContentView x:Name="contentView" Padding="0,20,0,0" ControlTemplate="{StaticResource GrayTemplate}">
+            <AbsoluteLayout VerticalOptions="CenterAndExpand">
+                <StackLayout AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,0.9" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    <Label Text="Welcome to the app!" HorizontalOptions="Center" />
+                    <Button Text="Change Theme" Clicked="OnButtonClicked" />
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="1,1,1,0.1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    <Button x:Name="backBtn" Text="Back" IsEnabled="true" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Clicked="backBtnClicked" />
+                    <Button x:Name="startPageBtn" Text="Go to Start" IsEnabled="true" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Clicked="startPageBtnClicked" />
+                    <Button x:Name="nextBtn" Text="Next" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Clicked="nextBtnClicked" />
+                </StackLayout>
+            </AbsoluteLayout>
+        </ContentView>
+    </ContentPage.Content>
+</ContentPage>
+
+observe this line 
+<ContentPage.Content>
+   <ContentView x:Name="contentView" Padding="0,20,0,0" ControlTemplate="{StaticResource GrayTemplate}">
+   </ContentView>
+</ContentPage.Content>
+
+ControlTemplate is used as a parameter in ContentView this Content view will be placed in to the ControlTempltae where ContentPresenter is defined
+Control Template can be used as a Parameters only for ContentPage, ContentView, TemplatedPage, TemplatedView.
+
+in c# :
+-------

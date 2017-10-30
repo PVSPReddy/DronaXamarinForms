@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="XamarinLayouts.App">
+	<Application.Resources>
+		<!-- Application resource dictionary -->
+		<ResourceDictionary>
+			<ControlTemplate x:Key="GrayTemplate">
+				<AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+					<StackLayout BackgroundColor="Gray" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,0.1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+						<Label Text="This is a ControlTemplate Demo" TextColor="Black" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+						</Label>
+					</StackLayout>
+					<StackLayout AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="1,1,1,0.9" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+						<ContentPresenter HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+						</ContentPresenter>
+					</StackLayout>
+				</AbsoluteLayout>
+			</ControlTemplate>
+			<ControlTemplate x:Key="TealTemplate">
+				<AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+					<StackLayout BackgroundColor="Teal" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,0.1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+						<Label Text="This is a ControlTemplate Demo" TextColor="Maroon" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+						</Label>
+					</StackLayout>
+					<StackLayout AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="1,1,1,0.9" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+						<ContentPresenter HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+						</ContentPresenter>
+					</StackLayout>
+				</AbsoluteLayout>
+			</ControlTemplate>
+			<ControlTemplate x:Key="MaroonTemplate">
+				<AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+					<StackLayout BackgroundColor="Maroon" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,0.1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+						<Label Text="This is a ControlTemplate Demo" TextColor="Teal">
+						</Label>
+					</StackLayout>
+					<StackLayout AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="1,1,1,0.9" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+						<ContentPresenter HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+						</ContentPresenter>
+					</StackLayout>
+				</AbsoluteLayout>
+			</ControlTemplate>
+		</ResourceDictionary>
+	</Application.Resources>
+</Application>

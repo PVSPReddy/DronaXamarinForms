@@ -1,0 +1,23 @@
+﻿<Properties StartupConfiguration="{0BD69B3F-9CCB-401C-B2EA-1CEF38CEC8E3}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="XamarinLayouts/Preface.txt">
+    <Files>
+      <File FileName="XamarinLayouts/Preface.txt" Line="491" Column="16" />
+      <File FileName="XamarinLayouts/App.xaml.cs" Line="12" Column="37" />
+      <File FileName="XamarinLayouts/App.xaml" Line="43" Column="26" />
+      <File FileName="XamarinLayouts/Views/ContentPresenter/ContentPresenterDemo.xaml" Line="25" Column="15" />
+      <File FileName="XamarinLayouts/Views/Frame/FrameDemo.xaml" Line="1" Column="1" />
+      <File FileName="XamarinLayouts/Views/Frame/FrameDemo.xaml.cs" Line="43" Column="67" />
+      <File FileName="XamarinLayouts/Views/ContentPresenter/ContentPresenterDemo.cs" Line="55" Column="62" />
+      <File FileName="XamarinLayouts/Views/StartPage.xaml.cs" Line="37" Column="29" />
+      <File FileName="XamarinLayouts/Views/StartPage.xaml" Line="1" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.XamarinLayouts.iOS PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.181B3DA1-30B6-4A59-9D79-331C3C344171" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.XamarinLayouts.Droid PreferredExecutionTarget="Android.Nexus 5 (Lollipop)" />
+  <MultiItemStartupConfigurations />
+</Properties>

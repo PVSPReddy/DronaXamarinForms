@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+	xmlns="http://xamarin.com/schemas/2014/forms" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+	x:Class="XamarinLayouts.StackLayoutDemo">
+	<ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness">
+            <On Platform="iOS" Value="0,20,0,0" />
+            <On Platform="Android, WinPhone, Windows" Value="0,0,0,0" />
+        </OnPlatform>
+    </ContentPage.Padding>
+    <ContentPage.Content>
+		<StackLayout x:Name="holder" BackgroundColor="Maroon" Spacing="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            
+            <StackLayout x:Name="headerStack" BackgroundColor="Gray" Spacing="0" HorizontalOptions="FillAndExpand">
+                <StackLayout.Padding>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <On Platform="iOS" Value="0,0,0,0" />
+                        <On Platform="Android, WinPhone, Windows" Value="0,0,0,0" />
+                    </OnPlatform>
+                </StackLayout.Padding>
+                <Label Text="This is a StackLayout Demo" Margin="0,20,0,0" VerticalOptions="Center" HorizontalOptions="Center" />
+            </StackLayout>
+            
+            <StackLayout x:Name="bodyStack" BackgroundColor="White" Spacing="10" Padding="20,20,20,20" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <StackLayout BackgroundColor="White" Spacing="10" Padding="0,0,0,0" HorizontalOptions="Center" VerticalOptions="CenterAndExpand">
+
+					<StackLayout BackgroundColor="White" Spacing="5" Padding="0,0,0,0" HorizontalOptions="Center" VerticalOptions="Center">
+				        <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" VerticalOptions="Fill" Padding="0,0,0,0">
+					        <Label Text="Mobile No. : " HorizontalOptions="Start" VerticalOptions="Center" />
+					        <Entry x:Name="mobNoEntry" Placeholder="Enter Mobile Number" TextColor="Black" HorizontalOptions="Start" VerticalOptions="Center" />
+				        </StackLayout>
+
+
+				        <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" VerticalOptions="Fill" Padding="0,0,0,0">
+					        <Label Text="Password : " HorizontalOptions="Start" VerticalOptions="Center" />
+                            <Entry x:Name="passEntry" Placeholder="Enter Password" TextColor="Black" HorizontalOptions="Start" VerticalOptions="Center" />
+                        </StackLayout>
+				    </StackLayout>
+
+				    <Button x:Name="submit" Text="Submit" WidthRequest="150" BackgroundColor="Maroon" HorizontalOptions="CenterAndExpand" VerticalOptions="Start" />
+                </StackLayout>
+			</StackLayout>
+            
+            <StackLayout x:Name="footerStack" Orientation="Horizontal" BackgroundColor="Gray" AbsoluteLayout.LayoutBounds="0,1,1,0.1">
+                <Button x:Name="backBtn" Text="Back" IsEnabled="true" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Clicked="backBtnClicked" />
+                <Button x:Name="startPageBtn" Text="Go to Start" IsEnabled="true" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Clicked="startPageBtnClicked" />
+                <Button x:Name="nextBtn" Text="Next" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Clicked="nextBtnClicked" />
+            </StackLayout>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+	xmlns="http://xamarin.com/schemas/2014/forms" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+	x:Class="XamarinLayouts.GridDemo">
+	<ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness">
+            <On Platform="iOS" Value="0,20,0,0" />
+            <On Platform="Android, WinPhone, Windows" Value="0,0,0,0" />
+        </OnPlatform>
+    </ContentPage.Padding>
+    <ContentPage.Content>
+		<Grid BackgroundColor="Gray" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="1*" />
+				<RowDefinition Height="Auto" />
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="1*" />
+				<ColumnDefinition Width="1*" />
+				<ColumnDefinition Width="1*" />
+			</Grid.ColumnDefinitions>
+            <!--<StackLayout x:Name="headerStack" BackgroundColor="Gray" Grid.Row="0" Grid.Column="0" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
+                <StackLayout.Padding>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <On Platform="iOS" Value="0,0,0,0" />
+                        <On Platform="Android, WinPhone, Windows" Value="0,0,0,0" />
+                    </OnPlatform>
+                </StackLayout.Padding>-->
+                <Label x:Name="headerStack" Text="This is a Grid Demo" Grid.Row="0" Grid.Column="0" Grid.RowSpan="1" Grid.ColumnSpan="3" Margin="0,20,0,0" VerticalOptions="Center" HorizontalOptions="Center" />
+<!--            </StackLayout>-->
+
+<!--			<StackLayout x:Name="bodyStack" BackgroundColor="White" Grid.Row="1" Grid.Column="0" Spacing="10" Padding="20,20,20,20" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">-->
+
+				<Grid BackgroundColor="Blue" Grid.Row="1" Grid.Column="0"  Grid.ColumnSpan="3" Padding="20,30,20,0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    <ScrollView>  
+    <Grid Padding="0,0,0,0" RowSpacing="10">  
+        <Grid.RowDefinitions>  
+        <RowDefinition Height="Auto" />  
+        <RowDefinition Height="*" />  
+        <RowDefinition Height="Auto" />  
+        <RowDefinition Height="Auto" />  
+        </Grid.RowDefinitions>  
+        <Label Text="Add Emp Details" Grid.Row="0" HorizontalOptions="Center" TextColor="White" FontSize="23" />  
+    <Grid Grid.Row="1" RowSpacing="20" Padding="0,0,0,0" VerticalOptions="Center">  
+    <Grid.RowDefinitions>  
+        <RowDefinition Height="Auto" />  
+        <RowDefinition Height="Auto" />     
+        <RowDefinition Height="Auto" />  
+        <RowDefinition Height="Auto" />  
+        <RowDefinition Height="Auto" />  
+        <RowDefinition Height="Auto" />  
+        <RowDefinition Height="Auto" />  
+        <RowDefinition Height="Auto" />  
+    </Grid.RowDefinitions>  
+    <Grid.ColumnDefinitions>  
+        <ColumnDefinition Width="Auto" />  
+        <ColumnDefinition Width="*" />  
+    </Grid.ColumnDefinitions>  
+        <Label Text="FirstName" Grid.Row="1" HorizontalOptions="Start" VerticalOptions="Center" TextColor="White" />  
+        <Entry x:Name="entryfirstname" Grid.Row="1" Grid.Column="1" VerticalOptions="Center" Placeholder="FirstName" />  
+        <Label Text="LastName" Grid.Row="2" TextColor="White" VerticalOptions="Center" />  
+        <Entry x:Name="entrylastname" Grid.Row="2" Grid.Column="1" Placeholder="LastName" VerticalOptions="Center" />  
+        <Label Text="ComapnyName" Grid.Row="3" TextColor="White" VerticalOptions="Center" />  
+        <Entry x:Name="entrycomapanyname" Grid.Row="3" Grid.Column="1" Placeholder="ComapanyName" VerticalOptions="Center" />  
+        <Label Text="Designation" Grid.Row="4" TextColor="White" VerticalOptions="Center"/>  
+        <Entry x:Name="entrydesignation" Grid.Row="4" Grid.Column="1" Placeholder="Designation" VerticalOptions="Center"/>  
+        <Label Text="MobileNumber" Grid.Row="5" TextColor="White" VerticalOptions="Center"/>  
+        <Entry x:Name="entrymobilenumber" Grid.Row="5" Grid.Column="1" Placeholder="MobileNumber" VerticalOptions="Center"/>  
+        <Label Text="Address" Grid.Row="6" TextColor="White" VerticalOptions="Center"/>  
+        <Editor x:Name="editoraddress" Grid.Row="6" Grid.Column="1" HeightRequest="50" VerticalOptions="Center"/>  
+    </Grid>  
+        <Button x:Name="Addbtn" Text="Add" BackgroundColor="White" Grid.Row="2" TextColor="Blue" />
+    </Grid>  
+    </ScrollView>   
+				</Grid>
+				
+<!--			</StackLayout>-->
+            
+<!--            <StackLayout x:Name="footerStack" Orientation="Horizontal"  Grid.Row="2" Grid.Column="0" BackgroundColor="Gray" HorizontalOptions="FillAndExpand" VerticalOptions="End">-->
+                <Button x:Name="backBtn" Grid.Row="2" Grid.Column="0" Text="Back" IsEnabled="true" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Clicked="backBtnClicked" />
+                <Button x:Name="startPageBtn" Grid.Row="2" Grid.Column="1" Text="Go to Start" IsEnabled="true" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Clicked="startPageBtnClicked" />
+                <Button x:Name="nextBtn" Grid.Row="2" Grid.Column="2" Text="Next" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Clicked="nextBtnClicked" />
+<!--            </StackLayout>-->
+
+			<StackLayout x:Name="popupStack" BackgroundColor="#30000000" IsVisible="false" Grid.Row="1" Grid.Column="0"  Grid.RowSpan="1" Grid.ColumnSpan="1"  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <Label Text="This is an popup with Activity Indicator(Loader symbol)"  HorizontalTextAlignment="Center" VerticalOptions="Start" HorizontalOptions="Center" />
+                <ActivityIndicator HeightRequest="30" WidthRequest= "30" IsRunning = "true" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" >
+                </ActivityIndicator>
+            </StackLayout>
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

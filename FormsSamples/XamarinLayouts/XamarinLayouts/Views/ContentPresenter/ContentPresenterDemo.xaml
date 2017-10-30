@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+	xmlns="http://xamarin.com/schemas/2014/forms" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+	x:Class="XamarinLayouts.ContentPresenterDemo">
+
+	<ContentPage.Resources>
+	</ContentPage.Resources>
+
+	<ContentPage.Content>
+		<ContentView x:Name="contentView" Padding="0,20,0,0" ControlTemplate="{StaticResource GrayTemplate}">
+			<AbsoluteLayout VerticalOptions="CenterAndExpand">
+				<StackLayout AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,0.9" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+					<Label Text="Welcome to the app!" HorizontalOptions="Center" />
+					<Button Text="Change Theme" Clicked="OnButtonClicked" />
+				</StackLayout>
+                <StackLayout Orientation="Horizontal" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="1,1,1,0.1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+					<Button x:Name="backBtn" Text="Back" IsEnabled="true" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Clicked="backBtnClicked" />
+					<Button x:Name="startPageBtn" Text="Go to Start" IsEnabled="true" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Clicked="startPageBtnClicked" />
+					<Button x:Name="nextBtn" Text="Next" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Clicked="nextBtnClicked" />
+				</StackLayout>
+			</AbsoluteLayout>
+		</ContentView>
+	</ContentPage.Content>
+</ContentPage>
