@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    xmlns:customControls="clr-namespace:BehaviorsAndTriggers;assembly=BehaviorsAndTriggers;"
+    x:Class="BehaviorsAndTriggers.Views.SampleOne.TestSampleOne">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="LabelUserProfile" TargetType="Label">
+                <Setter Property="HorizontalOptions" Value="Start"/>
+                <Setter Property="VerticalOptions" Value="EndAndExpand"/>
+            </Style>
+            <Style x:Key="EntryUserProfile" TargetType="Entry">
+                <Setter Property="PlaceholderColor" Value="Black"/>
+                <Setter Property="BackgroundColor" Value="Yellow"/>
+                <Setter Property="HorizontalTextAlignment" Value="Start"/>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="VerticalOptions" Value="FillAndExpand"/>
+<!--                <Setter Property="VerticalOptions" Value="EndAndExpand"/>-->
+            </Style>
+            <Style x:Key="BoxUserProfile" TargetType="BoxView">
+                <Setter Property="HeightRequest" Value="1"/>
+                <Setter Property="Color" Value="Black"/>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="VerticalOptions" Value="EndAndExpand"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness">
+            <On Platform="iOS" Value="0,20,0,0" />
+            <On Platform="Android, WinPhone, Windows" Value="0,0,0,0" />
+        </OnPlatform>
+    </ContentPage.Padding>
+    
+
+    <ContentPage.Content>
+        <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,0.1" AbsoluteLayout.LayoutFlags="All" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            </StackLayout>
+            <ScrollView AbsoluteLayout.LayoutBounds="1,1,1,0.9" AbsoluteLayout.LayoutFlags="All" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <StackLayout BackgroundColor="Teal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    <Grid x:Name="gridHolder" BackgroundColor="Green" Padding="10,0,10,0" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+<!--                            <RowDefinition Height="1*"/>-->
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*" />
+                        </Grid.ColumnDefinitions>
+                        
+                        <customControls:CustomEntry Placeholder="This is first entry" BackgroundColor="Yellow" Grid.Row="0" Grid.Column="0" Style="{StaticResource EntryUserProfile}">
+                        </customControls:CustomEntry>
+                        <BoxView Grid.Row="0" Grid.Column="0" Style="{StaticResource BoxUserProfile}">
+                        </BoxView>
+                        <Label Text="Enter data in above field" BackgroundColor="#20000000" Grid.Row="0" Grid.Column="0" Style="{StaticResource LabelUserProfile}">
+                        </Label>
+                        
+                        <StackLayout Grid.Row="1" Grid.Column="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                            <customControls:CustomEntry Placeholder="This is second entry" BackgroundColor="Yellow" Grid.Row="0" Grid.Column="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                            </customControls:CustomEntry>
+                        </StackLayout>
+
+                        <StackLayout Grid.Row="2" Grid.Column="0" Spacing="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                            <customControls:CustomEntry Placeholder="This is second entry" BackgroundColor="Yellow" Grid.Row="0" Grid.Column="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                            </customControls:CustomEntry>
+                            <BoxView Style="{StaticResource BoxUserProfile}">
+                            </BoxView>
+                            <Label Text="Enter data in above field" BackgroundColor="#20000000" Style="{StaticResource LabelUserProfile}">
+                            </Label>
+                        </StackLayout>
+
+                        <!--<customControls:CustomEntry Placeholder="This is first entry" BackgroundColor="Yellow" Grid.Row="2" Grid.Column="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                        </customControls:CustomEntry>-->
+                        
+                    </Grid>
+                </StackLayout>
+            </ScrollView>
+        </AbsoluteLayout>
+	</ContentPage.Content>
+</ContentPage>
