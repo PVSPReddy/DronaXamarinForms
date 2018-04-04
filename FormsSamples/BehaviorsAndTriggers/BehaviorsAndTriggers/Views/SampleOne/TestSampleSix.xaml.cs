@@ -5,21 +5,28 @@ using Xamarin.Forms;
 
 namespace BehaviorsAndTriggers.Views.SampleOne
 {
-    public partial class TestSampleThree : ContentPage
+    public partial class TestSampleSix : ContentPage
     {
-        public TestSampleThree()
+        public TestSampleSix()
         {
             InitializeComponent();
+
             var screenHeight = (App.screenHeight * 1) / 100;
             var screenWidth = (App.screenWidth) / 100;
 
-            entryUserName.Focused += EntryFocused;
-            entryUserPassword.Focused += EntryFocused;
-            entryUserMobile.Focused += EntryFocused;
-            entryUserEMail.Focused += EntryFocused;
+            ceViewUserName.entry.Placeholder = "Enter User Name";
+            ceViewUserPassword.entry.Placeholder = "Enter User Password";
+            ceViewUserMobile.entry.Placeholder = "Enter User Mobile";
+            ceViewUserEmail.entry.Placeholder = "Enter User Email Id";
 
 
-            gridHolder.HeightRequest = (screenHeight * 80);
+            ceViewUserName.entry.Focused += EntryFocused;
+            ceViewUserPassword.entry.Focused += EntryFocused;
+            ceViewUserMobile.entry.Focused += EntryFocused;
+            ceViewUserEmail.entry.Focused += EntryFocused;
+
+            gridHolder.HeightRequest = (screenHeight * 50);
+
         }
 
         private void BackTapped(object sender, EventArgs e)
@@ -38,7 +45,7 @@ namespace BehaviorsAndTriggers.Views.SampleOne
         {
             try
             {
-                Navigation.PushModalAsync(new TestSampleFour());
+                Navigation.PopModalAsync();
             }
             catch (Exception ex)
             {
@@ -50,26 +57,31 @@ namespace BehaviorsAndTriggers.Views.SampleOne
         {
             try
             {
-                var element = (Entry)sender;
+                var element = (CustomEntry)sender;
+
                 if (element.Placeholder.Contains("Name"))
                 {
-                    labelUserName.IsVisible = false;
-                    imageUserName.IsVisible = false;
+                }
+
+                if (element.Placeholder.Contains("Name"))
+                {
+                    ceViewUserName.mainHolder.BackgroundColor = Color.Yellow;
+                    ceViewUserName.image.IsVisible = false;
                 }
                 else if (element.Placeholder.Contains("Password"))
                 {
-                    //labelUserPassword.IsVisible = false;
-                    imageUserPassword.IsVisible = false;
+                    ceViewUserPassword.mainHolder.BackgroundColor = Color.Yellow;
+                    ceViewUserPassword.image.IsVisible = false;
                 }
                 else if (element.Placeholder.Contains("Mobile"))
                 {
-                    //labelUserMobile.IsVisible = false;
-                    imageUserMobile.IsVisible = false;
+                    ceViewUserMobile.mainHolder.BackgroundColor = Color.Yellow;
+                    ceViewUserMobile.image.IsVisible = false;
                 }
                 else if (element.Placeholder.Contains("Email"))
                 {
-                    //labelUserEMail.IsVisible = false;
-                    imageUserEMail.IsVisible = false;
+                    ceViewUserEmail.mainHolder.BackgroundColor = Color.Yellow;
+                    ceViewUserEmail.image.IsVisible = false;
                 }
                 else
                 {
@@ -86,6 +98,14 @@ namespace BehaviorsAndTriggers.Views.SampleOne
         {
             try
             {
+                if (string.IsNullOrEmpty(ceViewUserName.entry.Text))
+                {
+                    //ceViewUserName.label.TextColor = Color.Red;
+                    //ceViewUserName.label.Text = "User Name cannot be null";
+                    //ceViewUserName.label.IsVisible = true;
+                    ceViewUserName.mainHolder.BackgroundColor = Color.Red;
+                    ceViewUserName.image.IsVisible = true;
+                }
                 /*
                 if (string.IsNullOrEmpty(entryUserName.Text))
                 {
@@ -120,33 +140,27 @@ namespace BehaviorsAndTriggers.Views.SampleOne
 
                 }
                 */
-                if (string.IsNullOrEmpty(entryUserName.Text))
+
+
+                if (string.IsNullOrEmpty(ceViewUserName.entry.Text))
                 {
-                    labelUserName.TextColor = Color.Red;
-                    labelUserName.Text = "User Name cannot be null";
-                    imageUserName.IsVisible = true;
-                    labelUserName.IsVisible = true;
+                    ceViewUserName.mainHolder.BackgroundColor = Color.Red;
+                    ceViewUserName.image.IsVisible = true;
                 }
-                if (string.IsNullOrEmpty(entryUserPassword.Text))
+                if (string.IsNullOrEmpty(ceViewUserPassword.entry.Text))
                 {
-                    //labelUserPassword.TextColor = Color.Red;
-                    //labelUserPassword.Text = "User Password cannot be null";
-                    //labelUserPassword.IsVisible = true;
-                    imageUserPassword.IsVisible = true;
+                    ceViewUserPassword.mainHolder.BackgroundColor = Color.Red;
+                    ceViewUserPassword.image.IsVisible = true;
                 }
-                if (string.IsNullOrEmpty(entryUserMobile.Text))
+                if (string.IsNullOrEmpty(ceViewUserMobile.entry.Text))
                 {
-                    //labelUserMobile.TextColor = Color.Red;
-                    //labelUserMobile.Text = "Mobile number cannot be null";
-                    //labelUserMobile.IsVisible = true;
-                    imageUserMobile.IsVisible = true;
+                    ceViewUserMobile.mainHolder.BackgroundColor = Color.Red;
+                    ceViewUserMobile.image.IsVisible = true;
                 }
-                if (string.IsNullOrEmpty(entryUserEMail.Text))
+                if (string.IsNullOrEmpty(ceViewUserEmail.entry.Text))
                 {
-                    //labelUserEMail.TextColor = Color.Red;
-                    //labelUserEMail.Text = "Email Id cannot be null";
-                    //labelUserEMail.IsVisible = true;
-                    imageUserEMail.IsVisible = true;
+                    ceViewUserEmail.mainHolder.BackgroundColor = Color.Red;
+                    ceViewUserEmail.image.IsVisible = true;
                 }
             }
             catch (Exception ex)

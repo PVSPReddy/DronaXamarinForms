@@ -1,27 +1,29 @@
-﻿<Properties StartupConfiguration="{474DB50C-1CD6-41C2-AE83-4FBA0546CB21}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="BehaviorsAndTriggers/Views/SampleOne/TestSampleThree.xaml.cs">
+﻿<Properties StartupConfiguration="{36550CB3-7CB9-49A6-81E1-AC0E4EBD9DB0}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="BehaviorsAndTriggers/CustomControls/CustomEntryView.cs">
     <Files>
-      <File FileName="BehaviorsAndTriggers/Views/SampleOne/TestSampleOne.xaml" Line="60" Column="33" />
-      <File FileName="BehaviorsAndTriggers/Views/SampleOne/TestSampleOne.xaml.cs" Line="18" Column="60" />
-      <File FileName="BehaviorsAndTriggers/obj/Debug/BehaviorsAndTriggers.Views.SampleOne.TestSampleOne.xaml.g.cs" Line="1" Column="1" />
-      <File FileName="iOS/CustomControls/CustomEntryRenderer.cs" Line="71" Column="1" />
-      <File FileName="BehaviorsAndTriggers/App.xaml.cs" Line="19" Column="1" />
-      <File FileName="BehaviorsAndTriggers/Views/SampleOne/TestSampleTwo.xaml" Line="107" Column="37" />
-      <File FileName="BehaviorsAndTriggers/Views/SampleOne/TestSampleTwo.xaml.cs" Line="11" Column="10" />
-      <File FileName="BehaviorsAndTriggers/Views/SampleOne/TestSampleThree.xaml" Line="118" Column="43" />
-      <File FileName="BehaviorsAndTriggers/Views/SampleOne/TestSampleThree.xaml.cs" Line="15" Column="13" />
+      <File FileName="BehaviorsAndTriggers/Views/SampleOne/TestSampleTwo.xaml" Line="141" Column="1" />
+      <File FileName="BehaviorsAndTriggers/Views/SampleOne/TestSampleTwo.xaml.cs" Line="43" Column="60" />
+      <File FileName="BehaviorsAndTriggers/Views/SampleOne/TestSampleFive.xaml" Line="5" Column="10" />
+      <File FileName="BehaviorsAndTriggers/Views/SampleOne/TestSampleFive.xaml.cs" Line="10" Column="32" />
+      <File FileName="BehaviorsAndTriggers/CustomControls/CustomEntryView.cs" Line="27" Column="65" />
+      <File FileName="Droid/CustomControls/CustomEntryRenderer.cs" Line="128" Column="6" />
+      <File FileName="BehaviorsAndTriggers/Views/SampleOne/TestSampleSix.xaml" Line="83" Column="25" />
+      <File FileName="BehaviorsAndTriggers/Views/SampleOne/TestSampleSix.xaml.cs" Line="65" Column="17" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
-      <Breakpoint file="/Users/rabbit/Projects/BehaviorsAndTriggers/iOS/CustomControls/CustomEntryRenderer.cs" relfile="iOS/CustomControls/CustomEntryRenderer.cs" line="74" column="1" />
-      <Breakpoint file="/Users/rabbit/Projects/BehaviorsAndTriggers/iOS/CustomControls/CustomEntryRenderer.cs" relfile="iOS/CustomControls/CustomEntryRenderer.cs" line="134" column="1" />
-      <Breakpoint file="/Users/rabbit/Projects/BehaviorsAndTriggers/BehaviorsAndTriggers/App.xaml.cs" relfile="BehaviorsAndTriggers/App.xaml.cs" line="19" column="1" />
-      <Breakpoint file="/Users/rabbit/Projects/BehaviorsAndTriggers/BehaviorsAndTriggers/Views/SampleOne/TestSampleTwo.xaml.cs" relfile="BehaviorsAndTriggers/Views/SampleOne/TestSampleTwo.xaml.cs" line="76" column="1" />
-      <Breakpoint file="/Users/rabbit/Projects/BehaviorsAndTriggers/BehaviorsAndTriggers/Views/SampleOne/TestSampleTwo.xaml.cs" relfile="BehaviorsAndTriggers/Views/SampleOne/TestSampleTwo.xaml.cs" line="144" column="1" />
-      <Breakpoint file="/Users/rabbit/Projects/BehaviorsAndTriggers/BehaviorsAndTriggers/Views/SampleOne/TestSampleThree.xaml.cs" relfile="BehaviorsAndTriggers/Views/SampleOne/TestSampleThree.xaml.cs" line="153" column="1" />
-      <Breakpoint file="/Users/rabbit/Projects/BehaviorsAndTriggers/BehaviorsAndTriggers/Views/SampleOne/TestSampleThree.xaml.cs" relfile="BehaviorsAndTriggers/Views/SampleOne/TestSampleThree.xaml.cs" line="80" column="1" />
+      <Breakpoint file="/Users/rabbit/Desktop/untitledfolder/PersonalProjFiles/DronaXamarinForms/FormsSamples/BehaviorsAndTriggers/iOS/CustomControls/CustomEntryRenderer.cs" relfile="iOS/CustomControls/CustomEntryRenderer.cs" line="74" column="1" />
+      <Breakpoint file="/Users/rabbit/Desktop/untitledfolder/PersonalProjFiles/DronaXamarinForms/FormsSamples/BehaviorsAndTriggers/iOS/CustomControls/CustomEntryRenderer.cs" relfile="iOS/CustomControls/CustomEntryRenderer.cs" line="134" column="1" />
+      <Breakpoint file="/Users/rabbit/Desktop/untitledfolder/PersonalProjFiles/DronaXamarinForms/FormsSamples/BehaviorsAndTriggers/BehaviorsAndTriggers/App.xaml.cs" relfile="BehaviorsAndTriggers/App.xaml.cs" line="19" column="1" />
+      <Breakpoint file="/Users/rabbit/Desktop/untitledfolder/PersonalProjFiles/DronaXamarinForms/FormsSamples/BehaviorsAndTriggers/BehaviorsAndTriggers/Views/SampleOne/TestSampleTwo.xaml.cs" relfile="BehaviorsAndTriggers/Views/SampleOne/TestSampleTwo.xaml.cs" line="78" column="1" />
+      <Breakpoint file="/Users/rabbit/Desktop/untitledfolder/PersonalProjFiles/DronaXamarinForms/FormsSamples/BehaviorsAndTriggers/BehaviorsAndTriggers/Views/SampleOne/TestSampleTwo.xaml.cs" relfile="BehaviorsAndTriggers/Views/SampleOne/TestSampleTwo.xaml.cs" line="146" column="1" />
+      <Breakpoint file="/Users/rabbit/Desktop/untitledfolder/PersonalProjFiles/DronaXamarinForms/FormsSamples/BehaviorsAndTriggers/BehaviorsAndTriggers/Views/SampleOne/TestSampleThree.xaml.cs" relfile="BehaviorsAndTriggers/Views/SampleOne/TestSampleThree.xaml.cs" line="153" column="1" />
+      <Breakpoint file="/Users/rabbit/Desktop/untitledfolder/PersonalProjFiles/DronaXamarinForms/FormsSamples/BehaviorsAndTriggers/BehaviorsAndTriggers/Views/SampleOne/TestSampleThree.xaml.cs" relfile="BehaviorsAndTriggers/Views/SampleOne/TestSampleThree.xaml.cs" line="80" column="1" />
+      <Breakpoint file="/Users/rabbit/Desktop/untitledfolder/PersonalProjFiles/DronaXamarinForms/FormsSamples/BehaviorsAndTriggers/BehaviorsAndTriggers/Views/SampleOne/TestSampleFour.xaml.cs" relfile="BehaviorsAndTriggers/Views/SampleOne/TestSampleFour.xaml.cs" line="56" column="1" />
+      <Breakpoint file="/Users/rabbit/Desktop/untitledfolder/PersonalProjFiles/DronaXamarinForms/FormsSamples/BehaviorsAndTriggers/BehaviorsAndTriggers/Views/SampleOne/TestSampleFive.xaml.cs" relfile="BehaviorsAndTriggers/Views/SampleOne/TestSampleFive.xaml.cs" line="105" column="1" />
+      <Breakpoint file="/Users/rabbit/Desktop/untitledfolder/PersonalProjFiles/DronaXamarinForms/FormsSamples/BehaviorsAndTriggers/BehaviorsAndTriggers/Views/SampleOne/TestSampleTwo.xaml.cs" relfile="BehaviorsAndTriggers/Views/SampleOne/TestSampleTwo.xaml.cs" line="46" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

@@ -52,7 +52,13 @@ namespace BehaviorsAndTriggers.Droid
                     //Control.SetHintTextColor(ColorStateList.ValueOf(global::Android.Graphics.Color.Black));//for placeholder	
                     //this.Control.InputType = InputTypes.TextVariationPassword;
 
+
+                    //Control.TextAlignment = Android.Views.TextAlignment.ViewEnd;
+                    Control.Gravity = GravityFlags.Bottom;
+
                     //Control.FocusChange += EntryFocusChanged;
+
+
 
                     if (element.CustomFontSize != 0.0)
 					{
@@ -131,6 +137,9 @@ namespace BehaviorsAndTriggers.Droid
 					//Control.SetHintTextColor(ColorStateList.ValueOf(global::Android.Graphics.Color.Black));//for placeholder	
 					//this.Control.InputType = InputTypes.TextVariationPassword;
 					
+                    //Control.TextAlignment = Android.Views.TextAlignment.ViewEnd;
+                    Control.Gravity = GravityFlags.FillVertical;
+
                     //Control.FocusChange += EntryFocusChanged;
 
                     if (element.CustomFontSize != 0.0)

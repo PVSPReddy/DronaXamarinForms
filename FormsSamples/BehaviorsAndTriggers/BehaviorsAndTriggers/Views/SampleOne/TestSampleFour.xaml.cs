@@ -5,21 +5,33 @@ using Xamarin.Forms;
 
 namespace BehaviorsAndTriggers.Views.SampleOne
 {
-    public partial class TestSampleThree : ContentPage
+    public partial class TestSampleFour : ContentPage
     {
-        public TestSampleThree()
+        public TestSampleFour()
         {
             InitializeComponent();
             var screenHeight = (App.screenHeight * 1) / 100;
             var screenWidth = (App.screenWidth) / 100;
+
+
 
             entryUserName.Focused += EntryFocused;
             entryUserPassword.Focused += EntryFocused;
             entryUserMobile.Focused += EntryFocused;
             entryUserEMail.Focused += EntryFocused;
 
+            entryUserName.HeightRequest = (screenHeight*5);
+            entryUserPassword.HeightRequest = (screenHeight * 5);
+            entryUserMobile.HeightRequest = (screenHeight * 5);
+            entryUserEMail.HeightRequest = (screenHeight * 5);
 
-            gridHolder.HeightRequest = (screenHeight * 80);
+            labelUserName.HeightRequest = (screenHeight * 5);
+            labelUserPassword.HeightRequest = (screenHeight * 5);
+            labelUserMobile.HeightRequest = (screenHeight * 5);
+            labelUserEMail.HeightRequest = (screenHeight * 5);
+
+            gridHolder.HeightRequest = (screenHeight * 50);
+
         }
 
         private void BackTapped(object sender, EventArgs e)
@@ -38,7 +50,7 @@ namespace BehaviorsAndTriggers.Views.SampleOne
         {
             try
             {
-                Navigation.PushModalAsync(new TestSampleFour());
+                Navigation.PushModalAsync(new TestSampleFive());
             }
             catch (Exception ex)
             {
@@ -58,17 +70,17 @@ namespace BehaviorsAndTriggers.Views.SampleOne
                 }
                 else if (element.Placeholder.Contains("Password"))
                 {
-                    //labelUserPassword.IsVisible = false;
+                    labelUserPassword.IsVisible = false;
                     imageUserPassword.IsVisible = false;
                 }
                 else if (element.Placeholder.Contains("Mobile"))
                 {
-                    //labelUserMobile.IsVisible = false;
+                    labelUserMobile.IsVisible = false;
                     imageUserMobile.IsVisible = false;
                 }
                 else if (element.Placeholder.Contains("Email"))
                 {
-                    //labelUserEMail.IsVisible = false;
+                    labelUserEMail.IsVisible = false;
                     imageUserEMail.IsVisible = false;
                 }
                 else
@@ -120,6 +132,7 @@ namespace BehaviorsAndTriggers.Views.SampleOne
 
                 }
                 */
+
                 if (string.IsNullOrEmpty(entryUserName.Text))
                 {
                     labelUserName.TextColor = Color.Red;
@@ -129,23 +142,23 @@ namespace BehaviorsAndTriggers.Views.SampleOne
                 }
                 if (string.IsNullOrEmpty(entryUserPassword.Text))
                 {
-                    //labelUserPassword.TextColor = Color.Red;
-                    //labelUserPassword.Text = "User Password cannot be null";
-                    //labelUserPassword.IsVisible = true;
+                    labelUserPassword.TextColor = Color.Red;
+                    labelUserPassword.Text = "User Password cannot be null";
+                    labelUserPassword.IsVisible = true;
                     imageUserPassword.IsVisible = true;
                 }
                 if (string.IsNullOrEmpty(entryUserMobile.Text))
                 {
-                    //labelUserMobile.TextColor = Color.Red;
-                    //labelUserMobile.Text = "Mobile number cannot be null";
-                    //labelUserMobile.IsVisible = true;
+                    labelUserMobile.TextColor = Color.Red;
+                    labelUserMobile.Text = "Mobile number cannot be null";
+                    labelUserMobile.IsVisible = true;
                     imageUserMobile.IsVisible = true;
                 }
                 if (string.IsNullOrEmpty(entryUserEMail.Text))
                 {
-                    //labelUserEMail.TextColor = Color.Red;
-                    //labelUserEMail.Text = "Email Id cannot be null";
-                    //labelUserEMail.IsVisible = true;
+                    labelUserEMail.TextColor = Color.Red;
+                    labelUserEMail.Text = "Email Id cannot be null";
+                    labelUserEMail.IsVisible = true;
                     imageUserEMail.IsVisible = true;
                 }
             }

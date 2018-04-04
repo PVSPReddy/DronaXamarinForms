@@ -135,6 +135,9 @@
     <AndroidResource Include="Resources\drawable-xxhdpi\icon.png" />
     <AndroidResource Include="Resources\drawable\ExclamationOne.png" />
     <AndroidResource Include="Resources\drawable\ExclamationTwo.png" />
+    <AndroidResource Include="Resources\drawable\AsteriskOneOrange.png" />
+    <AndroidResource Include="Resources\drawable\AsteriskOneBlack.png" />
+    <AndroidResource Include="Resources\drawable\AsteriskTwo.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="CustomControls\" />

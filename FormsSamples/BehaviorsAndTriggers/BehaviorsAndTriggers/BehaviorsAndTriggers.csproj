@@ -42,6 +42,18 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\SampleOne\TestSampleFour.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\SampleOne\TestSampleFive.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\SampleOne\TestSampleSix.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
@@ -61,6 +73,16 @@
     </Compile>
     <Compile Include="Views\SampleOne\TestSampleThree.xaml.cs">
       <DependentUpon>TestSampleThree.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SampleOne\TestSampleFour.xaml.cs">
+      <DependentUpon>TestSampleFour.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SampleOne\TestSampleFive.xaml.cs">
+      <DependentUpon>TestSampleFive.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\CustomEntryView.cs" />
+    <Compile Include="Views\SampleOne\TestSampleSix.xaml.cs">
+      <DependentUpon>TestSampleSix.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

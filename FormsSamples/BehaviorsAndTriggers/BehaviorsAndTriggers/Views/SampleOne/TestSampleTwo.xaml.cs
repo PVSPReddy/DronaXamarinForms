@@ -38,7 +38,9 @@ namespace BehaviorsAndTriggers.Views.SampleOne
         {
             try
             {
-                Navigation.PushModalAsync(new TestSampleThree());
+                //Navigation.PushModalAsync(new TestSampleThree());
+                //Navigation.PushModalAsync(new TestSampleFive());
+                Navigation.PushModalAsync(new TestSampleSix());
             }
             catch (Exception ex)
             {
