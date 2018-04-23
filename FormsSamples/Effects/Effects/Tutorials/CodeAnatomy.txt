@@ -1,0 +1,13 @@
+﻿PCL:
+----
+namespace Effects
+{
+    public class FocusEffect : RoutingEffect
+    {
+        public FocusEffect() : base("EffectsTesting.FocusEffect")
+        {}
+    }
+}
+
+RoutingEffect = Class that inherits Effects Class and this connects our custom class with platform-specfic classes/code
+base("ResolutionGroupName.EffectName") : this helps the RoutingEffect to understand the name of effets and under which user defined group the current effect comes to effect.

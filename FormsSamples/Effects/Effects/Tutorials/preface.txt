@@ -1,0 +1,176 @@
+﻿This is an example project that states how/when to use effects and why to use them.
+
+
+effect vs custom-render
+------------------------
+A effect is required when there's no need to override methods of a platform-specific control. unlike we write custom render where we can change both the display properties and also the functionalities through overriding methods
+A custom renderer is required when there's a need to replace the platform-specific control that implements a Xamarin.Forms control.
+
+
+Components
+----------
+this is similar to customrender, we haveto inherit the effects to a custom class in PCL and this is
+edited in platform-specfic folders.
+the platform-specfic code contains
+
+Container(platform-specfic layout) – references the platform-specific control being used to implement the layout.
+Control(platform-specfic control/view) – references the platform-specific control being used to implement the Xamarin.Forms control.
+Element(pcl element/view) – references the Xamarin.Forms control that's being rendered.
+
+
+methods
+-------
+methods to override in platform-specfic code
+OnAttached – called when an affect is attached to a Xamarin.Forms control. An overridden version of this method, in each platfom-specific effect class, is the place to perform customization of the control, along with exception handling in case the effect cannot be applied to the specified Xamarin.Forms control.
+OnDetached – called when an effect is detached from a Xamarin.Forms control. An overridden version of this method, in each platform-specific effect class, is the place to perform any effect cleanup such as de-registering an event handler.
+
+we can also override OnElementPropertyChanged method to know when the properties of a control/container is changed.
+
+
+Procedure
+---------
+
+step 1:
+-------
+
+in iOS and Android(Platform-Specfic code)
+Create a subclass of the PlatformEffect class.
+Override the OnAttached method and write logic to customize the control.
+Override the OnDetached method and write logic to clean up the control customization, if required.
+Add a ResolutionGroupName attribute to the effect class. This attribute sets a company wide namespace for effects, preventing collisions with other effects with the same name. Note that this attribute can only be applied once per project.
+eg:
+[assembly:ResolutionGroupName ("MyCompany")]
+
+Add an ExportEffect attribute to the effect class. This attribute registers the effect with a unique ID that's used by Xamarin.Forms, along with the group name, to locate the effect prior to applying it to a control. The attribute takes two parameters – the type name of the effect, and a unique string that will be used to locate the effect prior to applying it to a control.
+eg:
+[assembly:ExportEffect (typeof(FocusEffect), "FocusEffect")]
+
+
+final output could be like
+iOS:
+using Xamarin.Forms;
+using Xamarin.Forms.Platform.iOS;
+
+[assembly:ResolutionGroupName ("MyCompany")]
+[assembly:ExportEffect (typeof(FocusEffect), "FocusEffect")]
+namespace EffectsDemo.iOS
+{
+    public class FocusEffect : PlatformEffect
+    {
+        UIColor backgroundColor;
+
+        protected override void OnAttached ()
+        {
+            try {
+                Control.BackgroundColor = backgroundColor = UIColor.FromRGB (204, 153, 255);
+            } catch (Exception ex) {
+                Console.WriteLine ("Cannot set property on attached control. Error: ", ex.Message);
+            }
+        }
+
+        protected override void OnDetached ()
+        {
+        }
+
+        protected override void OnElementPropertyChanged (PropertyChangedEventArgs args)
+        {
+            base.OnElementPropertyChanged (args);
+
+            try {
+                if (args.PropertyName == "IsFocused") {
+                    if (Control.BackgroundColor == backgroundColor) {
+                        Control.BackgroundColor = UIColor.White;
+                    } else {
+                        Control.BackgroundColor = backgroundColor;
+                    }
+                }
+            } catch (Exception ex) {
+                Console.WriteLine ("Cannot set property on attached control. Error: ", ex.Message);
+            }
+        }
+    }
+}
+
+Android:
+using Xamarin.Forms;
+using Xamarin.Forms.Platform.Android;
+
+[assembly:ResolutionGroupName ("MyCompany")]
+[assembly:ExportEffect (typeof(FocusEffect), "FocusEffect")]
+namespace EffectsDemo.Droid
+{
+    public class FocusEffect : PlatformEffect
+    {
+        Android.Graphics.Color backgroundColor;
+
+        protected override void OnAttached ()
+        {
+            try {
+                backgroundColor = Android.Graphics.Color.LightGreen;
+                Control.SetBackgroundColor (backgroundColor);
+
+            } catch (Exception ex) {
+                Console.WriteLine ("Cannot set property on attached control. Error: ", ex.Message);
+            }
+        }
+
+        protected override void OnDetached ()
+        {
+        }
+
+        protected override void OnElementPropertyChanged (System.ComponentModel.PropertyChangedEventArgs args)
+        {
+            base.OnElementPropertyChanged (args);
+            try {
+                if (args.PropertyName == "IsFocused") {
+                    if (((Android.Graphics.Drawables.ColorDrawable)Control.Background).Color == backgroundColor) {
+                        Control.SetBackgroundColor (Android.Graphics.Color.Black);
+                    } else {
+                        Control.SetBackgroundColor (backgroundColor);
+                    }
+                }
+            } catch (Exception ex) {
+                Console.WriteLine ("Cannot set property on attached control. Error: ", ex.Message);
+            }
+        }
+    }
+}
+
+Step 2:
+-------
+in PCL creating a class to inherit the code and consuming the effects
+
+Creating effect in PCL
+public class FocusEffect : RoutingEffect
+{
+    public FocusEffect () : base ("MyCompany.FocusEffect")
+    {
+    }
+}
+
+
+Consuming:
+
+In XAML:
+<Entry Text="Effect attached to an Entry" ...>
+    <Entry.Effects>
+        <local:FocusEffect />
+    </Entry.Effects>
+    ...
+</Entry>
+
+In C#
+var entry = new Entry {
+  Text = "Effect attached to an Entry",
+  ...
+};
+entry.Effects.Add (Effect.Resolve ("MyCompany.FocusEffect"));
+
+
+This is the basic part of Effects with examles.
+let us have a deep dive from here onwards
+
+
+
+
+

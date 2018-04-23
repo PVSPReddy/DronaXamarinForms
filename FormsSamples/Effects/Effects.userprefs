@@ -1,0 +1,17 @@
+﻿<Properties StartupConfiguration="{35EADAD7-3A2D-435E-B06A-226454705976}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="iOS/CustomControls/FocusEffect.cs">
+    <Files>
+      <File FileName="Effects/Views/TestPageOne.xaml" Line="40" Column="60" />
+      <File FileName="iOS/CustomControls/FocusEffect.cs" Line="47" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.Effects.iOS PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.BD353F08-B061-48E8-A2EF-14D7D4CE4E9C">
+    <MonoDevelop.MacDev.AppleDevelopmentTeam />
+  </MonoDevelop.Ide.ItemProperties.Effects.iOS>
+  <MultiItemStartupConfigurations />
+</Properties>
