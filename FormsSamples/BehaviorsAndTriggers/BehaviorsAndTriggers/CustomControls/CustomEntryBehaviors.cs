@@ -10,7 +10,7 @@ namespace BehaviorsAndTriggers
         int oldTextLength, newTextLength;
         public CustomEntryBehaviors()
         {
-            
+
         }
 
         protected override void OnAttachedTo(CustomEntry entry)
@@ -36,36 +36,56 @@ namespace BehaviorsAndTriggers
             try
             {
                 string textEntered = localEntry.Text;
+                localEntry.IsValidEntry = false;
                 switch (localEntry.CustomEntryType)
                 {
                     case "Numeric":
-                    break;
+                        NumericSelected();
+                        break;
                     case "MobileGeneral":
-                    break;
+                        break;
                     case "MobileStructured":
-                        TextLengthChangedEvent();
+                        MobileStructuredSelected();
                         //localEntry.Text = String.Format("{0:###-###-####}", textEntered.ToCharArray());
                         //localEntry.Text = localEntry;
-                    break;
+                        break;
                     case "MobileGeneralWithCode":
-                    break;
+                        break;
                     case "MobileStructuredWithCode":
-                    break;
+                        break;
                     default:
-                    break;
+                        break;
                 };
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 var msg = ex.Message;
             }
         }
 
-        private void TextLengthChangedEvent()
+        #region for Numeric entry
+        private void NumericSelected()
         {
             try
             {
-                if(localEntry.TextColor != Color.Black)
+                if (localEntry.TextColor != Color.Black)
+                {
+                    localEntry.TextColor = Color.Black;
+                }
+            }
+            catch (Exception ex)
+            {
+                var msg = ex.Message;
+            }
+        }
+        #endregion
+
+        #region for structured mobile number
+        private void MobileStructuredSelected()
+        {
+            try
+            {
+                if (localEntry.TextColor != Color.Black)
                 {
                     localEntry.TextColor = Color.Black;
                 }
@@ -75,18 +95,16 @@ namespace BehaviorsAndTriggers
                     {
                         oldTextLength = localEntry.Text.Length;
                     }
-
-
                     else
                     {
                         newTextLength = localEntry.Text.Length;
                         if (!(oldTextLength > newTextLength))
                         {
-                            if(newTextLength > 12)
+                            if (newTextLength > 12)
                             {
-                                localEntry.Text = localEntry.Text.Remove(newTextLength-1);
+                                localEntry.Text = localEntry.Text.Remove(newTextLength - 1);
                             }
-                            else if(newTextLength == 7)
+                            else if (newTextLength == 7)
                             {
                                 localEntry.Text += "-";
                             }
@@ -96,7 +114,7 @@ namespace BehaviorsAndTriggers
                             }
                             else
                             {
-                                
+
                             }
                             /*
                             if (newTextLength >= 3 && newTextLength < 7)
@@ -179,7 +197,6 @@ namespace BehaviorsAndTriggers
                     //}
                     //else
                     //{
-                        
                     //}
                     //if (allTextChars[7] != '-')
                     //{
@@ -187,7 +204,6 @@ namespace BehaviorsAndTriggers
                     //}
                     //else
                     //{
-
                     //}
                     //if(localEntry.Text.Length > 12)
                     //{
@@ -196,12 +212,14 @@ namespace BehaviorsAndTriggers
 
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 var msg = ex.Message;
             }
         }
+        #endregion
 
+        #region final validation after the text change completion
         private void TextChangeCompletedEvents(object sender, EventArgs e)
         {
             try
@@ -210,6 +228,24 @@ namespace BehaviorsAndTriggers
                 switch (localEntry.CustomEntryType)
                 {
                     case "Numeric":
+                        if (textEntered != null)
+                        {
+                            var IsValidNumber = Regex.IsMatch(textEntered, "^[0-9]*$");
+                            if (!IsValidNumber)
+                            {
+                                localEntry.TextColor = Color.Red;
+                                localEntry.IsValidEntry = false;
+                            }
+                            else
+                            {
+                                localEntry.TextColor = Color.Black;
+                                localEntry.IsValidEntry = true;
+                            }
+                        }
+                        else
+                        {
+
+                        }
                         break;
                     case "MobileGeneral":
                         break;
@@ -220,15 +256,17 @@ namespace BehaviorsAndTriggers
                             if (!IsValidNumber)
                             {
                                 localEntry.TextColor = Color.Red;
+                                localEntry.IsValidEntry = false;
                             }
                             else
                             {
                                 localEntry.TextColor = Color.Black;
+                                localEntry.IsValidEntry = true;
                             }
                         }
                         else
                         {
-                            
+
                         }
                         break;
                     case "MobileGeneralWithCode":
@@ -244,6 +282,7 @@ namespace BehaviorsAndTriggers
                 var msg = ex.Message;
             }
         }
+        #endregion
     }
 }
 

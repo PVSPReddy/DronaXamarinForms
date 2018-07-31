@@ -1,5 +1,6 @@
 ﻿using System;
 using BehaviorsAndTriggers.Views.SampleOne;
+using BehaviorsAndTriggers.Views.SampleTwo;
 using Xamarin.Forms;
 
 namespace BehaviorsAndTriggers
@@ -13,11 +14,12 @@ namespace BehaviorsAndTriggers
 
             try
             {
-                MainPage = new TestSampleTwo();
+                MainPage = new TestTriggerSampleOne();
             }
             catch(Exception ex)
             {
-                var msg = ex.Message;
+                var msg = ex.Message + "\n" + ex.StackTrace;
+                System.Diagnostics.Debug.WriteLine(msg);
             }
         }
 

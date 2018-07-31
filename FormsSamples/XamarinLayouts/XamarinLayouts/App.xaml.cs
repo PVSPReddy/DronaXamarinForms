@@ -9,7 +9,7 @@ namespace XamarinLayouts
         {
             InitializeComponent();
 
-            MainPage = new StartPage();
+            MainPage = new FlexLayoutDemo();
         }
 
         protected override void OnStart()

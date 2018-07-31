@@ -15,7 +15,7 @@ namespace BehaviorsAndTriggers.Views.SampleOne
 
 
 
-            gridHolder.HeightRequest = (screenHeight * 30);
+            //gridHolder.HeightRequest = (screenHeight * 30);
 
         }
     }

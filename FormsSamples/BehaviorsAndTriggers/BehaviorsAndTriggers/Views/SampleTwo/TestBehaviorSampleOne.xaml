@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:customControls="clr-namespace:BehaviorsAndTriggers;assembly=BehaviorsAndTriggers;"
+    x:Class="BehaviorsAndTriggers.Views.SampleTwo.TestBehaviorSampleOne">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="LabelUserProfile" TargetType="Label">
+                <Setter Property="Margin" Value="0,2,0,2"/>
+                <Setter Property="HorizontalOptions" Value="Start"/>
+                <Setter Property="VerticalOptions" Value="End"/>
+            </Style>
+            <Style x:Key="EntryUserProfile" TargetType="Entry">
+                <Setter Property="PlaceholderColor" Value="Black"/>
+                <Setter Property="BackgroundColor" Value="Yellow"/>
+                <Setter Property="HorizontalTextAlignment" Value="Start"/>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="VerticalOptions" Value="FillAndExpand"/>
+<!--                <Setter Property="VerticalOptions" Value="EndAndExpand"/>-->
+            </Style>
+            <Style x:Key="BoxUserProfile" TargetType="BoxView">
+                <Setter Property="HeightRequest" Value="1"/>
+                <Setter Property="Color" Value="Black"/>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="VerticalOptions" Value="End"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness">
+            <On Platform="iOS" Value="0,20,0,0" />
+            <On Platform="Android, WinPhone, Windows" Value="0,0,0,0" />
+        </OnPlatform>
+    </ContentPage.Padding>
+    
+
+    <ContentPage.Content>
+        <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            
+            <StackLayout BackgroundColor="Maroon" AbsoluteLayout.LayoutBounds="0,0,1,0.1" AbsoluteLayout.LayoutFlags="All" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="1*" />
+                    </Grid.ColumnDefinitions>
+                    <Label x:Name="labelBack" Text="&lt;" Grid.Row="0" Grid.Column="0" BackgroundColor="#20000000" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="BackTapped"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label x:Name="labelTitle" Text="Form Four" Grid.Row="0" Grid.Column="1" BackgroundColor="#20000000" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    </Label>
+                    <Label x:Name="labelNext" Text="&gt;" Grid.Row="0" Grid.Column="2" BackgroundColor="#20000000" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="NextTapped"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                </Grid>
+            </StackLayout>
+            
+            <ScrollView AbsoluteLayout.LayoutBounds="1,1,1,0.9" AbsoluteLayout.LayoutFlags="All" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <StackLayout BackgroundColor="Teal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    <Grid x:Name="gridHolder" BackgroundColor="Green" Padding="10,0,10,0" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*" />
+                        </Grid.ColumnDefinitions>
+
+                        <StackLayout Grid.Row="0" Grid.Column="0" Spacing="0" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                            <customControls:CustomEntry x:Name="entryUserName" Placeholder="Enter User Name" Style="{StaticResource EntryUserProfile}">
+                            </customControls:CustomEntry>
+                            <BoxView Style="{StaticResource BoxUserProfile}">
+                            </BoxView>
+                            <Label x:Name="labelUserName" Text="Enter data in above field" BackgroundColor="#20000000" IsVisible="false" Style="{StaticResource LabelUserProfile}">
+                            </Label>
+                            </StackLayout>
+                            <Image x:Name="imageUserName" Source="ExclamationOne.png" IsVisible="false" HorizontalOptions="End" VerticalOptions="CenterAndExpand">
+                            </Image>
+                        </StackLayout>
+                        
+                        <StackLayout Grid.Row="1" Grid.Column="0" Spacing="0" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                            <customControls:CustomEntry x:Name="entryUserPassword" Placeholder="Enter User Password" Style="{StaticResource EntryUserProfile}">
+                            </customControls:CustomEntry>
+                            <BoxView Style="{StaticResource BoxUserProfile}">
+                            </BoxView>
+                            <Label x:Name="labelUserPassword" Text="Enter data in above field" BackgroundColor="#20000000" IsVisible="false" Style="{StaticResource LabelUserProfile}">
+                            </Label>
+                            </StackLayout>
+                            <Image x:Name="imageUserPassword" Source="ExclamationOne.png" IsVisible="false" HorizontalOptions="End" VerticalOptions="CenterAndExpand">
+                            </Image>
+                        </StackLayout>
+
+                        <StackLayout Grid.Row="2" Grid.Column="0" Spacing="0" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                            <customControls:CustomEntry x:Name="entryUserMobile" CustomEntryType="Numeric" Placeholder="Enter User Mobile Number" Style="{StaticResource EntryUserProfile}">
+                                    <customControls:CustomEntry.Behaviors>
+                                        <customControls:CustomEntryBehaviors/>
+                                    </customControls:CustomEntry.Behaviors>
+                            </customControls:CustomEntry>
+                            <BoxView Style="{StaticResource BoxUserProfile}">
+                            </BoxView>
+                            <Label x:Name="labelUserMobile" Text="Enter data in above field" BackgroundColor="#20000000" IsVisible="false" Style="{StaticResource LabelUserProfile}">
+                            </Label>
+                            </StackLayout>
+                        </StackLayout>
+                        <Image x:Name="imageUserMobile" Grid.Row="2" Grid.Column="0" Source="ExclamationOne.png" IsVisible="false" HorizontalOptions="End" VerticalOptions="CenterAndExpand">
+                        </Image>
+                        
+                        <StackLayout Grid.Row="3" Grid.Column="0" Spacing="0" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
+                            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                            <customControls:CustomEntry x:Name="entryUserEMail" Placeholder="Enter User Email Id" Style="{StaticResource EntryUserProfile}">
+                            </customControls:CustomEntry>
+                            <BoxView Style="{StaticResource BoxUserProfile}">
+                            </BoxView>
+                            <Label x:Name="labelUserEMail" Text="Enter data in above field" BackgroundColor="#20000000" IsVisible="false" Style="{StaticResource LabelUserProfile}">
+                            </Label>
+                            </StackLayout>
+                            <Image x:Name="imageUserEMail" Source="ExclamationOne.png" IsVisible="false" HorizontalOptions="End" VerticalOptions="CenterAndExpand">
+                            </Image>
+                        </StackLayout>
+
+                        <Button x:Name="buttonSubmit" Text="Submit" BackgroundColor="Maroon" Grid.Row="4" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Clicked="SubmitClicked">
+                        </Button>
+                        
+                    </Grid>
+                </StackLayout>
+            </ScrollView>
+            
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>
