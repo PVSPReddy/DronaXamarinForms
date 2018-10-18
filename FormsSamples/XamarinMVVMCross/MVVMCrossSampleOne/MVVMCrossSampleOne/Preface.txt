@@ -1,0 +1,451 @@
+﻿Add Packages
+MvvmCross
+MvvmCross.Forms
+
+
+
+
+
+
+PCL Files
+
+CoreApp.cs
+
+using System;
+using MvvmCross.IoC;
+using MvvmCross.ViewModels;
+using MVVMCrossSampleOne.ViewModels;
+using Xamarin.Forms;
+namespace MVVMCrossSampleOne
+{
+    public class CoreApp : MvxApplication
+    {
+        public override void Initialize()
+        {
+            CreatableTypes()
+                .EndingWith("Service")
+                .AsInterfaces()
+                .RegisterAsLazySingleton();
+
+            RegisterAppStart<MvxFormsViewModel>();
+        }
+    }
+}
+
+
+
+MVVMCrossSampleOne.cs
+
+using System;
+using System.Threading.Tasks;
+using MvvmCross.Commands;
+using MvvmCross.ViewModels;
+using Xamarin.Forms;
+namespace MVVMCrossSampleOne.ViewModels
+{
+    public class MvxFormsViewModel : MvxViewModel
+    {
+        public MvxFormsViewModel()
+        {
+        }
+        public override Task Initialize()
+        {
+            //TODO: Add starting logic here
+
+            return base.Initialize();
+        }
+        public IMvxCommand ResetTextCommand => new MvxCommand(ResetText);
+        private void ResetText()
+        {
+            Text = "Hello MvvmCross";
+        }
+        private string _text = "Hello MvvmCross";
+        public string Text
+        {
+            get { return _text; }
+            set { SetProperty(ref _text, value); }
+        }
+    }
+}
+
+MvxFormsPage.xaml
+
+<?xml version="1.0" encoding="UTF-8"?>
+<d:MvxContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    xmlns:d="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
+    xmlns:viewModels="clr-namespace:MVVMCrossSampleOne.ViewModels;" 
+    x:TypeArguments="viewModels:MvxFormsViewModel"
+    xmlns:local="clr-namespace:MVVMCrossSampleOne.Pages;"
+    x:Class="MVVMCrossSampleOne.Pages.MvxFormsPage">
+    <ContentPage.Content>
+        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <Label Text="MvvmCross and Xamarin.Forms!" VerticalOptions="Center" HorizontalOptions="Center" />
+            <Label Text="{Binding Text}" VerticalOptions="Center" HorizontalOptions="Center" />
+        </StackLayout>
+    </ContentPage.Content>
+</d:MvxContentPage>
+
+
+MvxFormsPage.xaml.cs
+
+using System;
+using System.Collections.Generic;
+using MvvmCross.Forms.Views;
+using MVVMCrossSampleOne.ViewModels;
+using Xamarin.Forms;
+namespace MVVMCrossSampleOne.Pages
+{
+    public partial class MvxFormsPage : MvxContentPage<MvxFormsViewModel>
+    {
+        public MvxFormsPage()
+        {
+            InitializeComponent();
+        }
+    }
+}
+
+
+
+
+
+Android Files
+
+MainActivity.cs
+
+using System;
+using Android.App;
+using Android.Content.PM;
+using Android.Runtime;
+using Android.Views;
+using Android.Widget;
+using Android.OS;
+using MvvmCross.Forms.Platforms.Android.Views;
+namespace MVVMCrossSampleOne.Droid
+{
+    [Activity(Label = "MVVMCrossSampleOne.Droid", Icon = "@drawable/icon", Theme = "@style/MyTheme", MainLauncher =true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    public class MainActivity : MvxFormsAppCompatActivity
+    {
+        protected override void OnCreate(Bundle bundle)
+        {
+            base.OnCreate(bundle);
+            TabLayoutResource = Resource.Layout.Tabbar;
+            ToolbarResource = Resource.Layout.Toolbar;
+        }
+    }
+    //[Activity(Label = "MVVMCrossSampleOne", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    //public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
+    //{
+    //    protected override void OnCreate(Bundle bundle)
+    //    {
+    //        TabLayoutResource = Resource.Layout.Tabbar;
+    //        ToolbarResource = Resource.Layout.Toolbar;
+    //        base.OnCreate(bundle);
+    //        global::Xamarin.Forms.Forms.Init(this, bundle);
+    //        LoadApplication(new App());
+    //    }
+    //}
+}
+
+
+
+
+Setup.cs
+
+using System;
+using MvvmCross.Forms.Platforms.Android.Core;
+using Xamarin.Forms;
+namespace MVVMCrossSampleOne.Droid
+{
+    public class Setup : MvxFormsAndroidSetup<CoreApp, App>
+    {
+    }
+}
+
+LinkerPleaseInclude.cs
+
+//using System;
+using System.Collections.Specialized;
+using System.Windows.Input;
+using Android.App;
+using Android.Views;
+using Android.Widget;
+using MvvmCross.Binding.BindingContext;
+using MvvmCross.Navigation;
+using MvvmCross.ViewModels;
+namespace MVVMCrossSampleOne.Droid
+{
+    // This class is never actually executed, but when Xamarin linking is enabled it does how to ensure types and properties
+    // are preserved in the deployed app
+    public class LinkerPleaseInclude
+    {
+        public void Include(Button button)
+        {
+            button.Click += (s, e) => button.Text = button.Text + "";
+        }
+        public void Include(CheckBox checkBox)
+        {
+            checkBox.CheckedChange += (sender, args) => checkBox.Checked = !checkBox.Checked;
+        }
+        public void Include(Switch @switch)
+        {
+            @switch.CheckedChange += (sender, args) => @switch.Checked = !@switch.Checked;
+        }
+        public void Include(View view)
+        {
+            view.Click += (s, e) => view.ContentDescription = view.ContentDescription + "";
+        }
+        public void Include(TextView text)
+        {
+            text.AfterTextChanged += (sender, args) => text.Text = "" + text.Text;
+            text.Hint = "" + text.Hint;
+        }
+        public void Include(CheckedTextView text)
+        {
+            text.AfterTextChanged += (sender, args) => text.Text = "" + text.Text;
+            text.Hint = "" + text.Hint;
+        }
+        public void Include(CompoundButton cb)
+        {
+            cb.CheckedChange += (sender, args) => cb.Checked = !cb.Checked;
+        }
+        public void Include(SeekBar sb)
+        {
+            sb.ProgressChanged += (sender, args) => sb.Progress = sb.Progress + 1;
+        }
+        public void Include(RadioGroup radioGroup)
+        {
+            radioGroup.CheckedChange += (sender, args) => radioGroup.Check(args.CheckedId);
+        }
+        public void Include(RadioButton radioButton)
+        {
+            radioButton.CheckedChange += (sender, args) => radioButton.Checked = args.IsChecked;
+        }
+        public void Include(RatingBar ratingBar)
+        {
+            ratingBar.RatingBarChange += (sender, args) => ratingBar.Rating = 0 + ratingBar.Rating;
+        }
+        public void Include(Activity act)
+        {
+            act.Title = act.Title + "";
+        }
+        public void Include(INotifyCollectionChanged changed)
+        {
+            changed.CollectionChanged += (s, e) => { var test = $"{e.Action}{e.NewItems}{e.NewStartingIndex}{e.OldItems}{e.OldStartingIndex}"; };
+        }
+        public void Include(ICommand command)
+        {
+            command.CanExecuteChanged += (s, e) => { if (command.CanExecute(null)) command.Execute(null); };
+        }
+        public void Include(MvvmCross.IoC.MvxPropertyInjector injector)
+        {
+            injector = new MvvmCross.IoC.MvxPropertyInjector();
+        }
+        public void Include(System.ComponentModel.INotifyPropertyChanged changed)
+        {
+            changed.PropertyChanged += (sender, e) => {
+                var test = e.PropertyName;
+            };
+        }
+        public void Include(MvxTaskBasedBindingContext context)
+        {
+            context.Dispose();
+            var context2 = new MvxTaskBasedBindingContext();
+            context2.Dispose();
+        }
+        public void Include(MvxNavigationService service, IMvxViewModelLoader loader)
+        {
+            service = new MvxNavigationService(null, loader);
+        }
+    }
+}
+
+
+
+
+
+iOS Files
+
+AppDelegate.cs
+
+//using System;
+//using System.Collections.Generic;
+//using System.Linq;
+using Foundation;
+using MvvmCross.Forms.Platforms.Ios.Core;
+using UIKit;
+namespace MVVMCrossSampleOne.iOS
+{
+    [Register("AppDelegate")]
+    public partial class AppDelegate : MvxFormsApplicationDelegate<Setup, CoreApp, App>
+    {
+    }
+    /*
+    // The UIApplicationDelegate for the application. This class is responsible for launching the 
+    // User Interface of the application, as well as listening (and optionally responding) to 
+    // application events from iOS.
+    [Register("AppDelegate")]
+    public partial class AppDelegate : global::Xamarin.Forms.Platform.iOS.FormsApplicationDelegate
+    {
+        //
+        // This method is invoked when the application has loaded and is ready to run. In this 
+        // method you should instantiate the window, load the UI into it and then make the window
+        // visible.
+        //
+        // You have 17 seconds to return from this method, or iOS will terminate your application.
+        //
+        public override bool FinishedLaunching(UIApplication app, NSDictionary options)
+        {
+            global::Xamarin.Forms.Forms.Init();
+            LoadApplication(new App());
+
+            return base.FinishedLaunching(app, options);
+        }
+    }
+    */
+}
+
+
+
+Setup.cs
+
+using System;
+using MvvmCross.Forms.Platforms.Ios.Core;
+using MvvmCross.Platforms.Ios.Core;
+using MvvmCross.ViewModels;
+using UIKit;
+using Xamarin.Forms;
+namespace MVVMCrossSampleOne.iOS
+{
+    public class Setup : MvxFormsIosSetup<CoreApp, App>//MvxFormsIosSetup
+    {
+        //public Setup(IMvxApplicationDelegate applicationDelegate) : base(applicationDelegate)
+        //{
+        //}
+        //public Setup(IMvxApplicationDelegate applicationDelegate, UIWindow window) : base (applicationDelegate, window)
+        //{
+        //}
+        //public Setup(IMvxApplicationDelegate applicationDelegate, UIWindow window)
+        //{
+        //}
+        //protected override IMvxApplication CreateApp()
+        //{
+        //    throw new NotImplementedException();
+        //}
+        //protected override Xamarin.Forms.Application CreateFormsApplication()
+        //{
+        //    throw new NotImplementedException();
+        //}
+    }
+}
+
+LinkerPleaseInclude.cs
+
+using System;
+using Xamarin.Forms;
+using System.Collections.Specialized;
+using System.Windows.Input;
+using Foundation;
+using UIKit;
+using MvvmCross.Platforms.Ios.Views;
+using MvvmCross.Navigation;
+using MvvmCross.ViewModels;
+using MvvmCross.Binding.BindingContext;
+namespace MVVMCrossSampleOne.iOS
+{
+    // This class is never actually executed, but when Xamarin linking is enabled it does ensure types and properties
+    // are preserved in the deployed app
+    [Foundation.Preserve(AllMembers = true)]
+    public class LinkerPleaseInclude
+    {
+        public void Include(MvxTaskBasedBindingContext c)
+        {
+            c.Dispose();
+            var c2 = new MvxTaskBasedBindingContext();
+            c2.Dispose();
+        }
+        public void Include(UIButton uiButton)
+        {
+            uiButton.TouchUpInside += (s, e) =>
+                                      uiButton.SetTitle(uiButton.Title(UIControlState.Normal), UIControlState.Normal);
+        }
+        public void Include(UIBarButtonItem barButton)
+        {
+            barButton.Clicked += (s, e) =>
+                                 barButton.Title = barButton.Title + "";
+        }
+        public void Include(UITextField textField)
+        {
+            textField.Text = textField.Text + "";
+            textField.EditingChanged += (sender, args) => { textField.Text = ""; };
+        }
+        public void Include(UITextView textView)
+        {
+            textView.Text = textView.Text + "";
+            textView.Changed += (sender, args) => { textView.Text = ""; };
+        }
+        public void Include(UILabel label)
+        {
+            label.Text = label.Text + "";
+            label.AttributedText = new NSAttributedString(label.AttributedText.ToString() + "");
+        }
+        public void Include(UIImageView imageView)
+        {
+            imageView.Image = new UIImage(imageView.Image.CGImage);
+        }
+        public void Include(UIDatePicker date)
+        {
+            date.Date = date.Date.AddSeconds(1);
+            date.ValueChanged += (sender, args) => { date.Date = NSDate.DistantFuture; };
+        }
+        public void Include(UISlider slider)
+        {
+            slider.Value = slider.Value + 1;
+            slider.ValueChanged += (sender, args) => { slider.Value = 1; };
+        }
+        public void Include(UIProgressView progress)
+        {
+            progress.Progress = progress.Progress + 1;
+        }
+        public void Include(UISwitch sw)
+        {
+            sw.On = !sw.On;
+            sw.ValueChanged += (sender, args) => { sw.On = false; };
+        }
+        public void Include(MvxViewController vc)
+        {
+            vc.Title = vc.Title + "";
+        }
+        public void Include(UIStepper s)
+        {
+            s.Value = s.Value + 1;
+            s.ValueChanged += (sender, args) => { s.Value = 0; };
+        }
+        public void Include(UIPageControl s)
+        {
+            s.Pages = s.Pages + 1;
+            s.ValueChanged += (sender, args) => { s.Pages = 0; };
+        }
+        public void Include(INotifyCollectionChanged changed)
+        {
+            changed.CollectionChanged += (s, e) => { var test = $"{e.Action}{e.NewItems}{e.NewStartingIndex}{e.OldItems}{e.OldStartingIndex}"; };
+        }
+        public void Include(ICommand command)
+        {
+            command.CanExecuteChanged += (s, e) => { if (command.CanExecute(null)) command.Execute(null); };
+        }
+        public void Include(MvvmCross.IoC.MvxPropertyInjector injector)
+        {
+            injector = new MvvmCross.IoC.MvxPropertyInjector();
+        }
+        public void Include(System.ComponentModel.INotifyPropertyChanged changed)
+        {
+            changed.PropertyChanged += (sender, e) => { var test = e.PropertyName; };
+        }
+        public void Include(MvxNavigationService service, IMvxViewModelLoader loader)
+        {
+            service = new MvxNavigationService(null, loader);
+        }
+    }
+}
