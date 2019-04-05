@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    xmlns:local="clr-namespace:FireBaseTestPOC.CustomControls;assembly=FireBaseTestPOC"
+    x:Class="FireBaseTestPOC.Views.DynamicGridPage">
+    
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness">
+            <On Platform="iOS" Value="0,40,0,0"/>
+        </OnPlatform>
+    </ContentPage.Padding>
+    
+    <ContentPage.Content>
+        
+        <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            
+            <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,0.1" AbsoluteLayout.LayoutFlags="All" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <Label x:Name="backLabel" Text="&lt; Back" HorizontalOptions="Start" VerticalOptions="FillAndExpand">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="BackButtonTapped"/>
+                    </Label.GestureRecognizers>
+                </Label>
+            </StackLayout>
+            
+            <StackLayout AbsoluteLayout.LayoutBounds="1,1,1,0.9" AbsoluteLayout.LayoutFlags="All" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+<!--                <ScrollView Orientation="Both" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">-->
+                    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                        <local:DynamicViewButtons x:Name="dynamicButtonsView" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                        </local:DynamicViewButtons>
+                        <!--<StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                        </StackLayout>
+                        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                        </StackLayout>-->
+<!--                        <Button Text="Done" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Clicked="DoneButtonClicked"></Button>-->
+                    </StackLayout>
+<!--                </ScrollView>-->
+            </StackLayout>
+            
+        </AbsoluteLayout>
+        
+    </ContentPage.Content>
+</ContentPage>
