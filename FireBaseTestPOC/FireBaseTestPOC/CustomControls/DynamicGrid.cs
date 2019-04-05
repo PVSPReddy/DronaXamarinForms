@@ -86,24 +86,27 @@ namespace FireBaseTestPOC.CustomControls
                 else if (e.ButtonOption == ButtonOption.Delete)
                 {
                     var rows = grid.RowDefinitions.Count;
-                    var columns = grid.ColumnDefinitions.Count;
+                    //var columns = grid.ColumnDefinitions.Count;
                     var gridChildren = grid.Children;
                     List<View> removableColumnViews = new List<View>();
                     foreach (var child in gridChildren)
                     {
                         var childRow = Grid.GetRow(child);
-                        var childColumn = Grid.GetColumn(child);
-
-                        for (int column = 0; column < columns; column++)
+                        //var childColumn = Grid.GetColumn(child);
+                        if (childRow == rows)
                         {
-                            System.Diagnostics.Debug.WriteLine("Adjusting Rows");
-                            System.Diagnostics.Debug.WriteLine(string.Format("childRow :{0} \n row :{1}", childRow.ToString(), rows.ToString()));
-                            System.Diagnostics.Debug.WriteLine(string.Format("childColumn :{0} \n columns :{1}", childColumn.ToString(), column.ToString()));
-                            if (childRow == rows && childColumn == column)
-                            {
-                                removableColumnViews.Add(child);
-                            }
+                            removableColumnViews.Add(child);
                         }
+                        //for (int column = 0; column < columns; column++)
+                        //{
+                        //    System.Diagnostics.Debug.WriteLine("Adjusting Rows");
+                        //    System.Diagnostics.Debug.WriteLine(string.Format("childRow :{0} \n row :{1}", childRow.ToString(), rows.ToString()));
+                        //    System.Diagnostics.Debug.WriteLine(string.Format("childColumn :{0} \n columns :{1}", childColumn.ToString(), column.ToString()));
+                        //    if (childRow == rows && childColumn == column)
+                        //    {
+                        //        removableColumnViews.Add(child);
+                        //    }
+                        //}
                     }
                     foreach (var viewItem in removableColumnViews)
                     {
@@ -148,25 +151,28 @@ namespace FireBaseTestPOC.CustomControls
                 }
                 else if (e.ButtonOption == ButtonOption.Delete)
                 {
-                    var rows = grid.RowDefinitions.Count;
+                    //var rows = grid.RowDefinitions.Count;
                     var columns = grid.ColumnDefinitions.Count;
                     var gridChildren = grid.Children;
                     List<View> removableRowViews = new List<View>();
                     foreach(var child in gridChildren)
                     {
-                        var childRow = Grid.GetRow(child);
+                        //var childRow = Grid.GetRow(child);
                         var childColumn = Grid.GetColumn(child);
-
-                        for (int row = 0; row < rows; row++)
+                        if (childColumn == columns)
                         {
-                            System.Diagnostics.Debug.WriteLine("Adjusting Columns");
-                            System.Diagnostics.Debug.WriteLine(string.Format("childRow :{0} \n row :{1}", childRow.ToString(), row.ToString()));
-                            System.Diagnostics.Debug.WriteLine(string.Format("childColumn :{0} \n columns :{1}", childColumn.ToString(), columns.ToString()));
-                            if (childRow == row && childColumn == columns)
-                            {
-                                removableRowViews.Add(child);
-                            }
+                            removableRowViews.Add(child);
                         }
+                        //for (int row = 0; row < rows; row++)
+                        //{
+                        //    System.Diagnostics.Debug.WriteLine("Adjusting Columns");
+                        //    System.Diagnostics.Debug.WriteLine(string.Format("childRow :{0} \n row :{1}", childRow.ToString(), row.ToString()));
+                        //    System.Diagnostics.Debug.WriteLine(string.Format("childColumn :{0} \n columns :{1}", childColumn.ToString(), columns.ToString()));
+                        //    if (childRow == row && childColumn == columns)
+                        //    {
+                        //        removableRowViews.Add(child);
+                        //    }
+                        //}
                     }
                     foreach (var viewItem in removableRowViews)
                     {
