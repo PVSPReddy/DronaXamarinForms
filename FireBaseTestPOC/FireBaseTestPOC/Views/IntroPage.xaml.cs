@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using FireBaseTestPOC.Services;
 using Xamarin.Forms;
 
 namespace FireBaseTestPOC.Views
@@ -16,7 +16,8 @@ namespace FireBaseTestPOC.Views
         {
             try
             {
-                Navigation.PushModalAsync(new DynamicGridPage());
+                //Navigation.PushModalAsync(new DynamicGridPage());
+                DependencyService.Get<IFireBaseService>().GetAllImageUrlsFromServer();
             }
             catch(Exception ex)
             {

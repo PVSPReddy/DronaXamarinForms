@@ -15,6 +15,11 @@ namespace FireBaseTestPOC.iOS.Services
         {
             throw new NotImplementedException();
         }
+
+        public Task<string> GetAllImageUrlsFromServer()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 

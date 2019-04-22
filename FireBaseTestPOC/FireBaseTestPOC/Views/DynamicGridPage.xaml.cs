@@ -7,6 +7,22 @@ namespace FireBaseTestPOC.Views
 {
     public partial class DynamicGridPage : ContentPage
     {
+        #region for common code
+        #region for Restricting orientation to landscape mode
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            MessagingCenter.Send<DynamicGridPage>(this, "LandScape");
+        }
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            //MessagingCenter.Send<DynamicGridPage>(this, "Sensor");
+            MessagingCenter.Send<DynamicGridPage>(this, "Portrait");
+        }
+        #endregion
+        #endregion
+
         DynamicGrid grid;
         public DynamicGridPage()
         {

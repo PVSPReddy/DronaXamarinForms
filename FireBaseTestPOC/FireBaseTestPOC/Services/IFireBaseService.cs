@@ -6,5 +6,7 @@ namespace FireBaseTestPOC.Services
     public interface IFireBaseService
     {
         Task<bool> CreateFireBaseInstance();
+
+        Task<string> GetAllImageUrlsFromServer();
     }
 }

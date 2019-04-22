@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using FireBaseTestPOC.Views;
 using Foundation;
 using UIKit;
+using Xamarin.Forms;
 
 namespace FireBaseTestPOC.iOS
 {
@@ -26,6 +27,29 @@ namespace FireBaseTestPOC.iOS
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);
+        }
+
+
+        public override UIInterfaceOrientationMask GetSupportedInterfaceOrientations(UIApplication application, UIWindow forWindow)
+        {
+            var mainPage = Xamarin.Forms.Application.Current.MainPage;
+            var availablePages = mainPage.Navigation.NavigationStack;
+            if (availablePages.Count > 0)
+            {
+                var currentPage = availablePages.Last();
+                if (currentPage != null)
+                {
+                    if (currentPage is DynamicGridPage)
+                    {
+                        return UIInterfaceOrientationMask.AllButUpsideDown;
+                    }
+                }
+            }
+            //if (mainPage.Navigation.NavigationStack.Last() is DynamicGridPage)
+            //{
+            //    return UIInterfaceOrientationMask.AllButUpsideDown;
+            //}
+            return UIInterfaceOrientationMask.Portrait;
         }
     }
 }
