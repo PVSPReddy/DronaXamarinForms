@@ -30,7 +30,7 @@ namespace FireBaseTestPOC.Views
                 //CheckSumOfDigits(0, 100, integers, DigitsOrder.Ascending);
                 CheckSumOfDigits(0, 10000, integers, DigitsOrder.ExactAscendingWihAdjacentRepitition);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 var msg = ex.Message + "\n" + ex.StackTrace;
                 System.Diagnostics.Debug.WriteLine(msg);
@@ -46,10 +46,10 @@ namespace FireBaseTestPOC.Views
             foreach (var result in resultsList)
             {
                 DigitsListData _result = CheckSumOfDigitsEqualsList(result, sumShouldBeEquals);
-                if(_result != null)
+                if (_result != null)
                 {
                     DigitsListData __result = SettingDigitsInOrder(_result, digitsOrder);
-                    if(__result != null)
+                    if (__result != null)
                     {
                         _resultsList.Add(__result);
                     }
@@ -73,7 +73,7 @@ namespace FireBaseTestPOC.Views
                 {
                     foreach (var item in sumShouldBeEquals)
                     {
-                        if(_result.DigitsSum == item)
+                        if (_result.DigitsSum == item)
                         {
                             result = _result;
                         }
@@ -211,14 +211,14 @@ namespace FireBaseTestPOC.Views
         public int AddDigits(int[] digits)
         {
             int response = 0;
-            foreach(var item in digits)
+            foreach (var item in digits)
             {
                 response += (Convert.ToInt32(item));
             }
             //System.Diagnostics.Debug.WriteLine( "\t In progress: " + response + "\t");
             return response;
         }
-	}
+    }
 
     public class DigitsListData
     {
