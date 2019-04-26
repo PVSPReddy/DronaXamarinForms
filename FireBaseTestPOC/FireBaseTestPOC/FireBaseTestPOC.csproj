@@ -13,6 +13,7 @@
     <Folder Include="Views\" />
     <Folder Include="Services\" />
     <Folder Include="CustomControls\" />
+    <Folder Include="Helpers\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms" Version="3.6.0.264807" />
