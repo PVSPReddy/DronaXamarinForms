@@ -17,8 +17,8 @@
                 <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                     <ScrollView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                         <StackLayout Padding="20,0,20,0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                            <CControls:CustomEntry x:Name="testOne" CustomPlaceholder="Enter Text of Your Choice" CornerRadius="10" BackgroundColor="Green" TextColor="Blue" BorderColor="Maroon" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand"></CControls:CustomEntry>
-                            <CControls:CustomEntry x:Name="testTwo" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand"></CControls:CustomEntry>
+                            <CControls:CustomEntryGroup x:Name="testOne" CustomPlaceholder="Enter Text of Your Choice" CornerRadius="10" CaptionFontSize="12" BackgroundColor="Green" TextColor="Blue" BorderColor="Maroon" CustomEntryBackGroundColor="White" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand"></CControls:CustomEntryGroup>
+                            <CControls:CustomEntryGroup x:Name="testTwo" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand"></CControls:CustomEntryGroup>
                         </StackLayout>
                     </ScrollView>
                     <StackLayout HorizontalOptions="End" VerticalOptions="End">

@@ -2,11 +2,11 @@
 using Android.Content;
 using Android.Graphics;
 using FireBaseTestPOC.CustomControls;
-using FireBaseTestPOC.iOS.CustomControls;
+using FireBaseTestPOC.Droid.CustomControls;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
-[assembly: ExportRenderer(typeof(RoundEdgeStackLayout), typeof(IOSRoundEdgeStackLayoutRender))]
+[assembly: ExportRenderer(typeof(RoundEdgeStackLayout), typeof(AndroidRoundEdgeStackLayoutRender))]
 namespace FireBaseTestPOC.Droid.CustomControls
 {
     public class AndroidRoundEdgeStackLayoutRender : VisualElementRenderer<StackLayout>
