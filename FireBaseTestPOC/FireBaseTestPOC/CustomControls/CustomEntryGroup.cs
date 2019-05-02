@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
+using System.Text.RegularExpressions;
 using FireBaseTestPOC.Helpers;
 using Xamarin.Forms;
 
@@ -10,6 +11,15 @@ namespace FireBaseTestPOC.CustomControls
         public event EventHandler<EventArgs> OnCustomTextChanged;
 
         #region for bindable properties
+        #region for Advanced Types
+        public Keyboard CustomKeyboard { get; set; }
+        public static BindableProperty CustomKeyboardProperty = BindableProperty.Create<CustomEntryGroup, Keyboard>(p => p.CustomKeyboard, defaultValue: Keyboard.Text, propertyChanging: (bindable, oldvalue, newvalue) =>
+        {
+            var ctrl = (CustomEntryGroup)bindable;
+            ctrl.CustomKeyboard = newvalue;
+        });
+        #endregion
+
         #region for colors
         public Color BorderColor { get; set; }
         public static BindableProperty BorderColorProperty = BindableProperty.Create<CustomEntryGroup, Color>(p => p.BorderColor, defaultValue: Color.Transparent, propertyChanging: (bindable, oldvalue, newvalue) =>
@@ -142,6 +152,7 @@ namespace FireBaseTestPOC.CustomControls
             entryField.SetBinding(Entry.PlaceholderColorProperty, new Binding("TextColor"));
             entryField.SetBinding(Entry.PlaceholderProperty, new Binding("CustomPlaceholder"));
             entryField.SetBinding(Entry.FontFamilyProperty, new Binding("CustomFontFamily"));
+            entryField.SetBinding(Entry.KeyboardProperty, new Binding("CustomKeyboard"));
             entryField.TextChanged += OnEntryFieldTextChanged;
             //entryField.PropertyChanged += EntryFieldPropertyChanged;
 
@@ -265,17 +276,35 @@ namespace FireBaseTestPOC.CustomControls
         private void OnEntryFieldTextChanged(object sender, TextChangedEventArgs e)
         {
             var owner = (Entry)sender;
-            Value = owner.Text;
-            if (!(string.IsNullOrEmpty(owner.Text)))
+            string valueText = owner.Text;
+            if (!(string.IsNullOrEmpty(valueText)))
             {
                 //caption.IsVisible = true;
                 caption.Opacity = 1;
+                bool isValidText = false;
+                if(owner.Keyboard == Keyboard.Numeric)
+                {
+                    while(!isValidText)
+                    {
+                        if (Regex.IsMatch(valueText, @"^[0-9]*$"))
+                        {
+                            isValidText = true;
+                        }
+                        else
+                        {
+                            valueText = valueText.Remove(valueText.Length - 1);
+                        }
+                    }
+
+                }
             }
             else
             {
                 //caption.IsVisible = false;
                 caption.Opacity = 0;
             }
+            owner.Text = valueText;
+            Value = owner.Text;
             EventHandler<EventArgs> handler = OnCustomTextChanged;
             if (handler != null)
             {

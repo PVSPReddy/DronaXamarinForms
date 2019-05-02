@@ -33,7 +33,7 @@ namespace FireBaseTestPOC.Services
             List<DigitsListData> resultsList = null;
             try
             {
-                await CheckSumOfDigits(startIndex, endIndex, sumShouldBeEquals, digitsOrder, isSingleValue);
+                resultsList = await CheckSumOfDigits(startIndex, endIndex, sumShouldBeEquals, digitsOrder, isSingleValue);
             }
             catch (Exception ex)
             {

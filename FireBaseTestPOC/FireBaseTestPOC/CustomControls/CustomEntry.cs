@@ -37,5 +37,9 @@ namespace FireBaseTestPOC.CustomControls
         public BorderType BorderTypes { get; set; }
 
     }
-}
 
+    //public enum EntryKeyBoardType
+    //{
+    //    Numeric, 
+    //}
+}
