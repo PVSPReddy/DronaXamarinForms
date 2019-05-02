@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Threading.Tasks;
+using FireBaseTestPOC.CustomControls;
 using Xamarin.Forms;
 
 namespace FireBaseTestPOC.Views
@@ -10,6 +12,31 @@ namespace FireBaseTestPOC.Views
         public BikeNumberSelectionPage()
         {
             InitializeComponent();
+            testTwo.PropertyChanged += EntryPropertyChangedEvent;
+        }
+
+        private void EntryPropertyChangedEvent(object sender, PropertyChangedEventArgs e)
+        {
+            try
+            {
+                var owner = (CustomEntryGroup)sender;
+                if(e.PropertyName == "Value")
+                {
+                    if(!(string.IsNullOrEmpty(owner.Value)))
+                    {
+                        owner.BorderColor = Color.Gray;
+                    }
+                    else
+                    {
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                var msg = ex.Message + "\n" + ex.StackTrace;
+                System.Diagnostics.Debug.WriteLine(msg);
+            }
         }
 
         void BackButonClicked(object sender, System.EventArgs e)
@@ -32,8 +59,9 @@ namespace FireBaseTestPOC.Views
                 var isValidate = await Validate();
                 if(isValidate)
                 {
-                    var valueOne = testOne.TextColor;
-                    var valueTwo = testTwo.TextColor;
+                    //var valueOne = testOne.TextColor;
+                    //var valueTwo = testTwo.TextColor;
+                    Navigation.PushModalAsync(new BikeNumberResultsDisplayPage());
                 }
                 else
                 {}
@@ -48,6 +76,16 @@ namespace FireBaseTestPOC.Views
         async Task<bool> Validate()
         {
             bool isValidate = true;
+            if(string.IsNullOrEmpty(entryStartNumber.Value))
+            {
+                isValidate = false;
+                entryStartNumber.BorderColor = Color.Maroon;
+            }
+            if (string.IsNullOrEmpty(entryEndNumber.Value))
+            {
+                isValidate = false;
+                entryEndNumber.BorderColor = Color.Maroon;
+            }
             return isValidate;
         }
     }

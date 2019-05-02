@@ -85,6 +85,27 @@ namespace FireBaseTestPOC.CustomControls
         });
         #endregion
 
+        #region to get value from caller
+        //public new string _Value;
+        //public new string Value
+        //{
+        //    get
+        //    {
+        //        return _Value;
+        //    }
+        //    set
+        //    {
+        //        _Value = value;
+        //    }
+        //}
+        public string Value { get; set; }
+        public static BindableProperty ValueProperty = BindableProperty.Create<CustomEntryGroup, string>(p => p.Value, defaultValue: "", propertyChanging: (bindable, oldvalue, newvalue) =>
+        {
+            var ctrl = (CustomEntryGroup)bindable;
+            ctrl.Value = newvalue;
+        });
+        #endregion
+
         #endregion
 
         Label caption;
@@ -122,6 +143,7 @@ namespace FireBaseTestPOC.CustomControls
             entryField.SetBinding(Entry.PlaceholderProperty, new Binding("CustomPlaceholder"));
             entryField.SetBinding(Entry.FontFamilyProperty, new Binding("CustomFontFamily"));
             entryField.TextChanged += OnEntryFieldTextChanged;
+            //entryField.PropertyChanged += EntryFieldPropertyChanged;
 
             //StackLayout stackFieldsHolder = new StackLayout()
             //{
@@ -171,6 +193,38 @@ namespace FireBaseTestPOC.CustomControls
             Content = stackMainHolder;
         }
 
+        //void EntryFieldPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        //{
+        //    try
+        //    {
+        //        var owner = (Entry)sender;
+        //        if (e.PropertyName == "Text")
+        //        {
+        //            var textValue = owner.Text;
+        //            if(!(string.IsNullOrEmpty(textValue)))
+        //            {
+        //                if (CornerEdgeType == CornerEdgeStyle.None)
+        //                {
+        //                }
+        //                else if (CornerEdgeType == CornerEdgeStyle.Rounded)
+        //                {
+        //                    stackMainHolder.StartColor = BorderColor;
+        //                    stackMainHolder.EndColor = BorderColor;
+        //                }
+        //                else
+        //                {
+        //                }
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        var msg = ex.Message + "\n" + ex.StackTrace;
+        //        System.Diagnostics.Debug.WriteLine(msg);
+        //    }
+        //}
+
+
         protected override void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             base.OnPropertyChanged(propertyName);
@@ -211,6 +265,7 @@ namespace FireBaseTestPOC.CustomControls
         private void OnEntryFieldTextChanged(object sender, TextChangedEventArgs e)
         {
             var owner = (Entry)sender;
+            Value = owner.Text;
             if (!(string.IsNullOrEmpty(owner.Text)))
             {
                 //caption.IsVisible = true;

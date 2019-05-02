@@ -2,31 +2,13 @@
 <ContentPage 
     xmlns="http://xamarin.com/schemas/2014/forms" 
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-    xmlns:CControls="clr-namespace:FireBaseTestPOC.CustomControls;assembly=FireBaseTestPOC"
-    x:Class="FireBaseTestPOC.Views.BikeNumberSelectionPage">
+    x:Class="FireBaseTestPOC.Views.BikeNumberResultsDisplayPage">
     
     <ContentPage.Padding>
         <OnPlatform x:TypeArguments="Thickness">
             <On Platform="iOS" Value="0,20,0,0"/>
         </OnPlatform>
     </ContentPage.Padding>
-    
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <Style x:Key="entryStyles" TargetType="CControls:CustomEntryGroup">
-                <Setter Property="CornerRadius" Value="10"/>
-                <Setter Property="CaptionFontSize" Value="12"/>
-                <Setter Property="CornerEdgeType" Value="Rounded"/>
-                <Setter Property="BackgroundColor" Value="Transparent"/>
-                <Setter Property="TextColor" Value="Blue"/>
-                <Setter Property="BorderColor" Value="Gray"/>
-                <Setter Property="TextColor" Value="Blue"/>
-                <Setter Property="CustomEntryBackGroundColor" Value="Teal"/>
-                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
-                <Setter Property="VerticalOptions" Value="Center"/>
-            </Style>
-        </ResourceDictionary>
-    </ContentPage.Resources>
     
     <ContentPage.Content>
         
@@ -40,24 +22,18 @@
                 <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                     <ScrollView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                         <StackLayout Padding="20,0,20,0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                            <!--<CControls:CustomEntryGroup x:Name="entryStartNumber" CustomPlaceholder="Enter Start Number" CornerRadius="10" CaptionFontSize="12" CornerEdgeType="Rounded" BackgroundColor="Transparent" TextColor="Blue" BorderColor="Maroon" CustomEntryBackGroundColor="White" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand"></CControls:CustomEntryGroup>-->
                             
                             <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="Center">
-                                <CControls:CustomEntryGroup x:Name="entryStartNumber" CustomPlaceholder="Enter Start Number" Style="{StaticResource entryStyles}" PropertyChanged="EntryPropertyChangedEvent"></CControls:CustomEntryGroup>
-                                <CControls:CustomEntryGroup x:Name="entryEndNumber" CustomPlaceholder="Enter End Number" Style="{StaticResource entryStyles}" PropertyChanged="EntryPropertyChangedEvent"></CControls:CustomEntryGroup>
+                                <!--<CControls:CustomEntryGroup x:Name="entryStartNumber" CustomPlaceholder="Enter Start Number" Style="{StaticResource entryStyles}" PropertyChanged="EntryPropertyChangedEvent"></CControls:CustomEntryGroup>
+                                <CControls:CustomEntryGroup x:Name="entryEndNumber" CustomPlaceholder="Enter End Number" Style="{StaticResource entryStyles}" PropertyChanged="EntryPropertyChangedEvent"></CControls:CustomEntryGroup>-->
                             </StackLayout>
-                            
-                            <!--<StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="Center">
-                                <CControls:CustomEntryGroup x:Name="entryStartNumber" CustomPlaceholder="Enter Start Number" Style="{StaticResource entryStyles}"></CControls:CustomEntryGroup>
-                                <CControls:CustomEntryGroup x:Name="entryEndNumber" CustomPlaceholder="Enter End Number" Style="{StaticResource entryStyles}"></CControls:CustomEntryGroup>
-                            </StackLayout>-->
                       
                             <CControls:CustomEntryGroup x:Name="testTwo" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand"></CControls:CustomEntryGroup>
                         </StackLayout>
                     </ScrollView>
-                    <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="End">
+                    <!--<StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="End">
                         <Button Text="Done" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Clicked="DoneButtonClicked"></Button>
-                    </StackLayout>
+                    </StackLayout>-->
                 </StackLayout>
             </StackLayout>
             
