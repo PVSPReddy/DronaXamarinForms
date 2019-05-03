@@ -28,6 +28,29 @@ namespace FireBaseTestPOC.Services
             }
         }
 
+        public async Task<DigitsListData> GetNumbersList(int number)
+        {
+            DigitsListData digitsSum = null;
+            try
+            {
+                digitsSum = new DigitsListData();
+                int[] chars = GetIndividualDigits(number);
+                int result = AddDigits(chars);
+                while ((result.ToString()).Length > 1)
+                {
+                    int[] resultChar = GetIndividualDigits(result);
+                    result = AddDigits(resultChar);
+                }
+                digitsSum = new DigitsListData { Digits = number, DigitsSum = result };
+            }
+            catch (Exception ex)
+            {
+                var msg = ex.Message + "\n" + ex.StackTrace;
+                System.Diagnostics.Debug.WriteLine(msg);
+            }
+            return digitsSum;
+        }
+
         public async Task<List<DigitsListData>> GetNumbersList(int startIndex, int endIndex, int[] sumShouldBeEquals, DigitsOrder digitsOrder = DigitsOrder.Normal, bool isSingleValue = false)
         {
             List<DigitsListData> resultsList = null;
@@ -81,7 +104,7 @@ namespace FireBaseTestPOC.Services
                 //Console.WriteLine("Number : " + item.Digits.ToString() + " Final Result : " + item.DigitsSum);
             }
             Console.WriteLine("Count : " + _resultsList.Count.ToString());
-            return resultsList;
+            return _resultsList;
         }
 
         #region for after effects : Screening after getting all the digits and their sum

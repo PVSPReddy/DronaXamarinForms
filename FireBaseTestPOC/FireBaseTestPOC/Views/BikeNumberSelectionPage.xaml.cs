@@ -10,12 +10,41 @@ namespace FireBaseTestPOC.Views
 {
     public partial class BikeNumberSelectionPage : ContentPage
     {
+        List<int> sumDigits;
         public BikeNumberSelectionPage()
         {
             InitializeComponent();
+            sumDigits = new List<int>();
 
-            entryStartNumber.IsVisible = switchNumberRange.IsToggled;
-            entryEndNumber.IsVisible = switchNumberRange.IsToggled;
+            labelSingleNumberResult.Text = "Number : 0 \nSum : 0";
+
+            entryNumber.OnCustomTextChanged += EntryCustomTextChangedEvent;
+            stackRangeNumbers.IsVisible = switchNumberRange.IsToggled;
+            stackSumDigits.IsVisible = switchNumberRange.IsToggled;
+        }
+
+        private async void EntryCustomTextChangedEvent(object sender, EventArgs e)
+        {
+            try
+            {
+                int Num = 0;
+                if (!(string.IsNullOrEmpty(entryNumber.Value)))
+                {
+                    Num = Convert.ToInt32(entryNumber.Value);
+                }
+                else
+                {
+                    Num = 0;
+                }
+                BikeNumberSelector bikeNumberSelector = new BikeNumberSelector();
+                var number = await bikeNumberSelector.GetNumbersList(Num);
+                labelSingleNumberResult.Text = "Number : " + number.Digits.ToString() + "\nSum : " + number.DigitsSum.ToString();
+            }
+            catch (Exception ex)
+            {
+                var msg = ex.Message + "\n" + ex.StackTrace;
+                System.Diagnostics.Debug.WriteLine(msg);
+            }
         }
 
         void BackButonClicked(object sender, System.EventArgs e)
@@ -38,9 +67,9 @@ namespace FireBaseTestPOC.Views
                 var owner = (Switch)sender;
                 if(owner == switchNumberRange)
                 {
-                    entryNumber.IsVisible = !owner.IsToggled;
-                    entryStartNumber.IsVisible = owner.IsToggled;
-                    entryEndNumber.IsVisible = owner.IsToggled;
+                    stackSingleNumber.IsVisible = !owner.IsToggled;
+                    stackRangeNumbers.IsVisible = owner.IsToggled;
+                    stackSumDigits.IsVisible = owner.IsToggled;
                 }
                 else if (owner == switchSumNumbers)
                 {
@@ -72,13 +101,49 @@ namespace FireBaseTestPOC.Views
                         CustomPlaceholder = "Enter Number",
                         CustomKeyboard = Keyboard.Numeric
                     };
+                    trrtr.OnCustomTextChanged += SumDigitsTextChangedEvents;
                     stackRequiredSum.Children.Add(trrtr);
                 }
                 else
                 {
                     if ((stackRequiredSum.Children.Count - 1) > -1)
                     {
+                        var child = (CustomEntryGroup)stackRequiredSum.Children[stackRequiredSum.Children.Count - 1];
+                        if (child != null)
+                        {
+                            if (sumDigits.Count > 0)
+                            {
+                                if (!(sumDigits.Contains(Convert.ToInt32(child.Value))))
+                                {
+                                    sumDigits.Remove(Convert.ToInt32(child.Value));
+                                }
+                            }
+                        }
                         stackRequiredSum.Children.RemoveAt(stackRequiredSum.Children.Count - 1);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                var msg = ex.Message + "\n" + ex.StackTrace;
+                System.Diagnostics.Debug.WriteLine(msg);
+            }
+        }
+
+        private void SumDigitsTextChangedEvents(object sender, EventArgs e)
+        {
+            try
+            {
+                var owner = (CustomEntryGroup)sender;
+                if(sumDigits.Count == 0)
+                {
+                    sumDigits.Add(Convert.ToInt32(owner.Value));
+                }
+                else
+                {
+                    if(!(sumDigits.Contains(Convert.ToInt32(owner.Value))))
+                    {
+                        sumDigits.Add(Convert.ToInt32(owner.Value));
                     }
                 }
             }
@@ -94,19 +159,30 @@ namespace FireBaseTestPOC.Views
             try
             {
                 var isValidate = await Validate();
-                if(isValidate)
+                if (isValidate)
                 {
-                    //var valueOne = testOne.TextColor;
-                    //var valueTwo = testTwo.TextColor;
                     BikeNumberSelector bikeNumberSelector = new BikeNumberSelector();
-                    var startNum = Convert.ToInt32(entryStartNumber.Value);
-                    var endNum = Convert.ToInt32(entryEndNumber.Value);
-                    var startNumber = (startNum < endNum) ? startNum : endNum;
-                    var endNumber = (startNum < endNum) ? endNum : startNum;
-                    var numbersList = await bikeNumberSelector.GetNumbersList(startNumber, endNumber, null, DigitsOrder.ExactAscendingWihAdjacentRepitition, false);
-                    if(numbersList.Count > 0)
+                    if (stackRangeNumbers.IsVisible)
                     {
-                        await Navigation.PushModalAsync(new BikeNumberResultsDisplayPage(numbersList));
+                        var startNum = Convert.ToInt32(entryStartNumber.Value);
+                        var endNum = Convert.ToInt32(entryEndNumber.Value);
+                        var startNumber = (startNum < endNum) ? startNum : endNum;
+                        var endNumber = (startNum < endNum) ? endNum : startNum;
+                        int[] _sumDigits = null;
+                        if (sumDigits.Count > 0)
+                        {
+                            _sumDigits = new int[sumDigits.Count];
+                            for (int i = 0; i < sumDigits.Count; i++)
+                            {
+                                _sumDigits[i] = sumDigits[i];
+                            }
+                        }
+                        var numbersList = await bikeNumberSelector.GetNumbersList(startNumber, endNumber, _sumDigits, DigitsOrder.ExactAscendingWihAdjacentRepitition, false);
+
+                        if (numbersList.Count > 0)
+                        {
+                            await Navigation.PushModalAsync(new BikeNumberResultsDisplayPage(numbersList));
+                        }
                     }
                 }
                 else
@@ -122,12 +198,17 @@ namespace FireBaseTestPOC.Views
         async Task<bool> Validate()
         {
             bool isValidate = true;
-            if(string.IsNullOrEmpty(entryStartNumber.Value))
+            if ((stackSingleNumber.IsVisible) && string.IsNullOrEmpty(entryNumber.Value))
+            {
+                isValidate = false;
+                entryNumber.BorderColor = Color.Maroon;
+            }
+            if ((stackRangeNumbers.IsVisible) && string.IsNullOrEmpty(entryStartNumber.Value))
             {
                 isValidate = false;
                 entryStartNumber.BorderColor = Color.Maroon;
             }
-            if (string.IsNullOrEmpty(entryEndNumber.Value))
+            if ((stackRangeNumbers.IsVisible) && string.IsNullOrEmpty(entryEndNumber.Value))
             {
                 isValidate = false;
                 entryEndNumber.BorderColor = Color.Maroon;
