@@ -11,6 +11,14 @@ namespace FireBaseTestPOC.Views
     public partial class BikeNumberSelectionPage : ContentPage
     {
         List<int> sumDigits;
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            stackRangeNumbers.IsVisible = switchNumberRange.IsToggled;
+            stackRangeNumbers.Opacity = 1;
+        }
+
         public BikeNumberSelectionPage()
         {
             InitializeComponent();
@@ -19,7 +27,7 @@ namespace FireBaseTestPOC.Views
             labelSingleNumberResult.Text = "Number : 0 \nSum : 0";
 
             entryNumber.OnCustomTextChanged += EntryCustomTextChangedEvent;
-            stackRangeNumbers.IsVisible = switchNumberRange.IsToggled;
+            //stackRangeNumbers.IsVisible = switchNumberRange.IsToggled;
             stackSumDigits.IsVisible = switchNumberRange.IsToggled;
         }
 
@@ -97,12 +105,41 @@ namespace FireBaseTestPOC.Views
                 {
                     var trrtr = new CustomEntryGroup()
                     {
-                        Style = (Style)Resources["entryStyles"],
+                        //Style = (Style)Resources["entryStyles"],
                         CustomPlaceholder = "Enter Number",
-                        CustomKeyboard = Keyboard.Numeric
+                        CornerRadius = 10,
+                        CaptionFontSize = 12,
+                        CustomKeyboard = Keyboard.Numeric,
+                        CornerEdgeType = CornerEdgeStyle.Rounded,
+                        BackgroundColor = Color.Transparent,
+                        TextColor = Color.Blue,
+                        BorderColor = Color.Maroon,
+                        CustomEntryBackGroundColor = Color.Teal,
+                        HorizontalOptions = LayoutOptions.FillAndExpand,
+                        VerticalOptions = LayoutOptions.CenterAndExpand,
                     };
                     trrtr.OnCustomTextChanged += SumDigitsTextChangedEvents;
                     stackRequiredSum.Children.Add(trrtr);
+                    //Device.BeginInvokeOnMainThread(async () => 
+                    //{
+                    //    var trrtr = new CustomEntryGroup()
+                    //    {
+                    //        //Style = (Style)Resources["entryStyles"],
+                    //        CustomPlaceholder = "Enter Number",
+                    //        CornerRadius = 10,
+                    //        CaptionFontSize = 12,
+                    //        CustomKeyboard = Keyboard.Numeric,
+                    //        CornerEdgeType = CornerEdgeStyle.Rounded,
+                    //        BackgroundColor = Color.Transparent,
+                    //        TextColor = Color.Blue,
+                    //        BorderColor = Color.Maroon,
+                    //        CustomEntryBackGroundColor = Color.Teal,
+                    //        HorizontalOptions = LayoutOptions.FillAndExpand,
+                    //        VerticalOptions = LayoutOptions.CenterAndExpand,
+                    //    };
+                    //    trrtr.OnCustomTextChanged += SumDigitsTextChangedEvents;
+                    //    stackRequiredSum.Children.Add(trrtr);
+                    //});
                 }
                 else
                 {
