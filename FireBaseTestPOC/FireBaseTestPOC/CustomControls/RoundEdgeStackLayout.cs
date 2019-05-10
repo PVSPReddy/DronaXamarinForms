@@ -6,41 +6,126 @@ namespace FireBaseTestPOC.CustomControls
 {
     public class RoundEdgeStackLayout : StackLayout
     {
-        public GradientStyle GradientDirection { get; set; }
+        public GradientStyle GradientDirection
+        {
+            get
+            {
+                return (GradientStyle)GetValue(GradientDirectionProperty);
+            }
+            set
+            {
+                SetValue(GradientDirectionProperty, value);
+            }
+        }
+        public static BindableProperty GradientDirectionProperty = BindableProperty.Create<RoundEdgeStackLayout, GradientStyle>(p => p.GradientDirection, defaultValue: GradientStyle.None, propertyChanging: (bindable, oldvalue, newvalue) =>
+        {
+            var ctrl = (RoundEdgeStackLayout)bindable;
+            ctrl.GradientDirection = newvalue;
+        });
 
-        public Color StartColor { get; set; }
+        public Color StartColor
+        {
+            get
+            {
+                return (Color)GetValue(StartColorProperty);
+            }
+            set
+            {
+                SetValue(StartColorProperty, value);
+            }
+        }
         public static BindableProperty StartColorProperty = BindableProperty.Create<RoundEdgeStackLayout, Color>(p => p.StartColor, defaultValue: Color.Transparent, propertyChanging: (bindable, oldvalue, newvalue) =>
         {
             var ctrl = (RoundEdgeStackLayout)bindable;
             ctrl.StartColor = newvalue;
         });
 
-        public Color EndColor { get; set; }
+        public Color EndColor
+        {
+            get
+            {
+                return (Color)GetValue(EndColorProperty);
+            }
+            set
+            {
+                SetValue(EndColorProperty, value);
+            }
+        }
         public static BindableProperty EndColorProperty = BindableProperty.Create<RoundEdgeStackLayout, Color>(p => p.EndColor, defaultValue: Color.Transparent, propertyChanging: (bindable, oldvalue, newvalue) =>
         {
             var ctrl = (RoundEdgeStackLayout)bindable;
             ctrl.EndColor = newvalue;
         });
 
-        public double CornerRadius { get; set; }
+        public double CornerRadius
+        {
+            get
+            {
+                return (double)GetValue(CornerRadiusProperty);
+            }
+            set
+            {
+                SetValue(CornerRadiusProperty, value);
+            }
+        }
         public static BindableProperty CornerRadiusProperty = BindableProperty.Create<RoundEdgeStackLayout, double>(p => p.CornerRadius, defaultValue: 0.00, propertyChanging: (bindable, oldvalue, newvalue) =>
         {
             var ctrl = (RoundEdgeStackLayout)bindable;
             ctrl.CornerRadius = newvalue;
         });
 
-        public CornerRadiusReference CornerWRT { get; set; }
+        public CornerRadiusReference CornerWRT
+        {
+            get
+            {
+                return (CornerRadiusReference)GetValue(CornerWRTProperty);
+            }
+            set
+            {
+                SetValue(CornerWRTProperty, value);
+            }
+        }
+        public static BindableProperty CornerWRTProperty = BindableProperty.Create<RoundEdgeStackLayout, CornerRadiusReference>(p => p.CornerWRT, defaultValue: CornerRadiusReference.WRTHeightRequest, propertyChanging: (bindable, oldvalue, newvalue) =>
+        {
+            var ctrl = (RoundEdgeStackLayout)bindable;
+            ctrl.CornerWRT = newvalue;
+        });
 
-        public bool HasBorderColor { get; set; }
+        public bool HasBorderColor
+        {
+            get
+            {
+                return (bool)GetValue(HasBorderColorProperty);
+            }
+            set
+            {
+                SetValue(HasBorderColorProperty, value);
+            }
+        }
         public static BindableProperty HasBorderColorProperty = BindableProperty.Create<RoundEdgeStackLayout, bool>(p => p.HasBorderColor, defaultValue: false, propertyChanging: (bindable, oldvalue, newvalue) =>
         {
             var ctrl = (RoundEdgeStackLayout)bindable;
             ctrl.HasBorderColor = newvalue;
         });
 
-        public Color BorderColor { get; set; }
+        public Color BorderColor
+        {
+            get
+            {
+                return (Color)GetValue(BorderColorProperty);
+            }
+            set
+            {
+                SetValue(BorderColorProperty, value);
+            }
+        }
+        public static BindableProperty BorderColorProperty = BindableProperty.Create<RoundEdgeStackLayout, Color>(p => p.BorderColor, defaultValue: Color.Transparent, propertyChanging: (bindable, oldvalue, newvalue) =>
+        {
+            var ctrl = (RoundEdgeStackLayout)bindable;
+            ctrl.BorderColor = newvalue;
+        });
 
-        public RoundEdgeStackLayout(){}
+        public RoundEdgeStackLayout() { }
     }
 
     public enum GradientStyle
