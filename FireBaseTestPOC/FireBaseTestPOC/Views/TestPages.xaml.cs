@@ -107,17 +107,17 @@ namespace FireBaseTestPOC.Views
                     var trrtr = new CustomEntryGroup()
                     {
                         //Style = (Style)Resources["entryStyles"],
-                        CustomPlaceholder = "Enter Number",
-                        CornerRadius = 10,
-                        CaptionFontSize = 12,
-                        CustomKeyboard = Keyboard.Numeric,
-                        CornerEdgeType = CornerEdgeStyle.Rounded,
-                        BackgroundColor = Color.Transparent,
-                        TextColor = Color.Blue,
-                        BorderColor = Color.Maroon,
-                        CustomEntryBackGroundColor = Color.Teal,
-                        HorizontalOptions = LayoutOptions.FillAndExpand,
-                        VerticalOptions = LayoutOptions.CenterAndExpand,
+                        //CustomPlaceholder = "Enter Number",
+                        //CornerRadius = 10,
+                        //CaptionFontSize = 12,
+                        //CustomKeyboard = Keyboard.Numeric,
+                        //CornerEdgeType = CornerEdgeStyle.Rounded,
+                        //BackgroundColor = Color.Transparent,
+                        //TextColor = Color.Blue,
+                        //BorderColor = Color.Maroon,
+                        //CustomEntryBackGroundColor = Color.Teal,
+                        //HorizontalOptions = LayoutOptions.FillAndExpand,
+                        //VerticalOptions = LayoutOptions.CenterAndExpand,
                     };
                     trrtr.CustomPlaceholder = "Enter Number";
                     trrtr.CornerRadius = 10;

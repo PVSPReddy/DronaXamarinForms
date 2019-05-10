@@ -349,3 +349,232 @@ namespace FireBaseTestPOC.CustomControls
         }
     }
 }
+/*
+#region for bindable properties
+        #region for Advanced Types
+        public Keyboard CustomKeyboard
+        {
+            get
+            {
+                return (Keyboard)GetValue(CustomKeyboardProperty);
+            }
+            set
+            {
+                SetValue(CustomKeyboardProperty, value);
+            }
+        }// { get; set; }
+        public static BindableProperty CustomKeyboardProperty = BindableProperty.Create<CustomEntryGroup, Keyboard>(p => p.CustomKeyboard, defaultValue: Keyboard.Text, propertyChanging: (bindable, oldvalue, newvalue) =>
+        {
+            var ctrl = (CustomEntryGroup)bindable;
+            ctrl.CustomKeyboard = newvalue;
+        });
+        #endregion
+
+        #region for colors
+        public Color BorderColor
+        {
+            get
+            {
+                return (Color)GetValue(BorderColorProperty);
+            }
+            set
+            {
+                SetValue(BorderColorProperty, value);
+            }
+        }//{ get; set; }
+        public static BindableProperty BorderColorProperty = BindableProperty.Create<CustomEntryGroup, Color>(p => p.BorderColor, defaultValue: Color.Transparent, propertyChanging: (bindable, oldvalue, newvalue) =>
+        {
+            var ctrl = (CustomEntryGroup)bindable;
+            ctrl.BorderColor = newvalue;
+        });
+        public Color TextColor
+        {
+            get
+            {
+                return (Color)GetValue(TextColorProperty);
+            }
+            set
+            {
+                SetValue(TextColorProperty, value);
+            }
+        }//{ get; set; }
+        public static BindableProperty TextColorProperty = BindableProperty.Create<CustomEntryGroup, Color>(p => p.TextColor, defaultValue: Color.Black, propertyChanging: (bindable, oldvalue, newvalue) =>
+        {
+            var ctrl = (CustomEntryGroup)bindable;
+            ctrl.TextColor = newvalue;
+        });
+        public Color CustomBackGroundColor
+        {
+            get
+            {
+                return (Color)GetValue(CustomBackGroundColorProperty);
+            }
+            set
+            {
+                SetValue(CustomBackGroundColorProperty, value);
+            }
+        }//{ get; set; }
+        public static BindableProperty CustomBackGroundColorProperty = BindableProperty.Create<CustomEntryGroup, Color>(p => p.CustomBackGroundColor, defaultValue: Color.Transparent, propertyChanging: (bindable, oldvalue, newvalue) =>
+        {
+            var ctrl = (CustomEntryGroup)bindable;
+            ctrl.CustomBackGroundColor = newvalue;
+        });
+        public Color CustomEntryBackGroundColor
+        {
+            get
+            {
+                return (Color)GetValue(CustomEntryBackGroundColorProperty);
+            }
+            set
+            {
+                SetValue(CustomEntryBackGroundColorProperty, value);
+            }
+        }//{ get; set; }
+        public static BindableProperty CustomEntryBackGroundColorProperty = BindableProperty.Create<CustomEntryGroup, Color>(p => p.CustomEntryBackGroundColor, defaultValue: Color.White, propertyChanging: (bindable, oldvalue, newvalue) =>
+        {
+            var ctrl = (CustomEntryGroup)bindable;
+            ctrl.CustomEntryBackGroundColor = newvalue;
+        });
+        #endregion
+
+        #region for Text Values
+        public string CustomPlaceholder
+        {
+            get
+            {
+                return (string)GetValue(CustomPlaceholderProperty);
+            }
+            set
+            {
+                SetValue(CustomPlaceholderProperty, value);
+            }
+        }//{ get; set; }
+        public static BindableProperty CustomPlaceholderProperty = BindableProperty.Create<CustomEntryGroup, string>(p => p.CustomPlaceholder, defaultValue: String.Empty, propertyChanging: (bindable, oldvalue, newvalue) =>
+        {
+            var ctrl = (CustomEntryGroup)bindable;
+            ctrl.CustomPlaceholder = newvalue;
+        });
+        public string CustomFontFamily
+        {
+            get
+            {
+                return (string)GetValue(CustomFontFamilyProperty);
+            }
+            set
+            {
+                SetValue(CustomFontFamilyProperty, value);
+            }
+        }//{ get; set; }
+        public static BindableProperty CustomFontFamilyProperty = BindableProperty.Create<CustomEntryGroup, string>(p => p.CustomFontFamily, defaultValue: String.Empty, propertyChanging: (bindable, oldvalue, newvalue) =>
+        {
+            var ctrl = (CustomEntryGroup)bindable;
+            ctrl.CustomFontFamily = newvalue;
+        });
+        #endregion
+
+        #region for Dimension values
+        public double CornerRadius
+        {
+            get
+            {
+                return (double)GetValue(CornerRadiusProperty);
+            }
+            set
+            {
+                SetValue(CornerRadiusProperty, value);
+            }
+        }//{ get; set; }
+        public static BindableProperty CornerRadiusProperty = BindableProperty.Create<CustomEntryGroup, double>(p => p.CornerRadius, defaultValue: 0.00, propertyChanging: (bindable, oldvalue, newvalue) =>
+        {
+            var ctrl = (CustomEntryGroup)bindable;
+            ctrl.CornerRadius = newvalue;
+        });
+        public double CaptionFontSize 
+        {
+            get
+            {
+                return (double)GetValue(CaptionFontSizeProperty);
+            }
+            set
+            {
+                SetValue(CaptionFontSizeProperty, value);
+            }
+        }//{ get; set; }
+        public static BindableProperty CaptionFontSizeProperty = BindableProperty.Create<CustomEntryGroup, double>(p => p.CaptionFontSize, defaultValue: 10.00, propertyChanging: (bindable, oldvalue, newvalue) =>
+        {
+            var ctrl = (CustomEntryGroup)bindable;
+            ctrl.CaptionFontSize = newvalue;
+        });
+        #endregion
+
+        #region for confirmation values
+        public bool ShallAddBorder
+        {
+            get
+            {
+                return (bool)GetValue(ShallAddBorderProperty);
+            }
+            set
+            {
+                SetValue(ShallAddBorderProperty, value);
+            }
+        }//{ get; set; }
+        public static BindableProperty ShallAddBorderProperty = BindableProperty.Create<CustomEntryGroup, bool>(p => p.ShallAddBorder, defaultValue: false, propertyChanging: (bindable, oldvalue, newvalue) =>
+        {
+            var ctrl = (CustomEntryGroup)bindable;
+            ctrl.ShallAddBorder = newvalue;
+        });
+        #endregion
+
+        #region for confirmation values
+        public CornerEdgeStyle CornerEdgeType
+        {
+            get
+            {
+                return (CornerEdgeStyle)GetValue(CornerEdgeTypeProperty);
+            }
+            set
+            {
+                SetValue(CornerEdgeTypeProperty, value);
+            }
+        }//{ get; set; }
+        public static BindableProperty CornerEdgeTypeProperty = BindableProperty.Create<CustomEntryGroup, CornerEdgeStyle>(p => p.CornerEdgeType, defaultValue: CornerEdgeStyle.None, propertyChanging: (bindable, oldvalue, newvalue) =>
+        {
+            var ctrl = (CustomEntryGroup)bindable;
+            ctrl.CornerEdgeType = newvalue;
+        });
+        #endregion
+
+        #region to get value from caller
+        //public new string _Value;
+        //public new string Value
+        //{
+        //    get
+        //    {
+        //        return _Value;
+        //    }
+        //    set
+        //    {
+        //        _Value = value;
+        //    }
+        //}
+        public string Value
+        {
+            get
+            {
+                return (string)GetValue(ValueProperty);
+            }
+            set
+            {
+                SetValue(ValueProperty, value);
+            }
+        }//{ get; set; }
+        public static BindableProperty ValueProperty = BindableProperty.Create<CustomEntryGroup, string>(p => p.Value, defaultValue: "", propertyChanging: (bindable, oldvalue, newvalue) =>
+        {
+            var ctrl = (CustomEntryGroup)bindable;
+            ctrl.Value = newvalue;
+        });
+        #endregion
+
+        #endregion
+*/
