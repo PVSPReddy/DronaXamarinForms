@@ -149,6 +149,22 @@ namespace FireBaseTestPOC.CustomControls
             var ctrl = (CustomEntryGroup)bindable;
             ctrl.CornerRadius = newvalue;
         });
+        public double BorderThickness
+        {
+            get
+            {
+                return (double)GetValue(BorderThicknessProperty);
+            }
+            set
+            {
+                SetValue(BorderThicknessProperty, value);
+            }
+        }
+        public static BindableProperty BorderThicknessProperty = BindableProperty.Create<CustomEntryGroup, double>(p => p.BorderThickness, defaultValue: 0.00, propertyChanging: (bindable, oldvalue, newvalue) =>
+        {
+            var ctrl = (CustomEntryGroup)bindable;
+            ctrl.BorderThickness = newvalue;
+        });
         public double CaptionFontSize
         {
             get
@@ -288,15 +304,21 @@ namespace FireBaseTestPOC.CustomControls
             stackFieldsHolder.SetBinding(RoundEdgeStackLayout.EndColorProperty, new Binding("CustomEntryBackGroundColor"));
             stackFieldsHolder.SetBinding(RoundEdgeStackLayout.BorderColorProperty, new Binding("BorderColor"));
             stackFieldsHolder.SetBinding(RoundEdgeStackLayout.HasBorderColorProperty, new Binding("ShallAddBorder"));
+            stackFieldsHolder.SetBinding(RoundEdgeStackLayout.BorderThicknessProperty, new Binding("BorderThickness"));
             stackFieldsHolder.SetBinding(RoundEdgeStackLayout.CornerRadiusProperty, new Binding("CornerRadius"));
 
-            //StackLayout stackBorderLayout = new StackLayout()
-            //{
-            //    Children = { stackFieldsHolder },
-            //    HorizontalOptions = LayoutOptions.FillAndExpand,
-            //    VerticalOptions = LayoutOptions.FillAndExpand
-            //};
-            //stackBorderLayout.SetBinding(StackLayout.BackgroundColorProperty, new Binding("BorderColor"));
+            //stackMainHolder.SetBinding(RoundEdgeStackLayout.StartColorProperty, new Binding("CustomEntryBackGroundColor"));
+            //stackMainHolder.SetBinding(RoundEdgeStackLayout.EndColorProperty, new Binding("CustomEntryBackGroundColor"));
+            //stackFieldsHolder.SetBinding(RoundEdgeStackLayout.BorderColorProperty, new Binding("BorderColor"));
+            //stackMainHolder.SetBinding(RoundEdgeStackLayout.HasBorderColorProperty, new Binding("ShallAddBorder"));
+            //stackMainHolder.SetBinding(RoundEdgeStackLayout.CornerRadiusProperty, new Binding("CornerRadius"));
+            ////StackLayout stackBorderLayout = new StackLayout()
+            ////{
+            ////    Children = { stackFieldsHolder },
+            ////    HorizontalOptions = LayoutOptions.FillAndExpand,
+            ////    VerticalOptions = LayoutOptions.FillAndExpand
+            ////};
+            ////stackBorderLayout.SetBinding(StackLayout.BackgroundColorProperty, new Binding("BorderColor"));
 
             stackMainHolder = new RoundEdgeStackLayout()
             {

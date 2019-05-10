@@ -48,7 +48,7 @@ namespace FireBaseTestPOC.iOS.CustomControls
                     this.Layer.CornerRadius = (float)(min / 2.0);
                     this.Layer.MasksToBounds = false;
                     this.Layer.BorderColor = stack.BorderColor.ToCGColor();
-                    this.Layer.BorderWidth = 1;
+                    this.Layer.BorderWidth = Convert.ToSingle(stack.BorderThickness);
                     this.ClipsToBounds = true;
                 }
                 else

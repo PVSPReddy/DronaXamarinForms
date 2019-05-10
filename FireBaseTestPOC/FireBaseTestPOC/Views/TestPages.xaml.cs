@@ -110,6 +110,7 @@ namespace FireBaseTestPOC.Views
                         CustomPlaceholder = "Enter Number",
                         CornerRadius = 10,
                         CaptionFontSize = 12,
+                        BorderThickness = 2,
                         CustomKeyboard = Keyboard.Numeric,
                         CornerEdgeType = CornerEdgeStyle.Rounded,
                         BackgroundColor = Color.Transparent,
@@ -123,6 +124,7 @@ namespace FireBaseTestPOC.Views
                     trrtr.CustomPlaceholder = "Enter Number";
                     trrtr.CornerRadius = 10;
                     trrtr.CaptionFontSize = 12;
+                    trrtr.BorderThickness = 2;
                     trrtr.CustomKeyboard = Keyboard.Numeric;
                     trrtr.CornerEdgeType = CornerEdgeStyle.Rounded;
                     trrtr.BackgroundColor = Color.Transparent;

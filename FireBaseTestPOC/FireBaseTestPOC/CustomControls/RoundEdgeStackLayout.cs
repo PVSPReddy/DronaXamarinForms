@@ -108,6 +108,23 @@ namespace FireBaseTestPOC.CustomControls
             ctrl.HasBorderColor = newvalue;
         });
 
+        public double BorderThickness
+        {
+            get
+            {
+                return (double)GetValue(BorderThicknessProperty);
+            }
+            set
+            {
+                SetValue(BorderThicknessProperty, value);
+            }
+        }
+        public static BindableProperty BorderThicknessProperty = BindableProperty.Create<RoundEdgeStackLayout, double>(p => p.BorderThickness, defaultValue: 0.00, propertyChanging: (bindable, oldvalue, newvalue) =>
+        {
+            var ctrl = (RoundEdgeStackLayout)bindable;
+            ctrl.BorderThickness = newvalue;
+        });
+
         public Color BorderColor
         {
             get
