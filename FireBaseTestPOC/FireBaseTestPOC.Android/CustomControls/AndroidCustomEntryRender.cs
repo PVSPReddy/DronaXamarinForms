@@ -41,9 +41,10 @@ namespace FireBaseTestPOC.Droid.CustomControls
 
                     GradientDrawable gradientDrawable = new GradientDrawable();
                     gradientDrawable.SetColor(global::Android.Graphics.Color.Transparent);
-                    if (element.BorderColors != null)
+                    if (element.BorderColor != null)
                     {
-                        gradientDrawable.SetStroke(2, global::Android.Graphics.Color.ParseColor(element.BorderColors));
+                        //gradientDrawable.SetStroke(2, global::Android.Graphics.Color.ParseColor(element.BorderColor));
+                        gradientDrawable.SetStroke(2, element.BorderColor.ToAndroid());
                     }
                     //gradientDrawable.SetCornerRadius(45); // increase or decrease to changes the corner look
                     this.Control.SetBackgroundDrawable(gradientDrawable);
@@ -155,9 +156,9 @@ namespace FireBaseTestPOC.Droid.CustomControls
 
                     GradientDrawable gradientDrawable = new GradientDrawable();
                     gradientDrawable.SetColor(global::Android.Graphics.Color.Transparent);
-                    if (element.BorderColors != null)
+                    if (element.BorderColor != null)
                     {
-                        gradientDrawable.SetStroke(2, global::Android.Graphics.Color.ParseColor(element.BorderColors));
+                        gradientDrawable.SetStroke(2, element.BorderColor.ToAndroid());
                     }
                     //gradientDrawable.SetCornerRadius(45); // increase or decrease to changes the corner look
                     this.Control.SetBackgroundDrawable(gradientDrawable);

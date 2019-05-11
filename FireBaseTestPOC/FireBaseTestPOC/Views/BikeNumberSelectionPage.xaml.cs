@@ -205,15 +205,15 @@ namespace FireBaseTestPOC.Views
                         var endNum = Convert.ToInt32(entryEndNumber.Value);
                         var startNumber = (startNum < endNum) ? startNum : endNum;
                         var endNumber = (startNum < endNum) ? endNum : startNum;
-                        int[] _sumDigits = null;
-                        if (sumDigits.Count > 0)
-                        {
-                            _sumDigits = new int[sumDigits.Count];
-                            for (int i = 0; i < sumDigits.Count; i++)
-                            {
-                                _sumDigits[i] = sumDigits[i];
-                            }
-                        }
+                        int[] _sumDigits = {1,2,6};//null;
+                        //if (sumDigits.Count > 0)
+                        //{
+                        //    _sumDigits = new int[sumDigits.Count];
+                        //    for (int i = 0; i < sumDigits.Count; i++)
+                        //    {
+                        //        _sumDigits[i] = sumDigits[i];
+                        //    }
+                        //}
                         var numbersList = await bikeNumberSelector.GetNumbersList(startNumber, endNumber, _sumDigits, DigitsOrder.ExactAscendingWihAdjacentRepitition, false);
 
                         if (numbersList.Count > 0)

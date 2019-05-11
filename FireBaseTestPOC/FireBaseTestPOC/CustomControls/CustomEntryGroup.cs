@@ -181,6 +181,24 @@ namespace FireBaseTestPOC.CustomControls
             var ctrl = (CustomEntryGroup)bindable;
             ctrl.CaptionFontSize = newvalue;
         });
+        public Thickness EntryTextPadding
+        {
+            get
+            {
+                return (double)GetValue(EntryTextPaddingProperty);
+            }
+            set
+            {
+                SetValue(EntryTextPaddingProperty, value);
+            }
+        }
+        //public static BindableProperty EntryTextPaddingProperty = BindableProperty.Create<CustomEntryGroup, Thickness>(p => p.EntryTextPadding, defaultValue: 0, propertyChanging: (bindable, oldvalue, newvalue) =>
+        //{
+        //    var ctrl = (CustomEntryGroup)bindable;
+        //    ctrl.EntryTextPadding = newvalue;
+        //});
+        public static readonly BindableProperty EntryTextPaddingProperty = BindableProperty.Create("EntryTextPadding", typeof(Thickness), typeof(CustomEntryGroup), new Thickness(-1.0));
+        //public Thickness EntryTextPadding { get; set; }
         #endregion
 
         #region for confirmation values
@@ -200,9 +218,7 @@ namespace FireBaseTestPOC.CustomControls
             var ctrl = (CustomEntryGroup)bindable;
             ctrl.ShallAddBorder = newvalue;
         });
-        #endregion
 
-        #region for confirmation values
         public CornerEdgeStyle CornerEdgeType
         {
             get
@@ -244,7 +260,7 @@ namespace FireBaseTestPOC.CustomControls
 
         Label caption;
         CustomEntry entryField;
-        RoundEdgeStackLayout stackFieldsHolder;
+        StackLayout stackFieldsHolder;
         RoundEdgeStackLayout stackMainHolder;
 
         public CustomEntryGroup()
@@ -279,42 +295,15 @@ namespace FireBaseTestPOC.CustomControls
             entryField.SetBinding(Entry.FontFamilyProperty, new Binding("CustomFontFamily"));
             entryField.SetBinding(Entry.KeyboardProperty, new Binding("CustomKeyboard"));
             entryField.TextChanged += OnEntryFieldTextChanged;
-            //entryField.PropertyChanged += EntryFieldPropertyChanged;
 
-            //StackLayout stackFieldsHolder = new StackLayout()
-            //{
-            //    Children = { caption, entryField },
-            //    BackgroundColor = Color.White,
-            //    //Padding = new Thickness(2, 2, 2, 2),
-            //    Margin = new Thickness(2),
-            //    HorizontalOptions = LayoutOptions.FillAndExpand,
-            //    VerticalOptions = LayoutOptions.FillAndExpand
-            //}; 
-            stackFieldsHolder = new RoundEdgeStackLayout()
+            stackFieldsHolder = new StackLayout()
             {
                 Children = { caption, entryField },
-                //BackgroundColor = Color.White,
                 Padding = new Thickness(2),
                 Margin = new Thickness(2),
-                GradientDirection = GradientStyle.None,
                 HorizontalOptions = LayoutOptions.FillAndExpand,
                 VerticalOptions = LayoutOptions.FillAndExpand
             };
-            ////stackFieldsHolder.SetBinding(StackLayout.BackgroundColorProperty, new Binding("CustomEntryBackGroundColor"));
-            //stackFieldsHolder.SetBinding(RoundEdgeStackLayout.StartColorProperty, new Binding("CustomEntryBackGroundColor"));
-            //stackFieldsHolder.SetBinding(RoundEdgeStackLayout.EndColorProperty, new Binding("CustomEntryBackGroundColor"));
-            //stackFieldsHolder.SetBinding(RoundEdgeStackLayout.BorderColorProperty, new Binding("BorderColor"));
-            //stackFieldsHolder.SetBinding(RoundEdgeStackLayout.HasBorderColorProperty, new Binding("ShallAddBorder"));
-            //stackFieldsHolder.SetBinding(RoundEdgeStackLayout.BorderThicknessProperty, new Binding("BorderThickness"));
-            //stackFieldsHolder.SetBinding(RoundEdgeStackLayout.CornerRadiusProperty, new Binding("CornerRadius"));
-
-            ////StackLayout stackBorderLayout = new StackLayout()
-            ////{
-            ////    Children = { stackFieldsHolder },
-            ////    HorizontalOptions = LayoutOptions.FillAndExpand,
-            ////    VerticalOptions = LayoutOptions.FillAndExpand
-            ////};
-            ////stackBorderLayout.SetBinding(StackLayout.BackgroundColorProperty, new Binding("BorderColor"));
 
             stackMainHolder = new RoundEdgeStackLayout()
             {
@@ -330,64 +319,26 @@ namespace FireBaseTestPOC.CustomControls
             stackMainHolder.SetBinding(RoundEdgeStackLayout.BorderColorProperty, new Binding("BorderColor"));
             stackMainHolder.SetBinding(RoundEdgeStackLayout.HasBorderColorProperty, new Binding("ShallAddBorder"));
             stackMainHolder.SetBinding(RoundEdgeStackLayout.BorderThicknessProperty, new Binding("BorderThickness"));
+            //stackMainHolder.SetBinding(RoundEdgeStackLayout.PaddingProperty, new Binding("EntryTextPadding"));
             stackMainHolder.SetBinding(RoundEdgeStackLayout.CornerRadiusProperty, new Binding("CornerRadius"));
-            /*
-            stackMainHolder.SetBinding(RoundEdgeStackLayout.StartColorProperty, new Binding("BorderColor"));
-            stackMainHolder.SetBinding(RoundEdgeStackLayout.EndColorProperty, new Binding("BorderColor"));
-            stackMainHolder.SetBinding(RoundEdgeStackLayout.HasBorderColorProperty, new Binding("ShallAddBorder"));
-            stackMainHolder.SetBinding(RoundEdgeStackLayout.CornerRadiusProperty, new Binding("CornerRadius"));
-            ////stackMainHolder.SetBinding(RoundEdgeStackLayout.BackgroundColorProperty, new Binding("BorderColor"));
-            //stackMainHolder.SetBinding(RoundEdgeStackLayout.StartColorProperty, new Binding("BorderColor"));
-            //stackMainHolder.SetBinding(RoundEdgeStackLayout.EndColorProperty, new Binding("BorderColor"));
-            //stackMainHolder.SetBinding(RoundEdgeStackLayout.HasBorderColorProperty, new Binding("ShallAddBorder"));
-            ////stackMainHolder.SetBinding(RoundEdgeStackLayout., new Binding("BorderColor"));
-            ////stackMainHolder.SetBinding(RoundEdgeStackLayout.CornerRadiusProperty, new Binding("BorderColor"));
-            //stackMainHolder.SetBinding(RoundEdgeStackLayout.CornerRadiusProperty, new Binding("CornerRadius"));
-            */
 
             Content = stackMainHolder;
         }
 
-        //void EntryFieldPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        //{
-        //    try
-        //    {
-        //        var owner = (Entry)sender;
-        //        if (e.PropertyName == "Text")
-        //        {
-        //            var textValue = owner.Text;
-        //            if(!(string.IsNullOrEmpty(textValue)))
-        //            {
-        //                if (CornerEdgeType == CornerEdgeStyle.None)
-        //                {
-        //                }
-        //                else if (CornerEdgeType == CornerEdgeStyle.Rounded)
-        //                {
-        //                    stackMainHolder.StartColor = BorderColor;
-        //                    stackMainHolder.EndColor = BorderColor;
-        //                }
-        //                else
-        //                {
-        //                }
-        //            }
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        var msg = ex.Message + "\n" + ex.StackTrace;
-        //        System.Diagnostics.Debug.WriteLine(msg);
-        //    }
-        //}
-
-
         protected override void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             base.OnPropertyChanged(propertyName);
+            if(propertyName == "EntryTextPadding")
+            {
+                //stackFieldsHolder.Padding = EntryTextPadding;//new Thickness(10, 0, 10, 0);
+                stackMainHolder.Padding = new Thickness(10, 0, 10, 0);//EntryTextPadding;//new Thickness(10, 0, 10, 0);
+            }
+
+            /*
             if(propertyName == "CornerEdgeType")
             {
                 //if(CornerEdgeType == CornerEdgeStyle.None)
                 //{
-
                 //}
                 //else if(CornerEdgeType == CornerEdgeStyle.Rounded)
                 //{
@@ -415,38 +366,7 @@ namespace FireBaseTestPOC.CustomControls
                 //    stackMainHolder.SetBinding(RoundEdgeStackLayout.CornerRadiusProperty, new Binding("CornerRadius"));
                 //}
             }
-        }
-
-        public void OnCustomPropertyChanged(string propertyName = null)
-        {
-            //if (propertyName == "CornerEdgeType")
-            //{
-            //    if (CornerEdgeType == CornerEdgeStyle.None)
-            //    {
-
-            //    }
-            //    else if (CornerEdgeType == CornerEdgeStyle.Rounded)
-            //    {
-            //        stackFieldsHolder.SetBinding(RoundEdgeStackLayout.StartColorProperty, new Binding("CustomEntryBackGroundColor"));
-            //        stackFieldsHolder.SetBinding(RoundEdgeStackLayout.EndColorProperty, new Binding("CustomEntryBackGroundColor"));
-            //        stackFieldsHolder.SetBinding(RoundEdgeStackLayout.HasBorderColorProperty, new Binding("ShallAddBorder"));
-            //        stackFieldsHolder.SetBinding(RoundEdgeStackLayout.CornerRadiusProperty, new Binding("CornerRadius"));
-            //        ////stackFieldsHolder.SetBinding(RoundEdgeStackLayout.BackgroundColorProperty, new Binding("BorderColor"));
-            //        //stackFieldsHolder.SetBinding(RoundEdgeStackLayout.StartColorProperty, new Binding("BorderColor"));
-            //        //stackFieldsHolder.SetBinding(RoundEdgeStackLayout.EndColorProperty, new Binding("BorderColor"));
-            //        //stackFieldsHolder.SetBinding(RoundEdgeStackLayout.HasBorderColorProperty, new Binding("ShallAddBorder"));
-            //        ////stackFieldsHolder.SetBinding(RoundEdgeStackLayout., new Binding("BorderColor"));
-            //        ////stackFieldsHolder.SetBinding(RoundEdgeStackLayout.CornerRadiusProperty, new Binding("BorderColor"));
-            //        //stackFieldsHolder.SetBinding(RoundEdgeStackLayout.CornerRadiusProperty, new Binding("CornerRadius"));
-            //        //stackMainHolder.SetBinding(RoundEdgeStackLayout.BackgroundColorProperty, new Binding("BorderColor"));
-            //        stackMainHolder.SetBinding(RoundEdgeStackLayout.StartColorProperty, new Binding("BorderColor"));
-            //        stackMainHolder.SetBinding(RoundEdgeStackLayout.EndColorProperty, new Binding("BorderColor"));
-            //        stackMainHolder.SetBinding(RoundEdgeStackLayout.HasBorderColorProperty, new Binding("ShallAddBorder"));
-            //        //stackMainHolder.SetBinding(RoundEdgeStackLayout., new Binding("BorderColor"));
-            //        //stackMainHolder.SetBinding(RoundEdgeStackLayout.CornerRadiusProperty, new Binding("BorderColor"));
-            //        stackMainHolder.SetBinding(RoundEdgeStackLayout.CornerRadiusProperty, new Binding("CornerRadius"));
-            //    }
-            //}
+            */
         }
 
         private void OnEntryFieldTextChanged(object sender, TextChangedEventArgs e)
