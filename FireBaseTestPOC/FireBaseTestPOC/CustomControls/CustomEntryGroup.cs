@@ -289,6 +289,7 @@ namespace FireBaseTestPOC.CustomControls
                 //VerticalOptions = LayoutOptions.End
                 VerticalOptions = LayoutOptions.Center
             };
+            entryField.SetBinding(Entry.TextProperty, "Value", BindingMode.TwoWay ); //BindingMode.TwoWay, null, null);
             entryField.SetBinding(Entry.TextColorProperty, new Binding("TextColor"));
             entryField.SetBinding(Entry.PlaceholderColorProperty, new Binding("TextColor"));
             entryField.SetBinding(Entry.PlaceholderProperty, new Binding("CustomPlaceholder"));
@@ -400,7 +401,7 @@ namespace FireBaseTestPOC.CustomControls
                 caption.Opacity = 0;
             }
             owner.Text = valueText;
-            Value = owner.Text;
+            //Value = owner.Text;
             EventHandler<EventArgs> handler = OnCustomTextChanged;
             if (handler != null)
             {

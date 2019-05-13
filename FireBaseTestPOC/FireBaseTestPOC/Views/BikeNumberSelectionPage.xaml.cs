@@ -78,11 +78,26 @@ namespace FireBaseTestPOC.Views
                     stackSingleNumber.IsVisible = !owner.IsToggled;
                     stackRangeNumbers.IsVisible = owner.IsToggled;
                     stackSumDigits.IsVisible = owner.IsToggled;
+                    if(!owner.IsToggled)
+                    {
+                        switchSumNumbers.IsToggled = owner.IsToggled;
+                        entryStartNumber.Value = string.Empty;
+                        entryEndNumber.Value = string.Empty;
+                    }
+                    else
+                    {
+                        entryNumber.Value = string.Empty;
+                    }
                 }
                 else if (owner == switchSumNumbers)
                 {
                     stackRequiredSum.IsVisible = owner.IsToggled;
                     stackAddRemoveButton.IsVisible = owner.IsToggled;
+                    if(!owner.IsToggled)
+                    {
+                        stackRequiredSum.Children.Clear();
+                        sumDigits.Clear();
+                    }
                 }
                 else
                 {
