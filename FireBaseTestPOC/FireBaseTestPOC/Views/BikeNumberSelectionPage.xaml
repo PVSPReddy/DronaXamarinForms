@@ -17,6 +17,7 @@
                 <Setter Property="CornerRadius" Value="10"/>
                 <Setter Property="CaptionFontSize" Value="12"/>
                 <Setter Property="BorderThickness" Value="2"/>
+                <Setter Property="EntryTextPadding" Value="10,0,10,0"/>
                 <Setter Property="CornerEdgeType" Value="Rounded"/>
                 <Setter Property="ShallAddBorder" Value="true"/>
                 <Setter Property="BackgroundColor" Value="Transparent"/>
