@@ -133,6 +133,24 @@ namespace FireBaseTestPOC.CustomControls
         #endregion
 
         #region for Dimension values
+
+        public int AllowableTextLength
+        {
+            get
+            {
+                return (int)GetValue(AllowableTextLengthProperty);
+            }
+            set
+            {
+                SetValue(AllowableTextLengthProperty, value);
+            }
+        }
+        public static BindableProperty AllowableTextLengthProperty = BindableProperty.Create<CustomEntryGroup, int>(p => p.AllowableTextLength, defaultValue: 10000, propertyChanging: (bindable, oldvalue, newvalue) =>
+        {
+            var ctrl = (CustomEntryGroup)bindable;
+            ctrl.AllowableTextLength = newvalue;
+        });
+
         public double CornerRadius
         {
             get
@@ -383,6 +401,7 @@ namespace FireBaseTestPOC.CustomControls
                 {
                     while(!isValidText)
                     {
+                        //var regexString = @""+""+ "{0, "+AllowableTextLength+"}$";
                         if (Regex.IsMatch(valueText, @"^[0-9]*$"))
                         {
                             isValidText = true;
