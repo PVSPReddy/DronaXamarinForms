@@ -20,6 +20,7 @@ namespace FireBaseTestPOC.Droid.CustomControls
         private Xamarin.Forms.Color EndColor { get; set; }
         private GradientStyle gradientStyle { get; set; }
         RoundEdgeStackLayout stack;
+        private Canvas CustomCanvas { get; set; }
 
         public AndroidRoundEdgeStackLayoutRender(Context _context) : base(_context)
         {
@@ -37,32 +38,6 @@ namespace FireBaseTestPOC.Droid.CustomControls
             try
             {
                 stack = e.NewElement as RoundEdgeStackLayout;
-
-                this.StartColor = stack.StartColor;
-                this.EndColor = stack.EndColor;
-                this.gradientStyle = stack.GradientDirection;
-
-
-                _cornerRadius = 0.0f;
-                try
-                {
-                    if (stack.CornerWRT == CornerRadiusReference.WRTHeightRequest && stack.CornerRadius == 0)
-                    {
-                        _cornerRadius = (float)(stack.HeightRequest);
-                    }
-                    else if (stack.CornerWRT == CornerRadiusReference.WRTWidthRequest && stack.CornerRadius == 0)
-                    {
-                        _cornerRadius = (float)(stack.WidthRequest);
-                    }
-                    else
-                    {
-                        _cornerRadius = (float)(stack.CornerRadius);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    var msg = ex.Message;
-                }
             }
             catch (Exception ex)
             {
@@ -73,11 +48,32 @@ namespace FireBaseTestPOC.Droid.CustomControls
         protected override void OnSizeChanged(int w, int h, int oldw, int oldh)
         {
             base.OnSizeChanged(w, h, oldw, oldh);
+
+            try
+            {
+                _cornerRadius = 0.0f;
+                if (stack.CornerWRT == CornerRadiusReference.WRTHeightRequest && stack.CornerRadius == 0)
+                {
+                    _cornerRadius = (stack.HeightRequest > 0) ? (float)(stack.HeightRequest) : 0.0f;
+                }
+                else if (stack.CornerWRT == CornerRadiusReference.WRTWidthRequest && stack.CornerRadius == 0)
+                {
+                    _cornerRadius = (stack.WidthRequest > 0) ? (float)(stack.WidthRequest) : 0.0f;
+                }
+                else
+                {
+                    _cornerRadius = (float)(stack.CornerRadius);
+                }
+            }
+            catch (Exception ex)
+            {
+                var msg = ex.Message;
+            }
+
             if (w != oldw && h != oldh)
             {
                 _bounds = new RectF(0, 0, w, h);
             }
-
             _path = new Path();
             _path.Reset();
             _path.AddRoundRect(_bounds, _cornerRadius, _cornerRadius, Path.Direction.Cw);
@@ -85,11 +81,14 @@ namespace FireBaseTestPOC.Droid.CustomControls
             _path.Close();
         }
 
-        protected override void DispatchDraw(Canvas canvas)
+        private void CustomDispatchDraw(Canvas canvas)
         {
             try
             {
-                if (_path != null)
+                this.StartColor = stack.StartColor;
+                this.EndColor = stack.EndColor;
+                this.gradientStyle = stack.GradientDirection;
+                if (_path != null) 
                 {
                     int height = Height;
                     int width = Width;
@@ -98,23 +97,14 @@ namespace FireBaseTestPOC.Droid.CustomControls
                     {
                         width = 0;
                     }
-                    else
+                    else if (gradientStyle == GradientStyle.Horizontal)
                     {
                         height = 0;
                     }
-
-                    /*
-                    #region for Vertical Gradient  
-                    var gradient = new Android.Graphics.LinearGradient(0, 0, 0, Height,
-                    #endregion
-                    //#region for Horizontal Gradient  
-                    //var gradient = new Android.Graphics.LinearGradient(0, 0, Width, 0,
-                    this.StartColor.ToAndroid(),
-                    this.EndColor.ToAndroid(),
-                    Android.Graphics.Shader.TileMode.Mirror);
-                    //#endregion
-                    */
-
+                    else 
+                    {
+                        height = 0;
+                    }
 
                     var gradient = new Android.Graphics.LinearGradient(0, 0, width, height, this.StartColor.ToAndroid(), this.EndColor.ToAndroid(), Android.Graphics.Shader.TileMode.Mirror);
                     var paint = new Android.Graphics.Paint()
@@ -122,14 +112,13 @@ namespace FireBaseTestPOC.Droid.CustomControls
                         Dither = true,
                     };
 
-
                     paint.SetShader(gradient);
                     canvas.Save();
                     canvas.ClipPath(_path);
                     canvas.DrawPaint(paint);
                     try
                     {
-                        if (stack.HasBorderColor == true && stack.BorderColor != null)
+                        if (stack.HasBorderColor == true)
                         {
                             var borderPaint = new Paint();
                             borderPaint.AntiAlias = true;
@@ -144,21 +133,33 @@ namespace FireBaseTestPOC.Droid.CustomControls
                         var msg = ex.Message + "\n" + ex.StackTrace;
                         System.Diagnostics.Debug.WriteLine(msg);
                     }
-                    //base.Draw(canvas);
-                    base.DispatchDraw(canvas);
                     canvas.Restore();
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 var msg = ex.Message + "\n" + ex.StackTrace;
                 System.Diagnostics.Debug.WriteLine(msg);
             }
         }
 
+        protected override void DispatchDraw(Canvas canvas)
+        {
+            CustomCanvas = canvas;
+            CustomDispatchDraw(CustomCanvas);
+            //base.Draw(canvas);
+            base.DispatchDraw(canvas);
+            canvas.Restore();
+        }
+
         protected override void OnElementPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             base.OnElementPropertyChanged(sender, e);
+            System.Diagnostics.Debug.WriteLine("Current Page is " + this.GetType().ToString() + " : " + e.PropertyName);
+            if(CustomCanvas != null)
+            {
+                CustomDispatchDraw(CustomCanvas);
+            }
         }
     }
 }

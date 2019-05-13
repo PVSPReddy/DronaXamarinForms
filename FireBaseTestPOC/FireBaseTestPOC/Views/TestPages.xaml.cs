@@ -9,14 +9,15 @@ using Xamarin.Forms;
 namespace FireBaseTestPOC.Views
 {
     public partial class TestPages : ContentPage
+
     {
         List<int> sumDigits;
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            //stackRangeNumbers.IsVisible = switchNumberRange.IsToggled;
-            //stackRangeNumbers.Opacity = 1;
+            stackRangeNumbers.IsVisible = switchNumberRange.IsToggled;
+            stackRangeNumbers.Opacity = 1;
         }
 
         public TestPages()
@@ -24,11 +25,11 @@ namespace FireBaseTestPOC.Views
             InitializeComponent();
             sumDigits = new List<int>();
 
-            //labelSingleNumberResult.Text = "Number : 0 \nSum : 0";
+            labelSingleNumberResult.Text = "Number : 0 \nSum : 0";
 
-            //entryNumber.OnCustomTextChanged += EntryCustomTextChangedEvent;
+            entryNumber.OnCustomTextChanged += EntryCustomTextChangedEvent;
             //stackRangeNumbers.IsVisible = switchNumberRange.IsToggled;
-            //stackSumDigits.IsVisible = switchNumberRange.IsToggled;
+            stackSumDigits.IsVisible = switchNumberRange.IsToggled;
         }
 
         private async void EntryCustomTextChangedEvent(object sender, EventArgs e)
@@ -36,17 +37,17 @@ namespace FireBaseTestPOC.Views
             try
             {
                 int Num = 0;
-                //if (!(string.IsNullOrEmpty(entryNumber.Value)))
-                //{
-                //    Num = Convert.ToInt32(entryNumber.Value);
-                //}
-                //else
-                //{
-                //    Num = 0;
-                //}
-                //BikeNumberSelector bikeNumberSelector = new BikeNumberSelector();
-                //var number = await bikeNumberSelector.GetNumbersList(Num);
-                //labelSingleNumberResult.Text = "Number : " + number.Digits.ToString() + "\nSum : " + number.DigitsSum.ToString();
+                if (!(string.IsNullOrEmpty(entryNumber.Value)))
+                {
+                    Num = Convert.ToInt32(entryNumber.Value);
+                }
+                else
+                {
+                    Num = 0;
+                }
+                BikeNumberSelector bikeNumberSelector = new BikeNumberSelector();
+                var number = await bikeNumberSelector.GetNumbersList(Num);
+                labelSingleNumberResult.Text = "Number : " + number.Digits.ToString() + "\nSum : " + number.DigitsSum.ToString();
             }
             catch (Exception ex)
             {
@@ -73,14 +74,13 @@ namespace FireBaseTestPOC.Views
             try
             {
                 var owner = (Switch)sender;
-                //if (owner == switchNumberRange)
-                //{
-                //    stackSingleNumber.IsVisible = !owner.IsToggled;
-                //    stackRangeNumbers.IsVisible = owner.IsToggled;
-                //    stackSumDigits.IsVisible = owner.IsToggled;
-                //}
-                //else 
-                if (owner == switchSumNumbers)
+                if (owner == switchNumberRange)
+                {
+                    stackSingleNumber.IsVisible = !owner.IsToggled;
+                    stackRangeNumbers.IsVisible = owner.IsToggled;
+                    stackSumDigits.IsVisible = owner.IsToggled;
+                }
+                else if (owner == switchSumNumbers)
                 {
                     stackRequiredSum.IsVisible = owner.IsToggled;
                     stackAddRemoveButton.IsVisible = owner.IsToggled;
@@ -106,21 +106,9 @@ namespace FireBaseTestPOC.Views
                 {
                     var trrtr = new CustomEntryGroup()
                     {
-                        //Style = (Style)Resources["entryStyles"],
+                        Style = (Style)Resources["entryStyles"],
                         CustomPlaceholder = "Enter Number",
-                        CornerRadius = 10,
-                        CaptionFontSize = 12,
-                        BorderThickness = 2,
-                        EntryTextPadding = new Thickness(10, 0, 10, 0),
-                        CustomKeyboard = Keyboard.Numeric,
-                        CornerEdgeType = CornerEdgeStyle.Rounded,
-                        BackgroundColor = Color.Transparent,
-                        TextColor = Color.Blue,
-                        BorderColor = Color.Maroon,
-                        ShallAddBorder = true,
-                        CustomEntryBackGroundColor = Color.Teal,
-                        HorizontalOptions = LayoutOptions.FillAndExpand,
-                        VerticalOptions = LayoutOptions.CenterAndExpand,
+                        CustomKeyboard = Keyboard.Numeric
                     };
                     stackRequiredSum.Children.Add(trrtr);
                 }
@@ -133,12 +121,9 @@ namespace FireBaseTestPOC.Views
                         {
                             if (sumDigits.Count > 0)
                             {
-                                if(!(string.IsNullOrEmpty(child.Value)))
+                                if (!(sumDigits.Contains(Convert.ToInt32(child.Value))))
                                 {
-                                    if (!(sumDigits.Contains(Convert.ToInt32(child.Value))))
-                                    {
-                                        sumDigits.Remove(Convert.ToInt32(child.Value));
-                                    }
+                                    sumDigits.Remove(Convert.ToInt32(child.Value));
                                 }
                             }
                         }
@@ -185,28 +170,28 @@ namespace FireBaseTestPOC.Views
                 if (isValidate)
                 {
                     BikeNumberSelector bikeNumberSelector = new BikeNumberSelector();
-                    //if (stackRangeNumbers.IsVisible)
-                    //{
-                    //    var startNum = Convert.ToInt32(entryStartNumber.Value);
-                    //    var endNum = Convert.ToInt32(entryEndNumber.Value);
-                    //    var startNumber = (startNum < endNum) ? startNum : endNum;
-                    //    var endNumber = (startNum < endNum) ? endNum : startNum;
-                    //    int[] _sumDigits = null;
-                    //    if (sumDigits.Count > 0)
-                    //    {
-                    //        _sumDigits = new int[sumDigits.Count];
-                    //        for (int i = 0; i < sumDigits.Count; i++)
-                    //        {
-                    //            _sumDigits[i] = sumDigits[i];
-                    //        }
-                    //    }
-                    //    var numbersList = await bikeNumberSelector.GetNumbersList(startNumber, endNumber, _sumDigits, DigitsOrder.ExactAscendingWihAdjacentRepitition, false);
+                    if (stackRangeNumbers.IsVisible)
+                    {
+                        var startNum = Convert.ToInt32(entryStartNumber.Value);
+                        var endNum = Convert.ToInt32(entryEndNumber.Value);
+                        var startNumber = (startNum < endNum) ? startNum : endNum;
+                        var endNumber = (startNum < endNum) ? endNum : startNum;
+                        int[] _sumDigits = { 1, 2, 6 };//null;
+                        //if (sumDigits.Count > 0)
+                        //{
+                        //    _sumDigits = new int[sumDigits.Count];
+                        //    for (int i = 0; i < sumDigits.Count; i++)
+                        //    {
+                        //        _sumDigits[i] = sumDigits[i];
+                        //    }
+                        //}
+                        var numbersList = await bikeNumberSelector.GetNumbersList(startNumber, endNumber, _sumDigits, DigitsOrder.ExactAscendingWihAdjacentRepitition, false);
 
-                    //    if (numbersList.Count > 0)
-                    //    {
-                    //        await Navigation.PushModalAsync(new BikeNumberResultsDisplayPage(numbersList));
-                    //    }
-                    //}
+                        if (numbersList.Count > 0)
+                        {
+                            await Navigation.PushModalAsync(new BikeNumberResultsDisplayPage(numbersList));
+                        }
+                    }
                 }
                 else
                 { }
@@ -221,21 +206,21 @@ namespace FireBaseTestPOC.Views
         async Task<bool> Validate()
         {
             bool isValidate = true;
-            //if ((stackSingleNumber.IsVisible) && string.IsNullOrEmpty(entryNumber.Value))
-            //{
-            //    isValidate = false;
-            //    entryNumber.BorderColor = Color.Maroon;
-            //}
-            //if ((stackRangeNumbers.IsVisible) && string.IsNullOrEmpty(entryStartNumber.Value))
-            //{
-            //    isValidate = false;
-            //    entryStartNumber.BorderColor = Color.Maroon;
-            //}
-            //if ((stackRangeNumbers.IsVisible) && string.IsNullOrEmpty(entryEndNumber.Value))
-            //{
-            //    isValidate = false;
-            //    entryEndNumber.BorderColor = Color.Maroon;
-            //}
+            if ((stackSingleNumber.IsVisible) && string.IsNullOrEmpty(entryNumber.Value))
+            {
+                isValidate = false;
+                entryNumber.BorderColor = Color.Maroon;
+            }
+            if ((stackRangeNumbers.IsVisible) && string.IsNullOrEmpty(entryStartNumber.Value))
+            {
+                isValidate = false;
+                entryStartNumber.BorderColor = Color.Maroon;
+            }
+            if ((stackRangeNumbers.IsVisible) && string.IsNullOrEmpty(entryEndNumber.Value))
+            {
+                isValidate = false;
+                entryEndNumber.BorderColor = Color.Maroon;
+            }
             return isValidate;
         }
     }

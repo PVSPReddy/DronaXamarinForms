@@ -103,43 +103,31 @@ namespace FireBaseTestPOC.Views
                 var owner = (Label)sender;
                 if (owner.Text == "+")
                 {
+                    //var trrtr = new CustomEntryGroup()
+                    //{
+                    //    //Style = (Style)Resources["entryStyles"],
+                    //    CustomPlaceholder = "Enter Number",
+                    //    CornerRadius = 10,
+                    //    CaptionFontSize = 12,
+                    //    BorderThickness = 2,
+                    //    EntryTextPadding = new Thickness(10, 0, 10, 0),
+                    //    CustomKeyboard = Keyboard.Numeric,
+                    //    CornerEdgeType = CornerEdgeStyle.Rounded,
+                    //    BackgroundColor = Color.Transparent,
+                    //    TextColor = Color.Blue,
+                    //    BorderColor = Color.Maroon,
+                    //    ShallAddBorder = true,
+                    //    CustomEntryBackGroundColor = Color.Teal,
+                    //    HorizontalOptions = LayoutOptions.FillAndExpand,
+                    //    VerticalOptions = LayoutOptions.CenterAndExpand,
+                    //};
                     var trrtr = new CustomEntryGroup()
                     {
-                        //Style = (Style)Resources["entryStyles"],
+                        Style = (Style)Resources["entryStyles"],
                         CustomPlaceholder = "Enter Number",
-                        CornerRadius = 10,
-                        CaptionFontSize = 12,
-                        CustomKeyboard = Keyboard.Numeric,
-                        CornerEdgeType = CornerEdgeStyle.Rounded,
-                        BackgroundColor = Color.Transparent,
-                        TextColor = Color.Blue,
-                        BorderColor = Color.Maroon,
-                        CustomEntryBackGroundColor = Color.Teal,
-                        HorizontalOptions = LayoutOptions.FillAndExpand,
-                        VerticalOptions = LayoutOptions.CenterAndExpand,
+                        CustomKeyboard = Keyboard.Numeric
                     };
-                    trrtr.OnCustomTextChanged += SumDigitsTextChangedEvents;
                     stackRequiredSum.Children.Add(trrtr);
-                    //Device.BeginInvokeOnMainThread(async () => 
-                    //{
-                    //    var trrtr = new CustomEntryGroup()
-                    //    {
-                    //        //Style = (Style)Resources["entryStyles"],
-                    //        CustomPlaceholder = "Enter Number",
-                    //        CornerRadius = 10,
-                    //        CaptionFontSize = 12,
-                    //        CustomKeyboard = Keyboard.Numeric,
-                    //        CornerEdgeType = CornerEdgeStyle.Rounded,
-                    //        BackgroundColor = Color.Transparent,
-                    //        TextColor = Color.Blue,
-                    //        BorderColor = Color.Maroon,
-                    //        CustomEntryBackGroundColor = Color.Teal,
-                    //        HorizontalOptions = LayoutOptions.FillAndExpand,
-                    //        VerticalOptions = LayoutOptions.CenterAndExpand,
-                    //    };
-                    //    trrtr.OnCustomTextChanged += SumDigitsTextChangedEvents;
-                    //    stackRequiredSum.Children.Add(trrtr);
-                    //});
                 }
                 else
                 {

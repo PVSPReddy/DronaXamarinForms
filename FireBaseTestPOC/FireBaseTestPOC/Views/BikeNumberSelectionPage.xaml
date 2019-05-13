@@ -16,7 +16,9 @@
             <Style x:Key="entryStyles" TargetType="CControls:CustomEntryGroup">
                 <Setter Property="CornerRadius" Value="10"/>
                 <Setter Property="CaptionFontSize" Value="12"/>
+                <Setter Property="BorderThickness" Value="2"/>
                 <Setter Property="CornerEdgeType" Value="Rounded"/>
+                <Setter Property="ShallAddBorder" Value="true"/>
                 <Setter Property="BackgroundColor" Value="Transparent"/>
                 <Setter Property="TextColor" Value="Blue"/>
                 <Setter Property="BorderColor" Value="Gray"/>
