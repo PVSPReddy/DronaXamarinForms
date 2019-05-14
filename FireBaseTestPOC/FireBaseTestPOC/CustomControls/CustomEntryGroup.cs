@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using FireBaseTestPOC.Helpers;
@@ -8,8 +9,6 @@ namespace FireBaseTestPOC.CustomControls
 {
     public class CustomEntryGroup : ContentView
     {
-        public event EventHandler<EventArgs> OnCustomTextChanged;
-
         #region for bindable properties
         #region for Advanced Types
         public Keyboard CustomKeyboard
@@ -272,16 +271,54 @@ namespace FireBaseTestPOC.CustomControls
             var ctrl = (CustomEntryGroup)bindable;
             ctrl.Value = newvalue;
         });
+        public object PickerValue
+        {
+            get
+            {
+                return (object)GetValue(PickerValueProperty);
+            }
+            set
+            {
+                SetValue(PickerValueProperty, value);
+            }
+        }
+        public static BindableProperty PickerValueProperty = BindableProperty.Create<CustomEntryGroup, object>(p => p.PickerValue, defaultValue: null, propertyChanging: (bindable, oldvalue, newvalue) =>
+        {
+            var ctrl = (CustomEntryGroup)bindable;
+            ctrl.PickerValue = newvalue;
+        });
         #endregion
 
+        #region for picker items source
+        public IList ItemsSource
+        {
+            get
+            {
+                return (IList)GetValue(ItemsSourceProperty);
+            }
+            set
+            {
+                SetValue(ItemsSourceProperty, value);
+            }
+        }
+        public static BindableProperty ItemsSourceProperty = BindableProperty.Create<CustomEntryGroup, IList>(p => p.ItemsSource, defaultValue: null, propertyChanging: (bindable, oldvalue, newvalue) =>
+        {
+            var ctrl = (CustomEntryGroup)bindable;
+            ctrl.ItemsSource = newvalue;
+        });
+        #endregion
         #endregion
 
         Label caption;
         CustomEntry entryField;
+        CustomPicker pickerField;
         StackLayout stackFieldsHolder;
         RoundEdgeStackLayout stackMainHolder;
 
         MainFieldType mainFieldType;
+
+        public event EventHandler<EventArgs> OnCustomTextChanged;
+        public event EventHandler<EventArgs> OnSelectedIndexChanged;
 
         public CustomEntryGroup(MainFieldType _mainFieldType)
         {
@@ -312,7 +349,6 @@ namespace FireBaseTestPOC.CustomControls
                 PlaceholderColor = CustomColors.PlaceholderColor,
                 BorderTypes = CustomEntry.BorderType.None,
                 HorizontalOptions = LayoutOptions.FillAndExpand,
-                //VerticalOptions = LayoutOptions.End
                 VerticalOptions = LayoutOptions.Center
             };
             entryField.SetBinding(Entry.TextProperty, "Value", BindingMode.TwoWay); //BindingMode.TwoWay, null, null);
@@ -322,6 +358,19 @@ namespace FireBaseTestPOC.CustomControls
             entryField.SetBinding(Entry.FontFamilyProperty, new Binding("CustomFontFamily"));
             entryField.SetBinding(Entry.KeyboardProperty, new Binding("CustomKeyboard"));
             entryField.TextChanged += OnEntryFieldTextChanged;
+
+            pickerField = new CustomPicker()
+            {
+                HorizontalOptions = LayoutOptions.FillAndExpand,
+                VerticalOptions = LayoutOptions.Center
+            };
+            //pickerField.ItemsSource = 
+            pickerField.SetBinding(Picker.TextColorProperty, new Binding("TextColor"));
+            pickerField.SetBinding(Picker.TitleProperty, new Binding("CustomPlaceholder"));
+            pickerField.SetBinding(Picker.FontSizeProperty, new Binding("CaptionFontSize"));
+            pickerField.SetBinding(Picker.FontFamilyProperty, new Binding("CustomFontFamily"));
+            pickerField.SetBinding(Picker.ItemsSourceProperty, new Binding("ItemsSource"));
+            pickerField.SelectedIndexChanged += OnItemSelected;
 
             stackFieldsHolder = new StackLayout()
             {
@@ -336,6 +385,9 @@ namespace FireBaseTestPOC.CustomControls
             {
                 case MainFieldType.EntryField :
                     stackFieldsHolder.Children.Add(entryField);
+                    break;
+                case MainFieldType.PickerField:
+                    stackFieldsHolder.Children.Add(pickerField);
                     break;
                 default :
                     break;
@@ -359,6 +411,28 @@ namespace FireBaseTestPOC.CustomControls
             stackMainHolder.SetBinding(RoundEdgeStackLayout.CornerRadiusProperty, new Binding("CornerRadius"));
 
             Content = stackMainHolder;
+        }
+
+        private void OnItemSelected(object sender, EventArgs e)
+        {
+            var owner = (CustomPicker)sender;
+            if (owner.SelectedIndex != -1)
+            {
+                if(string.IsNullOrEmpty(owner.SelectedItem.ToString()))
+                {
+                    caption.Opacity = 0;
+                }
+                else
+                {
+                    caption.Opacity = 1;
+                }
+                PickerValue = owner.SelectedItem;
+            }
+            EventHandler<EventArgs> handler = OnSelectedIndexChanged;
+            if (handler != null)
+            {
+                handler(this, e);
+            }
         }
 
         protected override void OnPropertyChanged([CallerMemberName] string propertyName = null)

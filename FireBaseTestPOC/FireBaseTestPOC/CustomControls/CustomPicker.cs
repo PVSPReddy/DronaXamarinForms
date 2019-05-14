@@ -19,19 +19,6 @@ namespace FireBaseTestPOC.CustomControls
             }
         }
 
-        public static readonly BindableProperty CustomFontFamilyProperty = BindableProperty.Create(propertyName: "CustomFontFamily", returnType: typeof(string), declaringType: typeof(CustomPicker), defaultValue: default(string));
-        public string CustomFontFamily
-        {
-            get
-            {
-                return (string)GetValue(CustomFontFamilyProperty);
-            }
-            set
-            {
-                SetValue(CustomFontFamilyProperty, value);
-            }
-        }
-
         public static readonly BindableProperty CustomFontSizeProperty = BindableProperty.Create(propertyName: "CustomFontSize", returnType: typeof(float), declaringType: typeof(CustomPicker), defaultValue: default(float));
         public float CustomFontSize
         {

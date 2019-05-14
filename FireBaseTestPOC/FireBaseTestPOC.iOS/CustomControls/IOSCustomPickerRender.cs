@@ -72,11 +72,11 @@ namespace FireBaseTestPOC.iOS.CustomControls
                         Control.AdjustsFontSizeToFitWidth = true;
                         Control.TintColor = UIColor.Black;
                         Control.AttributedPlaceholder = new Foundation.NSAttributedString(Control.AttributedPlaceholder.Value, foregroundColor: UIColor.Black);
-                        if (!(string.IsNullOrEmpty(element.CustomFontFamily)))
+                        if (!(string.IsNullOrEmpty(element.FontFamily)))
                         {
                             try
                             {
-                                Control.Font = UIFont.FromName(element.CustomFontFamily, 20.0f);
+                                Control.Font = UIFont.FromName(element.FontFamily, 20.0f);
                             }
                             catch (Exception ex)
                             {

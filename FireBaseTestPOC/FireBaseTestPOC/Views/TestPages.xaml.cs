@@ -30,6 +30,17 @@ namespace FireBaseTestPOC.Views
             entryNumber.OnCustomTextChanged += EntryCustomTextChangedEvent;
             //stackRangeNumbers.IsVisible = switchNumberRange.IsToggled;
             stackSumDigits.IsVisible = switchNumberRange.IsToggled;
+
+
+            //pickerNumber.ItemsSource = new List<int>()
+            //{
+            //    1,2,3,4,5,6,7,8,9,10
+            //};
+            pickerNumber.ItemsSource = new List<string>()
+            {
+                "","1","2","3","4","5","6","7","8","9","10"
+            };
+
         }
 
         private async void EntryCustomTextChangedEvent(object sender, EventArgs e)
