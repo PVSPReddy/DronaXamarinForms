@@ -72,7 +72,7 @@ namespace FireBaseTestPOC.Views
         {
             try
             {
-                var owner = (Switch)sender;
+                var owner = (CustomSwitchLabelGroup)sender;
                 if(owner == switchNumberRange)
                 {
                     stackSingleNumber.IsVisible = !owner.IsToggled;

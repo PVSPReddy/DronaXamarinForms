@@ -73,17 +73,32 @@ namespace FireBaseTestPOC.Views
         {
             try
             {
-                var owner = (Switch)sender;
+                var owner = (CustomSwitchLabelGroup)sender;
                 if (owner == switchNumberRange)
                 {
                     stackSingleNumber.IsVisible = !owner.IsToggled;
                     stackRangeNumbers.IsVisible = owner.IsToggled;
                     stackSumDigits.IsVisible = owner.IsToggled;
+                    if (!owner.IsToggled)
+                    {
+                        switchSumNumbers.IsToggled = owner.IsToggled;
+                        entryStartNumber.Value = string.Empty;
+                        entryEndNumber.Value = string.Empty;
+                    }
+                    else
+                    {
+                        entryNumber.Value = string.Empty;
+                    }
                 }
                 else if (owner == switchSumNumbers)
                 {
                     stackRequiredSum.IsVisible = owner.IsToggled;
                     stackAddRemoveButton.IsVisible = owner.IsToggled;
+                    if (!owner.IsToggled)
+                    {
+                        stackRequiredSum.Children.Clear();
+                        sumDigits.Clear();
+                    }
                 }
                 else
                 {
@@ -104,13 +119,21 @@ namespace FireBaseTestPOC.Views
                 var owner = (Label)sender;
                 if (owner.Text == "+")
                 {
-                    var trrtr = new CustomEntryGroup()
+                    if (stackRequiredSum.Children.Count < 9)
                     {
-                        Style = (Style)Resources["entryStyles"],
-                        CustomPlaceholder = "Enter Number",
-                        CustomKeyboard = Keyboard.Numeric
-                    };
-                    stackRequiredSum.Children.Add(trrtr);
+                        var entryLuckyNumber = new CustomEntryGroup()
+                        {
+                            Style = (Style)Resources["entryStyles"],
+                            CustomPlaceholder = "Enter Number",
+                            CustomKeyboard = Keyboard.Numeric
+                        };
+                        entryLuckyNumber.OnCustomTextChanged += SumDigitsTextChangedEvents;
+                        stackRequiredSum.Children.Add(entryLuckyNumber);
+                    }
+                    else
+                    {
+                        DisplayAlert("Alert", "Max limit Reached", "OK");
+                    }
                 }
                 else
                 {
@@ -119,15 +142,12 @@ namespace FireBaseTestPOC.Views
                         var child = (CustomEntryGroup)stackRequiredSum.Children[stackRequiredSum.Children.Count - 1];
                         if (child != null)
                         {
+                            stackRequiredSum.Children.RemoveAt(stackRequiredSum.Children.Count - 1);
                             if (sumDigits.Count > 0)
                             {
-                                if (!(sumDigits.Contains(Convert.ToInt32(child.Value))))
-                                {
-                                    sumDigits.Remove(Convert.ToInt32(child.Value));
-                                }
+                                UpdateLuckyNumbersList();
                             }
                         }
-                        stackRequiredSum.Children.RemoveAt(stackRequiredSum.Children.Count - 1);
                     }
                 }
             }
@@ -142,18 +162,30 @@ namespace FireBaseTestPOC.Views
         {
             try
             {
-                var owner = (CustomEntryGroup)sender;
-                if (sumDigits.Count == 0)
+                UpdateLuckyNumbersList();
+            }
+            catch (Exception ex)
+            {
+                var msg = ex.Message + "\n" + ex.StackTrace;
+                System.Diagnostics.Debug.WriteLine(msg);
+            }
+        }
+
+        public void UpdateLuckyNumbersList()
+        {
+            try
+            {
+                var luckyNumsHolders = stackRequiredSum.Children;
+                sumDigits.Clear();
+                foreach (var item in luckyNumsHolders)
                 {
-                    sumDigits.Add(Convert.ToInt32(owner.Value));
-                }
-                else
-                {
-                    if (!(sumDigits.Contains(Convert.ToInt32(owner.Value))))
+                    var owner = (CustomEntryGroup)item;
+                    if (!(string.IsNullOrEmpty(owner.Value)))
                     {
                         sumDigits.Add(Convert.ToInt32(owner.Value));
                     }
                 }
+
             }
             catch (Exception ex)
             {
@@ -176,15 +208,15 @@ namespace FireBaseTestPOC.Views
                         var endNum = Convert.ToInt32(entryEndNumber.Value);
                         var startNumber = (startNum < endNum) ? startNum : endNum;
                         var endNumber = (startNum < endNum) ? endNum : startNum;
-                        int[] _sumDigits = { 1, 2, 6 };//null;
-                        //if (sumDigits.Count > 0)
-                        //{
-                        //    _sumDigits = new int[sumDigits.Count];
-                        //    for (int i = 0; i < sumDigits.Count; i++)
-                        //    {
-                        //        _sumDigits[i] = sumDigits[i];
-                        //    }
-                        //}
+                        int[] _sumDigits = null;
+                        if (sumDigits.Count > 0)
+                        {
+                            _sumDigits = new int[sumDigits.Count];
+                            for (int i = 0; i < sumDigits.Count; i++)
+                            {
+                                _sumDigits[i] = sumDigits[i];
+                            }
+                        }
                         var numbersList = await bikeNumberSelector.GetNumbersList(startNumber, endNumber, _sumDigits, DigitsOrder.ExactAscendingWihAdjacentRepitition, false);
 
                         if (numbersList.Count > 0)
@@ -221,6 +253,11 @@ namespace FireBaseTestPOC.Views
                 isValidate = false;
                 entryEndNumber.BorderColor = Color.Maroon;
             }
+            //if ((stackSumDigits.IsVisible) && (entryEndNumber.Value))
+            //{
+            //    isValidate = false;
+            //    entryEndNumber.BorderColor = Color.Maroon;
+            //}
             return isValidate;
         }
     }

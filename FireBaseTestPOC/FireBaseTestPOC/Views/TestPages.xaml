@@ -17,6 +17,7 @@
                 <Setter Property="CornerRadius" Value="10"/>
                 <Setter Property="CaptionFontSize" Value="12"/>
                 <Setter Property="BorderThickness" Value="2"/>
+                <Setter Property="EntryTextPadding" Value="10,0,10,0"/>
                 <Setter Property="CornerEdgeType" Value="Rounded"/>
                 <Setter Property="ShallAddBorder" Value="true"/>
                 <Setter Property="BackgroundColor" Value="Transparent"/>
@@ -24,6 +25,13 @@
                 <Setter Property="BorderColor" Value="Gray"/>
                 <Setter Property="TextColor" Value="Blue"/>
                 <Setter Property="CustomEntryBackGroundColor" Value="Teal"/>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+            </Style>
+            <Style x:Key="customSwitchStyles" TargetType="CControls:CustomSwitchLabelGroup">
+                <Setter Property="CaptionFontSize" Value="16"/>
+                <Setter Property="BackgroundColor" Value="Transparent"/>
+                <Setter Property="TextColor" Value="Blue"/>
                 <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
                 <Setter Property="VerticalOptions" Value="Center"/>
             </Style>
@@ -54,14 +62,12 @@
                                 </Grid.ColumnDefinitions>
                                 
                                 <StackLayout Grid.Row="0" Grid.Column="0" HorizontalOptions="FillAndExpand" VerticalOptions="Center">
-                                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
-                                        <Label Text="Is required numbers b/w X and Y" HorizontalOptions="FillAndExpand" VerticalOptions="Center"></Label>
-                                        <Switch x:Name="switchNumberRange" HorizontalOptions="End" VerticalOptions="Center" Toggled="IsSwitchToggled"></Switch>
-                                    </StackLayout>
+                                    
+                                    <CControls:CustomSwitchLabelGroup x:Name="switchNumberRange" CustomPlaceholder="Is required numbers b/w X and Y" Style="{StaticResource customSwitchStyles}" Toggled="IsSwitchToggled"></CControls:CustomSwitchLabelGroup>
                                     
                                     <StackLayout x:Name="stackSingleNumber" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
                                         <Label x:Name="labelSingleNumberResult" HorizontalOptions="Fill" VerticalOptions="Center">
-                                            <!--Label.Text>
+                                            <!--<Label.Text>
                                                 Number : 0
 Sum : 0
                                             </Label.Text>-->
@@ -76,10 +82,8 @@ Sum : 0
                                 </StackLayout>
 
                                 <StackLayout x:Name="stackSumDigits" Grid.Row="1" Grid.Column="0" HorizontalOptions="FillAndExpand" VerticalOptions="Center">
-                                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
-                                        <Label Text="Toggle to select required sums of digits" HorizontalOptions="FillAndExpand" VerticalOptions="Center"></Label>
-                                        <Switch x:Name="switchSumNumbers" HorizontalOptions="End" VerticalOptions="Center" Toggled="IsSwitchToggled"></Switch>
-                                    </StackLayout>
+                                    
+                                    <CControls:CustomSwitchLabelGroup x:Name="switchSumNumbers" CustomPlaceholder="Toggle to select required sums of digits" Style="{StaticResource customSwitchStyles}" Toggled="IsSwitchToggled"></CControls:CustomSwitchLabelGroup>
                                     
                                     <StackLayout x:Name="stackRequiredSum" IsVisible="false" Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
                                     </StackLayout>
