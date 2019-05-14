@@ -492,14 +492,22 @@ namespace FireBaseTestPOC.CustomControls
                 {
                     while(!isValidText)
                     {
-                        //var regexString = @""+""+ "{0, "+AllowableTextLength+"}$";
-                        if (Regex.IsMatch(valueText, @"^[0-9]*$"))
+                        var regexString = @"^([0-9]{0," + AllowableTextLength + "})$"; //@"^([0-9]{0,4})$";//@"^("+"[0-9]"+ "{0, "+AllowableTextLength+"})$";
+                        //if (Regex.IsMatch(valueText, @"^[0-9]*$"))//[0-9]{0,4}
+                        if (Regex.IsMatch(valueText, regexString))
                         {
                             isValidText = true;
                         }
                         else
                         {
-                            valueText = valueText.Remove(valueText.Length - 1);
+                            if (valueText.Length > 0)
+                            {
+                                valueText = valueText.Remove(valueText.Length - 1);
+                            }
+                            else
+                            {
+                                isValidText = true;
+                            }
                         }
                     }
 
