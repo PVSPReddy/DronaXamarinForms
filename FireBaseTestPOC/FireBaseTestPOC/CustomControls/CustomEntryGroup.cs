@@ -281,7 +281,15 @@ namespace FireBaseTestPOC.CustomControls
         StackLayout stackFieldsHolder;
         RoundEdgeStackLayout stackMainHolder;
 
-        public CustomEntryGroup()
+        MainFieldType mainFieldType;
+
+        public CustomEntryGroup(MainFieldType _mainFieldType)
+        {
+            mainFieldType = _mainFieldType;
+            SetLayout(_mainFieldType);
+        }
+
+        public void SetLayout(MainFieldType _mainFieldType)
         {
             BindingContext = this;
 
@@ -307,7 +315,7 @@ namespace FireBaseTestPOC.CustomControls
                 //VerticalOptions = LayoutOptions.End
                 VerticalOptions = LayoutOptions.Center
             };
-            entryField.SetBinding(Entry.TextProperty, "Value", BindingMode.TwoWay ); //BindingMode.TwoWay, null, null);
+            entryField.SetBinding(Entry.TextProperty, "Value", BindingMode.TwoWay); //BindingMode.TwoWay, null, null);
             entryField.SetBinding(Entry.TextColorProperty, new Binding("TextColor"));
             entryField.SetBinding(Entry.PlaceholderColorProperty, new Binding("TextColor"));
             entryField.SetBinding(Entry.PlaceholderProperty, new Binding("CustomPlaceholder"));
@@ -317,12 +325,21 @@ namespace FireBaseTestPOC.CustomControls
 
             stackFieldsHolder = new StackLayout()
             {
-                Children = { caption, entryField },
+                Children = { caption },
                 Padding = new Thickness(2),
                 Margin = new Thickness(2),
                 HorizontalOptions = LayoutOptions.FillAndExpand,
                 VerticalOptions = LayoutOptions.FillAndExpand
             };
+
+            switch (_mainFieldType)
+            {
+                case MainFieldType.EntryField :
+                    stackFieldsHolder.Children.Add(entryField);
+                    break;
+                default :
+                    break;
+            }
 
             stackMainHolder = new RoundEdgeStackLayout()
             {
@@ -427,5 +444,9 @@ namespace FireBaseTestPOC.CustomControls
                 handler(this, e);
             }
         }
+    }
+    public enum MainFieldType
+    {
+        EntryField, PickerField
     }
 }

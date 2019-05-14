@@ -54,6 +54,7 @@
     <Compile Include="Services\AndroidFireBaseService.cs" />
     <Compile Include="CustomControls\AndroidRoundEdgeStackLayoutRender.cs" />
     <Compile Include="CustomControls\AndroidCustomEntryRender.cs" />
+    <Compile Include="CustomControls\AndroidCustomPickerRender.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

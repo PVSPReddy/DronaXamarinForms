@@ -120,7 +120,7 @@ namespace FireBaseTestPOC.Views
                 {
                     if (stackRequiredSum.Children.Count < 9)
                     {
-                        var entryLuckyNumber = new CustomEntryGroup()
+                        var entryLuckyNumber = new CustomEntryGroup(MainFieldType.EntryField)
                         {
                             Style = (Style)Resources["entryStyles"],
                             CustomPlaceholder = "Enter Number",

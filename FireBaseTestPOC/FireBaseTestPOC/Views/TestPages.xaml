@@ -72,12 +72,18 @@
 Sum : 0
                                             </Label.Text>-->
                                         </Label>
-                                        <CControls:CustomEntryGroup x:Name="entryNumber" CustomPlaceholder="Enter Number" Style="{StaticResource entryStyles}" CustomKeyboard="Numeric"></CControls:CustomEntryGroup>
+                                        <CControls:CustomEntryGroup x:Name="entryNumber" CustomPlaceholder="Enter Number" Style="{StaticResource entryStyles}" CustomKeyboard="Numeric">
+                                            <x:Arguments><CControls:MainFieldType>EntryField</CControls:MainFieldType></x:Arguments>
+                                        </CControls:CustomEntryGroup>
                                     </StackLayout>
                                     
                                     <StackLayout x:Name="stackRangeNumbers" Opacity="0" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
-                                        <CControls:CustomEntryGroup x:Name="entryStartNumber" CustomPlaceholder="Enter Start Number" Style="{StaticResource entryStyles}" CustomKeyboard="Numeric"></CControls:CustomEntryGroup>
-                                        <CControls:CustomEntryGroup x:Name="entryEndNumber" CustomPlaceholder="Enter End Number" Style="{StaticResource entryStyles}" CustomKeyboard="Numeric"></CControls:CustomEntryGroup>
+                                        <CControls:CustomEntryGroup x:Name="entryStartNumber" CustomPlaceholder="Enter Start Number" Style="{StaticResource entryStyles}" CustomKeyboard="Numeric">
+                                            <x:Arguments><CControls:MainFieldType>EntryField</CControls:MainFieldType></x:Arguments>
+                                        </CControls:CustomEntryGroup>
+                                        <CControls:CustomEntryGroup x:Name="entryEndNumber" CustomPlaceholder="Enter End Number" Style="{StaticResource entryStyles}" CustomKeyboard="Numeric">
+                                            <x:Arguments><CControls:MainFieldType>EntryField</CControls:MainFieldType></x:Arguments>
+                                        </CControls:CustomEntryGroup>
                                     </StackLayout>
                                 </StackLayout>
 

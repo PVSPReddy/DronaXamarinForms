@@ -99,6 +99,7 @@
     <Compile Include="CustomControls\IOSPageOrientationRender.cs" />
     <Compile Include="CustomControls\IOSRoundEdgeStackLayoutRender.cs" />
     <Compile Include="CustomControls\IOSCustomEntryRender.cs" />
+    <Compile Include="CustomControls\IOSCustomPickerRender.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
