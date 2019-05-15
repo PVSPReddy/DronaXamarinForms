@@ -124,7 +124,9 @@ namespace FireBaseTestPOC.Views
                         {
                             Style = (Style)Resources["entryStyles"],
                             CustomPlaceholder = "Enter Number",
-                            CustomKeyboard = Keyboard.Numeric
+                            CustomKeyboard = Keyboard.Numeric,
+                            AllowableTextLength = 1,
+                            RegexValidatorString = "([0-9]{0,1})",
                         };
                         entryLuckyNumber.OnCustomTextChanged += SumDigitsTextChangedEvents;
                         stackRequiredSum.Children.Add(entryLuckyNumber);

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using FireBaseTestPOC.Helpers;
 using Xamarin.Forms;
 
@@ -26,6 +27,23 @@ namespace FireBaseTestPOC.CustomControls
         {
             var ctrl = (CustomEntryGroup)bindable;
             ctrl.CustomKeyboard = newvalue;
+        });
+
+        public string RegexValidatorString
+        {
+            get
+            {
+                return (string)GetValue(RegexValidatorStringProperty);
+            }
+            set
+            {
+                SetValue(RegexValidatorStringProperty, value);
+            }
+        }
+        public static BindableProperty RegexValidatorStringProperty = BindableProperty.Create<CustomEntryGroup, string>(p => p.RegexValidatorString, defaultValue: "(.*)", propertyChanging: (bindable, oldvalue, newvalue) =>
+        {
+            var ctrl = (CustomEntryGroup)bindable;
+            ctrl.RegexValidatorString = newvalue;
         });
         #endregion
 
@@ -443,40 +461,6 @@ namespace FireBaseTestPOC.CustomControls
                 //stackFieldsHolder.Padding = EntryTextPadding;//new Thickness(10, 0, 10, 0);
                 stackMainHolder.Padding = new Thickness(10, 0, 10, 0);//EntryTextPadding;//new Thickness(10, 0, 10, 0);
             }
-
-            /*
-            if(propertyName == "CornerEdgeType")
-            {
-                //if(CornerEdgeType == CornerEdgeStyle.None)
-                //{
-                //}
-                //else if(CornerEdgeType == CornerEdgeStyle.Rounded)
-                //{
-                //    stackFieldsHolder.SetBinding(RoundEdgeStackLayout.StartColorProperty, new Binding("CustomEntryBackGroundColor"));
-                //    stackFieldsHolder.SetBinding(RoundEdgeStackLayout.EndColorProperty, new Binding("CustomEntryBackGroundColor"));
-                //    stackFieldsHolder.SetBinding(RoundEdgeStackLayout.HasBorderColorProperty, new Binding("ShallAddBorder"));
-                //    stackFieldsHolder.SetBinding(RoundEdgeStackLayout.CornerRadiusProperty, new Binding("CornerRadius"));
-
-
-                //    ////stackFieldsHolder.SetBinding(RoundEdgeStackLayout.BackgroundColorProperty, new Binding("BorderColor"));
-                //    //stackFieldsHolder.SetBinding(RoundEdgeStackLayout.StartColorProperty, new Binding("BorderColor"));
-                //    //stackFieldsHolder.SetBinding(RoundEdgeStackLayout.EndColorProperty, new Binding("BorderColor"));
-                //    //stackFieldsHolder.SetBinding(RoundEdgeStackLayout.HasBorderColorProperty, new Binding("ShallAddBorder"));
-                //    ////stackFieldsHolder.SetBinding(RoundEdgeStackLayout., new Binding("BorderColor"));
-                //    ////stackFieldsHolder.SetBinding(RoundEdgeStackLayout.CornerRadiusProperty, new Binding("BorderColor"));
-                //    //stackFieldsHolder.SetBinding(RoundEdgeStackLayout.CornerRadiusProperty, new Binding("CornerRadius"));
-
-
-                //    //stackMainHolder.SetBinding(RoundEdgeStackLayout.BackgroundColorProperty, new Binding("BorderColor"));
-                //    stackMainHolder.SetBinding(RoundEdgeStackLayout.StartColorProperty, new Binding("BorderColor"));
-                //    stackMainHolder.SetBinding(RoundEdgeStackLayout.EndColorProperty, new Binding("BorderColor"));
-                //    stackMainHolder.SetBinding(RoundEdgeStackLayout.HasBorderColorProperty, new Binding("ShallAddBorder"));
-                //    //stackMainHolder.SetBinding(RoundEdgeStackLayout., new Binding("BorderColor"));
-                //    //stackMainHolder.SetBinding(RoundEdgeStackLayout.CornerRadiusProperty, new Binding("BorderColor"));
-                //    stackMainHolder.SetBinding(RoundEdgeStackLayout.CornerRadiusProperty, new Binding("CornerRadius"));
-                //}
-            }
-            */
         }
 
         private void OnEntryFieldTextChanged(object sender, TextChangedEventArgs e)
@@ -488,29 +472,26 @@ namespace FireBaseTestPOC.CustomControls
                 //caption.IsVisible = true;
                 caption.Opacity = 1;
                 bool isValidText = false;
-                if(owner.Keyboard == Keyboard.Numeric)
+                while (!isValidText)
                 {
-                    while(!isValidText)
+                    var regexString = @"^" + RegexValidatorString + "$";
+                    //var regexString = @"^([0-9]{0," + AllowableTextLength + "})$"; //@"^([0-9]{0,4})$";//@"^("+"[0-9]"+ "{0, "+AllowableTextLength+"})$";
+                    //if (Regex.IsMatch(valueText, @"^[0-9]*$"))//[0-9]{0,4}
+                    if (Regex.IsMatch(valueText, regexString))
                     {
-                        var regexString = @"^([0-9]{0," + AllowableTextLength + "})$"; //@"^([0-9]{0,4})$";//@"^("+"[0-9]"+ "{0, "+AllowableTextLength+"})$";
-                        //if (Regex.IsMatch(valueText, @"^[0-9]*$"))//[0-9]{0,4}
-                        if (Regex.IsMatch(valueText, regexString))
+                        isValidText = true;
+                    }
+                    else
+                    {
+                        if (valueText.Length > 0)
                         {
-                            isValidText = true;
+                            valueText = valueText.Remove(valueText.Length - 1);
                         }
                         else
                         {
-                            if (valueText.Length > 0)
-                            {
-                                valueText = valueText.Remove(valueText.Length - 1);
-                            }
-                            else
-                            {
-                                isValidText = true;
-                            }
+                            isValidText = true;
                         }
                     }
-
                 }
             }
             else
@@ -525,6 +506,27 @@ namespace FireBaseTestPOC.CustomControls
             {
                 handler(this, e);
             }
+        }
+
+        public async Task<bool> Validate( string textValue = "", string _regexValidatorString = "(.*)")
+        {
+            bool isValid = false;
+            try
+            {
+                var regexString = @"^" + _regexValidatorString + "$";
+                if (Regex.IsMatch(textValue, regexString))
+                {
+                    isValid = true;
+                }
+                else
+                {
+                }
+            }
+            catch (Exception ex)
+            {
+                var msg = ex.Message + "\n" + ex.StackTrace;
+            }
+            return isValid;
         }
     }
     public enum MainFieldType

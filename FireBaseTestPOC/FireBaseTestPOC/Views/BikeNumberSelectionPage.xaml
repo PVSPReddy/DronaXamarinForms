@@ -23,6 +23,7 @@
                 <Setter Property="BackgroundColor" Value="Transparent"/>
                 <Setter Property="TextColor" Value="Blue"/>
                 <Setter Property="BorderColor" Value="Gray"/>
+                <Setter Property="RegexValidatorString" Value="([0-9]{0,4})"/>
                 <Setter Property="TextColor" Value="Blue"/>
                 <Setter Property="CustomEntryBackGroundColor" Value="Teal"/>
                 <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
