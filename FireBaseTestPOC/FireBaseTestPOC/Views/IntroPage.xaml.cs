@@ -20,8 +20,9 @@ namespace FireBaseTestPOC.Views
             {
                 //Navigation.PushModalAsync(new DynamicGridPage());
                 //DependencyService.Get<IFireBaseService>().GetAllImageUrlsFromServer();
-                Navigation.PushModalAsync(new BikeNumberSelectionPage());
+                //Navigation.PushModalAsync(new BikeNumberSelectionPage());
                 //Navigation.PushModalAsync(new TestPages());
+                Navigation.PushModalAsync(new TestPageTwo());
             }
             catch (Exception ex)
             {

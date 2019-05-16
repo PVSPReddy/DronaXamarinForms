@@ -77,11 +77,11 @@ namespace FireBaseTestPOC.Droid.CustomControls
                         {
                             Control.SetTextSize(ComplexUnitType.Dip, element.CustomFontSize);
                         }
-                        if (!(string.IsNullOrEmpty(element.CustomFontFamily)))
+                        if (!(string.IsNullOrEmpty(element.FontFamily)))
                         {
                             try
                             {
-                                Graphicss.Typeface font = Graphicss.Typeface.CreateFromAsset(Forms.Context.Assets, element.CustomFontFamily);
+                                Graphicss.Typeface font = Graphicss.Typeface.CreateFromAsset(Forms.Context.Assets, element.FontFamily);
                                 Control.Typeface = font;
                             }
                             catch (Exception ex)

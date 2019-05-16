@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    xmlns:CControls="clr-namespace:FireBaseTestPOC.CustomControls;assembly=FireBaseTestPOC"
+    x:Class="FireBaseTestPOC.Views.TestPageTwo">
+    
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness">
+            <On Platform="iOS" Value="0,20,0,0"/>
+        </OnPlatform>
+    </ContentPage.Padding>
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="entryStyles" TargetType="CControls:CustomEntryGroup">
+                <Setter Property="CornerRadius" Value="10"/>
+                <Setter Property="CaptionFontSize" Value="12"/>
+                <Setter Property="BorderThickness" Value="2"/>
+                <Setter Property="EntryTextPadding" Value="10,0,10,0"/>
+                <Setter Property="CornerEdgeType" Value="Rounded"/>
+                <Setter Property="ShallAddBorder" Value="true"/>
+                <Setter Property="BackgroundColor" Value="Transparent"/>
+                <Setter Property="TextColor" Value="Blue"/>
+                <Setter Property="BorderColor" Value="Gray"/>
+                <Setter Property="TextColor" Value="Blue"/>
+                <Setter Property="CustomEntryBackGroundColor" Value="Teal"/>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+            </Style>
+            <Style x:Key="customSwitchStyles" TargetType="CControls:CustomSwitchLabelGroup">
+                <Setter Property="CaptionFontSize" Value="16"/>
+                <Setter Property="BackgroundColor" Value="Transparent"/>
+                <Setter Property="TextColor" Value="Blue"/>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <ContentPage.Content>
+        
+        <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            
+            <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,0.1" AbsoluteLayout.LayoutFlags="All" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <Button x:Name="Back" Text="&lt; Back" HorizontalOptions="Start" VerticalOptions="FillAndExpand" Clicked="BackButonClicked"></Button> 
+            </StackLayout>
+            
+            <StackLayout AbsoluteLayout.LayoutBounds="1,1,1,0.9" AbsoluteLayout.LayoutFlags="All" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    <ScrollView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                        <StackLayout Padding="20,0,20,0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                            <Image x:Name="obtainedImage" HorizontalOptions="Center" VerticalOptions="Center"></Image>
+                            <Button Text="Gallery" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Clicked="DoneButtonClicked"></Button>
+                        </StackLayout>
+                    </ScrollView>
+                    
+                    <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="End">
+                        <Button Text="Done" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Clicked="DoneButtonClicked"></Button>
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+            
+            <StackLayout x:Name="popUpHolder" IsVisible="false" AbsoluteLayout.LayoutBounds="1,1,1,0.9" AbsoluteLayout.LayoutFlags="All" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <StackLayout BackgroundColor="#40000000" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    <StackLayout BackgroundColor="White" HeightRequest="100" WidthRequest="100" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                        <ActivityIndicator BindingContext="{x:Reference popUpHolder}" IsEnabled="{Binding IsVisible}" IsRunning="{Binding IsVisible}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"></ActivityIndicator>
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+            
+        </AbsoluteLayout>
+        
+    </ContentPage.Content>
+</ContentPage>

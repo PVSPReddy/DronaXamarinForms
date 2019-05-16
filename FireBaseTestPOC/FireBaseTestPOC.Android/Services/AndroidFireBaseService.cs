@@ -34,6 +34,7 @@ namespace FireBaseTestPOC.Droid.Services
         public async Task<string> GetAllImageUrlsFromServer()
         {
             string response = "";
+            /*
             try
             {
                 Firebase.FirebaseApp fireBaseApp = Firebase.FirebaseApp.Instance;
@@ -49,6 +50,27 @@ namespace FireBaseTestPOC.Droid.Services
                 //return imgurl;
             }
             catch(Exception ex)
+            {
+                var msg = ex.Message + "\n" + ex.StackTrace;
+                System.Diagnostics.Debug.WriteLine(msg);
+            }
+            */
+            try
+            {
+                Firebase.FirebaseApp fireBaseApp = Firebase.FirebaseApp.Instance;
+                //FirebaseStorage storageImage = FirebaseStorage.GetInstance(fireBaseApp, "gs://mytestfirebproj.appspot.com");
+                var storageImage = FirebaseStorage.GetInstance(fireBaseApp, "gs://mytestfirebproj.appspot.com").Reference.Child("FireBaseTestImageOne");
+                //storageImage.Reference.Child()
+                ////Firebase.FirebaseApp fireBaseApp = Firebase.FirebaseApp.Instance;
+                ////FirebaseStorage storage = FirebaseStorage.GetInstance(fireBaseApp);
+                //var stroageImage = await new FirebaseStorage("xamarinfirebase-d3352.appspot.com")  
+                //.Child("XamarinMonkeys")  
+                //.Child("image.jpg")  
+                //.PutAsync(imageStream);
+                //string imgurl = stroageImage; 
+                //return imgurl;
+            }
+            catch (Exception ex)
             {
                 var msg = ex.Message + "\n" + ex.StackTrace;
                 System.Diagnostics.Debug.WriteLine(msg);
