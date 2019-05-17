@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
@@ -39,13 +40,32 @@ namespace FireBaseTestPOC.Droid.Services
         //    PictureActionCompleted(this, args);
         //}
 
+        public AndroidCameraGalleryService()
+        {
+            try
+            {
+                MessagingCenter.Subscribe<MediaActivity, string>(this, "fileURL", (MediaActivity arg1, string arg2) =>
+                {
+                    PictureActionArgs args = new PictureActionArgs()
+                    {
+                        LocalPictureURL = arg2
+                    };
+                    PictureActionCompleted(this, args);
+                });
+            }
+            catch(Exception ex)
+            {
+                var msg = ex.Message + "\n" + ex.StackTrace;
+                System.Diagnostics.Debug.WriteLine(msg);
+            }
+        }
+
         public void CapturePicture()
         {
             var activity = Forms.Context as Activity;
 
             try
             {
-                //pictureService = this;
                 var isCameraAvailable = activity.PackageManager.HasSystemFeature(PackageManager.FeatureCamera);//use the Android.Content.PM
                 if (isCameraAvailable)
                 {
@@ -55,6 +75,8 @@ namespace FireBaseTestPOC.Droid.Services
                     }
                     try
                     {
+                        List<object> objectList = new List<object>();
+                        objectList.Add(PictureActionCompleted);
                         var intent = new Intent(activity, typeof(MediaActivity));
                         intent.PutExtra("id", 1);
                         activity.StartActivity(intent);
@@ -73,11 +95,6 @@ namespace FireBaseTestPOC.Droid.Services
             }
         }
 
-        //public Task<ForLargeImages> CapturePictureDroid(MyTrailCameraOne mtco)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
         public void SelectImage()
         {
             var activity = Forms.Context as Activity;
@@ -85,7 +102,7 @@ namespace FireBaseTestPOC.Droid.Services
             {
                 var intent = new Intent(activity, typeof(MediaActivity));
                 intent.PutExtra("id", 2);
-                activity.StartActivity(intent);
+                activity.StartActivityForResult(intent, 2);
             }
             catch (Exception ex)
             {
@@ -107,13 +124,7 @@ namespace FireBaseTestPOC.Droid.Services
                 var msg = ex.Message;
             }
         }
-
-        //public Task<ForLargeImages> SelectImageDroid(MyTrailCameraOne mtco)
-        //{
-        //    throw new NotImplementedException();
-        //}
     }
-
 
     [Activity(Label = "MediaActivity")]
     public class MediaActivity : Activity
@@ -172,12 +183,7 @@ namespace FireBaseTestPOC.Droid.Services
                         {
                             var uri1 = data.Data;
                             uuuri = await getRealPathFromURI(this, uri1);
-                            PictureActionArgs args = new PictureActionArgs()
-                            {
-                                LocalPictureURL = uuuri
-                            };
-                            //XamCustomImage.xamCustomImage.SetImage(uuuri);
-                            PictureActionCompleted(this, args);
+                            //MessagingCenter.Send<MediaActivity, string>(this, "fileURL", uuuri);
                         }
                         catch (Exception ex)
                         {
@@ -239,21 +245,7 @@ namespace FireBaseTestPOC.Droid.Services
                     var filedone = resizedImage.Compress(Bitmap.CompressFormat.Jpeg, 90, stream);
                     try
                     {
-                        PictureActionArgs args = new PictureActionArgs()
-                        {
-                            LocalPictureURL = _uuuri
-                        };
-                        //XamCustomImage.xamCustomImage.SetImage(_uuuri);
-                        PictureActionCompleted(this, args);
-
-                        /*
-                        PictureActionArgs args = new PictureActionArgs()
-                        {
-                            LocalPictureURL = uuuri
-                        };
-                        XamCustomImage.xamCustomImage.SetImage(uuuri);
-                        //PictureActionCompleted(this, args);
-                        */
+                        MessagingCenter.Send<MediaActivity, string>(this, "fileURL", _uuuri);
                     }
                     catch (Exception ex)
                     {
@@ -286,7 +278,6 @@ namespace FireBaseTestPOC.Droid.Services
             int inSampleSize = 1;
             if (height > reqHeight || width > reqWidth)
             {
-
                 int halfHeight = height / 2;
                 int halfWidth = width / 2;
 
@@ -295,7 +286,6 @@ namespace FireBaseTestPOC.Droid.Services
                     inSampleSize *= 2;
                 }
             }
-
             return inSampleSize;
         }
 

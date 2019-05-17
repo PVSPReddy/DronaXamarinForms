@@ -7,6 +7,7 @@ namespace FireBaseTestPOC.Views
 {
     public partial class TestPageTwo : ContentPage
     {
+        string url = "";
         public TestPageTwo()
         {
             InitializeComponent();//FireBaseTestImageOne.png
@@ -22,11 +23,13 @@ namespace FireBaseTestPOC.Views
                 }
                 try
                 {
-                    obtainedImage.Source = new UriImageSource()
-                    {
-                        CachingEnabled = false,
-                        Uri = new Uri(e.LocalPictureURL)
-                    };
+                    //obtainedImage.Source = new UriImageSource()
+                    //{
+                    //    CachingEnabled = false,
+                    //    Uri = new Uri(e.LocalPictureURL)
+                    //};
+                    obtainedImage.Source = ImageSource.FromFile(e.LocalPictureURL);//FromUri(e.LocalPictureURL)
+                    url = e.LocalPictureURL;
                 }
                 catch (Exception ex)
                 {
@@ -56,7 +59,14 @@ namespace FireBaseTestPOC.Views
                 switch (owner.Text)
                 {
                     case "Done":
-                        await DependencyService.Get<IFireBaseService>().GetAllImageUrlsFromServer();
+                        if (!(string.IsNullOrEmpty(url)))
+                        {
+                            await DependencyService.Get<IFireBaseService>().GetAllImageUrlsFromServer(url);
+                        }
+                        else
+                        {
+
+                        }
                         break;
                     case "Gallery":
                         DependencyService.Get<ICameraGalleryService>().SelectImage();

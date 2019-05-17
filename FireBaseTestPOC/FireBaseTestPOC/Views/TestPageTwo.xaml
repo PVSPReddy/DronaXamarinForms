@@ -50,7 +50,7 @@
                 <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                     <ScrollView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                         <StackLayout Padding="20,0,20,0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                            <Image x:Name="obtainedImage" HorizontalOptions="Center" VerticalOptions="Center"></Image>
+                            <Image x:Name="obtainedImage" HeightRequest="200" WidthRequest="200" HorizontalOptions="Center" VerticalOptions="Center"></Image>
                             <Button Text="Gallery" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Clicked="DoneButtonClicked"></Button>
                         </StackLayout>
                     </ScrollView>

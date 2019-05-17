@@ -56,6 +56,7 @@
     <Compile Include="CustomControls\AndroidCustomEntryRender.cs" />
     <Compile Include="CustomControls\AndroidCustomPickerRender.cs" />
     <Compile Include="Services\AndroidCameraGalleryService.cs" />
+    <Compile Include="Services\AndroidConversionService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

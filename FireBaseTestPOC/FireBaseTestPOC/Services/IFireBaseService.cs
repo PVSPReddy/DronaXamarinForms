@@ -8,5 +8,7 @@ namespace FireBaseTestPOC.Services
         Task<bool> CreateFireBaseInstance();
 
         Task<string> GetAllImageUrlsFromServer();
+
+        Task<string> GetAllImageUrlsFromServer(string fileURL);
     }
 }
