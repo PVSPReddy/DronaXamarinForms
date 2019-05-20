@@ -58,15 +58,28 @@ namespace FireBaseTestPOC.Views
                 var owner = (Button)sender;
                 switch (owner.Text)
                 {
-                    case "Done":
+                    case "Upload":
                         if (!(string.IsNullOrEmpty(url)))
                         {
-                            await DependencyService.Get<IFireBaseService>().GetAllImageUrlsFromServer(url);
+                            await DependencyService.Get<IFireBaseService>().UploadAnImageToFireBase(url, "", "TemporaryTestFiles/");
                         }
                         else
                         {
 
                         }
+                        break;
+                    case "Download":
+                        var _url = "TemporaryTestFiles/TestFileOne.jpg";
+                        await DependencyService.Get<IFireBaseService>().GetAllImageUrlsFromServer(_url);
+                        break;
+                    case "Done":
+                        //if (!(string.IsNullOrEmpty(url)))
+                        //{
+                        //    await DependencyService.Get<IFireBaseService>().UploadAnImageToFireBase(url, "", "TemporaryTestFiles/");
+                        //}
+                        //else
+                        //{
+                        //}
                         break;
                     case "Gallery":
                         DependencyService.Get<ICameraGalleryService>().SelectImage();

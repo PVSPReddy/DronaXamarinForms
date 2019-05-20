@@ -9,6 +9,8 @@ namespace FireBaseTestPOC.Services
 
         Task<string> GetAllImageUrlsFromServer();
 
-        Task<string> GetAllImageUrlsFromServer(string fileURL);
+        Task<string> GetAllImageUrlsFromServer(string fileURL, string fileNameWithOutExtension = "");
+
+        Task<string> UploadAnImageToFireBase(string fileURL, string fileNameWithOutExtension = "", string folderStructureName = "");
     }
 }

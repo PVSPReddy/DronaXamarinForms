@@ -28,6 +28,31 @@ namespace FireBaseTestPOC.Droid.Services
             }
             return streamResponse;
         }
+
+        public async Task<byte[]> GetBytesFromStream(Stream streamData)
+        {
+            byte[] byteResponse = null;
+            Stream streamResponse = new MemoryStream();
+            try
+            {
+                byte[] buffer = new byte[16 * 1024];
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    int read;
+                    while ((read = streamData.Read(buffer, 0, buffer.Length)) > 0)
+                    {
+                        ms.Write(buffer, 0, read);
+                    }
+                    return ms.ToArray();
+                }
+            }
+            catch (Exception ex)
+            {
+                var msg = ex.Message + "\n" + ex.StackTrace;
+                System.Diagnostics.Debug.WriteLine(msg);
+            }
+            return byteResponse;
+        }
     }
 }
 

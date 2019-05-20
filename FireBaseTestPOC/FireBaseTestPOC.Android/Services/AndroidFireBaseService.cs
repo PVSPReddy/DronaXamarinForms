@@ -2,6 +2,7 @@
 using System.IO;
 using System.Threading.Tasks;
 using Android.App;
+using Android.Gms.Tasks;
 using Android.Support.V7.App;
 using Firebase.Storage;
 using FireBaseTestPOC.Droid.Services;
@@ -32,26 +33,86 @@ namespace FireBaseTestPOC.Droid.Services
             return response;
         }
 
-        public async Task<string> GetAllImageUrlsFromServer(string fileURL)
+
+        #region to send a single photo to server
+        public async Task<string> UploadAnImageToFireBase(string fileURL, string fileNameWithOutExtension = "", string folderStructureName = "")
         {
             string response = "";
             try
             {
                 Stream streamResponse = new MemoryStream();
-                AndroidConversionService androidConversionService = new AndroidConversionService();
-                //var streamResponse = await androidConversionService.GetStreamFromLocalFileURL(fileURL);
-                Firebase.FirebaseApp fireBaseApp = Firebase.FirebaseApp.Instance;
-                //var storageImage = FirebaseStorage.GetInstance(fireBaseApp, "gs://mytestfirebproj.appspot.com").Reference.Child("TemporaryTestFiles").Child("TestFileOne").PutStream(streamResponse);
                 FileStream fs = new FileStream(fileURL, FileMode.Open, FileAccess.Read);
+
                 using (System.IO.Stream stream = new FileStream(fileURL, FileMode.Open, FileAccess.Read))
                 {
                     streamResponse = stream;
+                    var firebaseStorageReference = FirebaseStorage.GetInstance("gs://mytestfirebproj.appspot.com").Reference;
+                    StorageReference storageFilesReference;
+                    if (string.IsNullOrEmpty(fileNameWithOutExtension))
+                    {
+                        string fileNameWithExtension = Path.GetFileName(fileURL);
+                        storageFilesReference = firebaseStorageReference.Child(folderStructureName + fileNameWithExtension);// ("TemporaryTestFiles/" + fileNameWithExtension);
+                    }
+                    else
+                    {
+                        string fileExtension = Path.GetExtension(fileURL);
+                        storageFilesReference = firebaseStorageReference.Child(folderStructureName + fileNameWithOutExtension + fileExtension);// ("TemporaryTestFiles/" + fileNameWithOutExtension + fileExtension);
+                    }
+                    AndroidConversionService androidConversionService = new AndroidConversionService();
+                    var urlBytes = await androidConversionService.GetBytesFromStream(streamResponse);
+                    if (urlBytes != null)
+                    {
+                        UploadTask uploadTask = storageFilesReference.PutBytes(urlBytes);
+                        //uploadTask.AddOnCompleteListener()
+                    }
                 }
-                //var storageImage = FirebaseStorage.GetInstance(fireBaseApp, "gs://mytestfirebproj.appspot.com").Reference.Child("TemporaryTestFiles").Child("TestFileOne.jpg").PutStream(streamResponse);
-                var storageImage = FirebaseStorage.GetInstance(fireBaseApp, "gs://mytestfirebproj.appspot.com").Reference.Child("TemporaryTestFiles").Child("TestFileOne.jpg");
-                var cre = storageImage.PutStream(streamResponse);
-                //var rer = new FirebaseStorage("");
-                //await Task.Delay(12000);
+            }
+            catch (Exception ex)
+            {
+                var msg = ex.Message + "\n" + ex.StackTrace;
+                System.Diagnostics.Debug.WriteLine(msg);
+            }
+            return response;
+        }
+        #endregion
+
+
+        public async Task<string> GetAllImageUrlsFromServer(string fileURL, string fileNameWithOutExtension = "")
+        {
+            string response = "";
+            try
+            {
+                var firebaseStorageReference = FirebaseStorage.GetInstance("gs://mytestfirebproj.appspot.com").Reference;
+                /*
+                // Create a storage reference from our app
+                StorageReference storageRef = storage.getReference();
+
+                // Create a reference with an initial file path and name
+                StorageReference pathReference = storageRef.child("images/stars.jpg");
+
+                // Create a reference to a file from a Google Cloud Storage URI
+                StorageReference gsReference = storage.getReferenceFromUrl("gs://bucket/images/stars.jpg");
+
+                // Create a reference from an HTTPS URL
+                // Note that in the URL, characters are URL escaped!
+                StorageReference httpsReference = storage.getReferenceFromUrl("https://firebasestorage.googleapis.com/b/bucket/o/images%20stars.jpg");
+                */
+                StorageReference storageFilesReference;
+                storageFilesReference = firebaseStorageReference.Child(fileURL);
+
+                //storageFilesReference.DownloadUrl.AddOnCompleteListener()
+                //storageFilesReference.GetBytes(1024 * 1024);
+
+                var fileURl = storageFilesReference.DownloadUrl;
+                //var file = storageFilesReference.GetFile(new Android.Net.Uri());
+                //var uro = new Android.Net.Uri();
+
+                //File localFile = new File.Create("");
+
+                //var file;
+
+
+
             }
             catch (Exception ex)
             {
