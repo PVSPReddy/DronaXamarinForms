@@ -7,7 +7,7 @@ namespace FireBaseTestPOC.Views
 {
     public partial class TestPageTwo : ContentPage
     {
-        string url = "";
+        string localFileURL = "";
         public TestPageTwo()
         {
             InitializeComponent();//FireBaseTestImageOne.png
@@ -23,13 +23,36 @@ namespace FireBaseTestPOC.Views
                 }
                 try
                 {
-                    //obtainedImage.Source = new UriImageSource()
-                    //{
-                    //    CachingEnabled = false,
-                    //    Uri = new Uri(e.LocalPictureURL)
-                    //};
                     obtainedImage.Source = ImageSource.FromFile(e.LocalPictureURL);//FromUri(e.LocalPictureURL)
-                    url = e.LocalPictureURL;
+                    localFileURL = e.LocalPictureURL;
+                }
+                catch (Exception ex)
+                {
+                    var msg = ex.Message;
+                }
+            };
+            DependencyService.Get<IFireBaseService>().FirebaseActionCompleted += (object sender, IFireBaseStorageActionArgs e) =>
+            {
+                try
+                {
+                    System.Diagnostics.Debug.WriteLine(e.LocalPictureURL);
+                }
+                catch (Exception ex)
+                {
+                    var msg = ex.Message;
+                }
+                try
+                {
+                    if (e.ReturnType == FirebaseReturnType.StringURL)
+                    {
+                        var timeStamp = DateTime.Today.Ticks;
+                        var imageURL = e.LocalPictureURL + "&timeStamp=" + timeStamp;
+                        obtainedImage.Source = new UriImageSource()
+                        {
+                            CachingEnabled = false,
+                            Uri = new Uri(imageURL)
+                        };
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -59,9 +82,9 @@ namespace FireBaseTestPOC.Views
                 switch (owner.Text)
                 {
                     case "Upload":
-                        if (!(string.IsNullOrEmpty(url)))
+                        if (!(string.IsNullOrEmpty(localFileURL)))
                         {
-                            await DependencyService.Get<IFireBaseService>().UploadAnImageToFireBase(url, "", "TemporaryTestFiles/");
+                            await DependencyService.Get<IFireBaseService>().UploadAnImageToFireBase(localFileURL, "", "TemporaryTestFiles/");
                         }
                         else
                         {
