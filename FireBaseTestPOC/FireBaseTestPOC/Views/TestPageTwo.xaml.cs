@@ -104,6 +104,9 @@ namespace FireBaseTestPOC.Views
                         //{
                         //}
                         break;
+                    case "Access DB":
+                        await DependencyService.Get<IFirebaseDatabaseService>().SetDataToDB();
+                        break;
                     case "Gallery":
                         DependencyService.Get<ICameraGalleryService>().SelectImage();
                         break;

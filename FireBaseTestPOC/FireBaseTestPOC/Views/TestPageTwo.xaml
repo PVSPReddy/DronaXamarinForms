@@ -56,9 +56,10 @@
                     </ScrollView>
                     
                     <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="End">
-                        <Button Text="Upload" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Clicked="DoneButtonClicked"></Button>
+                        <Button Text="Access DB" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Clicked="DoneButtonClicked"></Button>
+                        <!--<Button Text="Upload" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Clicked="DoneButtonClicked"></Button>
                         <Button Text="Download" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Clicked="DoneButtonClicked"></Button>
-                        <Button Text="Done" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Clicked="DoneButtonClicked"></Button>
+                        <Button Text="Done" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Clicked="DoneButtonClicked"></Button>-->
                     </StackLayout>
                 </StackLayout>
             </StackLayout>
