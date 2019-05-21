@@ -10,7 +10,7 @@ using FireBaseTestPOC.Services;
 using Java.Lang;
 using Xamarin.Forms;
 
-[assembly: Dependency(typeof(AndroidFireBaseService))]
+[assembly: Dependency(typeof(AndroidFireBaseStorageService))]
 namespace FireBaseTestPOC.Droid.Services
 {
     public class FireBaseStorageActionArgs : EventArgs, IFireBaseStorageActionArgs
@@ -22,11 +22,13 @@ namespace FireBaseTestPOC.Droid.Services
     }
 
     //public class AndroidFireBaseService : IFireBaseService//AppCompatActivity, IFireBaseService
-    public class AndroidFireBaseService : Java.Lang.Object, IFireBaseService, IOnSuccessListener, IOnCompleteListener, IOnFailureListener, IOnPausedListener, IOnProgressListener //AppCompatActivity, IFireBaseService
+    public class AndroidFireBaseStorageService : Java.Lang.Object, IFireBaseStorageService, IOnSuccessListener, IOnCompleteListener, IOnFailureListener, IOnPausedListener, IOnProgressListener //AppCompatActivity, IFireBaseService
     {
-        public AndroidFireBaseService(){}
+        public AndroidFireBaseStorageService(){}
 
         public event EventHandler<IFireBaseStorageActionArgs> FirebaseActionCompleted;
+
+        private readonly string FirebaseAppInstance = "gs://mytestfirebproj.appspot.com";
 
         public async Task<bool> CreateFireBaseInstance()
         {
@@ -56,7 +58,7 @@ namespace FireBaseTestPOC.Droid.Services
                 using (System.IO.Stream stream = new FileStream(fileURL, FileMode.Open, FileAccess.Read))
                 {
                     streamResponse = stream;
-                    var firebaseStorageReference = FirebaseStorage.GetInstance("gs://mytestfirebproj.appspot.com").Reference;
+                    var firebaseStorageReference = FirebaseStorage.GetInstance(FirebaseAppInstance).Reference;
                     StorageReference storageFilesReference;
                     if (string.IsNullOrEmpty(fileNameWithOutExtension))
                     {
@@ -87,12 +89,12 @@ namespace FireBaseTestPOC.Droid.Services
         #endregion
 
         #region to get single image
-        public async Task<string> GetAllImageUrlsFromServer(string fileURL, string fileNameWithOutExtension = "")
+        public async Task<string> GetAnImageUrlFromServer(string fileURL, string fileNameWithOutExtension = "")
         {
             string response = "";
             try
             {
-                var firebaseStorageReference = FirebaseStorage.GetInstance("gs://mytestfirebproj.appspot.com").Reference;
+                var firebaseStorageReference = FirebaseStorage.GetInstance(FirebaseAppInstance).Reference;
                 #region multiple ways to get firebase instance
                 /*
                 // Create a storage reference from our app
@@ -111,7 +113,7 @@ namespace FireBaseTestPOC.Droid.Services
                 #endregion
                 StorageReference storageFilesReference;
                 storageFilesReference = firebaseStorageReference.Child(fileURL);               
-                var fileURl = storageFilesReference.DownloadUrl;
+                var fileURl = storageFilesReference.DownloadUrl.AddOnCompleteListener(this).AddOnFailureListener(this).AddOnSuccessListener(this);
                 #region both works
                 /*
                 var fileBytes = storageFilesReference.GetBytes(1024 * 1024).
@@ -123,13 +125,12 @@ namespace FireBaseTestPOC.Droid.Services
                                                      AddOnFailureListener(this).
                                                      AddOnSuccessListener(this);
                 */
+
+                //var fileStream = storageFilesReference.Stream;
+                //var rere = storageFilesReference.Path;
+                //var cfgfgf = storageFilesReference.Root.Path;
+                //var trtf = storageFilesReference.DownloadUrl.AddOnCompleteListener(this).AddOnFailureListener(this).AddOnSuccessListener(this);
                 #endregion
-                var fileStream = storageFilesReference.Stream;
-                var rere = storageFilesReference.Path;
-                var cfgfgf = storageFilesReference.Root.Path;
-
-                var trtf = storageFilesReference.DownloadUrl.AddOnCompleteListener(this).AddOnFailureListener(this).AddOnSuccessListener(this);
-
             }
             catch (System.Exception ex)
             {
@@ -139,6 +140,24 @@ namespace FireBaseTestPOC.Droid.Services
             return response;
         }
         #endregion
+
+        public async Task<string> GetAllImageUrlsFromServer(string fileURL, string fileNameWithOutExtension = "")
+        {
+            string response = "";
+            try
+            {
+                var firebaseStorageReference = FirebaseStorage.GetInstance(FirebaseAppInstance).Reference;
+                StorageReference storageFilesReference;
+                storageFilesReference = firebaseStorageReference.Child(fileURL);
+                var fileURl = storageFilesReference.DownloadUrl.AddOnCompleteListener(this).AddOnFailureListener(this).AddOnSuccessListener(this);
+            }
+            catch (System.Exception ex)
+            {
+                var msg = ex.Message + "\n" + ex.StackTrace;
+                System.Diagnostics.Debug.WriteLine(msg);
+            }
+            return response;
+        }
 
         #region to delete single image
         public async Task<string> DeleteAnImageFromFireBase(string fileURL, string fileNameWithOutExtension = "", string folderStructureName = "")
@@ -152,7 +171,7 @@ namespace FireBaseTestPOC.Droid.Services
                 using (System.IO.Stream stream = new FileStream(fileURL, FileMode.Open, FileAccess.Read))
                 {
                     streamResponse = stream;
-                    var firebaseStorageReference = FirebaseStorage.GetInstance("gs://mytestfirebproj.appspot.com").Reference;
+                    var firebaseStorageReference = FirebaseStorage.GetInstance(FirebaseAppInstance).Reference;
                     StorageReference storageFilesReference;
                     if (string.IsNullOrEmpty(fileNameWithOutExtension))
                     {
@@ -212,7 +231,7 @@ namespace FireBaseTestPOC.Droid.Services
                 var streamResponse = await androidConversionService.GetStreamFromLocalFileURL("");
                 Firebase.FirebaseApp fireBaseApp = Firebase.FirebaseApp.Instance;
                 //FirebaseStorage storageImage = FirebaseStorage.GetInstance(fireBaseApp, "gs://mytestfirebproj.appspot.com");
-                var storageImage = FirebaseStorage.GetInstance(fireBaseApp, "gs://mytestfirebproj.appspot.com").Reference.Child("FireBaseTestImageOne");
+                var storageImage = FirebaseStorage.GetInstance(fireBaseApp, FirebaseAppInstance).Reference.Child("FireBaseTestImageOne");
                 //storageImage.Reference.Child()
                 ////Firebase.FirebaseApp fireBaseApp = Firebase.FirebaseApp.Instance;
                 ////FirebaseStorage storage = FirebaseStorage.GetInstance(fireBaseApp);

@@ -95,12 +95,13 @@
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\IOSFireBaseService.cs" />
+    <Compile Include="Services\IOSFireBaseStorageService.cs" />
     <Compile Include="CustomControls\IOSPageOrientationRender.cs" />
     <Compile Include="CustomControls\IOSRoundEdgeStackLayoutRender.cs" />
     <Compile Include="CustomControls\IOSCustomEntryRender.cs" />
     <Compile Include="CustomControls\IOSCustomPickerRender.cs" />
     <Compile Include="Services\IOSCameraGalleryService.cs" />
+    <Compile Include="Services\IOSFirebaseDatabaseService.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />

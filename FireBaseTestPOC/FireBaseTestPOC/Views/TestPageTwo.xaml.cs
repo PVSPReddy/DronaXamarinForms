@@ -31,7 +31,7 @@ namespace FireBaseTestPOC.Views
                     var msg = ex.Message;
                 }
             };
-            DependencyService.Get<IFireBaseService>().FirebaseActionCompleted += (object sender, IFireBaseStorageActionArgs e) =>
+            DependencyService.Get<IFireBaseStorageService>().FirebaseActionCompleted += (object sender, IFireBaseStorageActionArgs e) =>
             {
                 try
                 {
@@ -84,7 +84,7 @@ namespace FireBaseTestPOC.Views
                     case "Upload":
                         if (!(string.IsNullOrEmpty(localFileURL)))
                         {
-                            await DependencyService.Get<IFireBaseService>().UploadAnImageToFireBase(localFileURL, "", "TemporaryTestFiles/");
+                            await DependencyService.Get<IFireBaseStorageService>().UploadAnImageToFireBase(localFileURL, "", "TemporaryTestFiles/");
                         }
                         else
                         {
@@ -93,7 +93,7 @@ namespace FireBaseTestPOC.Views
                         break;
                     case "Download":
                         var _url = "TemporaryTestFiles/TestFileOne.jpg";
-                        await DependencyService.Get<IFireBaseService>().GetAllImageUrlsFromServer(_url);
+                        await DependencyService.Get<IFireBaseStorageService>().GetAnImageUrlFromServer(_url);
                         break;
                     case "Done":
                         //if (!(string.IsNullOrEmpty(url)))

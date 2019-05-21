@@ -51,12 +51,13 @@
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\AndroidFireBaseService.cs" />
+    <Compile Include="Services\AndroidFireBaseStorageService.cs" />
     <Compile Include="CustomControls\AndroidRoundEdgeStackLayoutRender.cs" />
     <Compile Include="CustomControls\AndroidCustomEntryRender.cs" />
     <Compile Include="CustomControls\AndroidCustomPickerRender.cs" />
     <Compile Include="Services\AndroidCameraGalleryService.cs" />
     <Compile Include="Services\AndroidConversionService.cs" />
+    <Compile Include="Services\AndroidFirebaseDatabaseService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

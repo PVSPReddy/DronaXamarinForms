@@ -3,11 +3,13 @@ using System.Threading.Tasks;
 
 namespace FireBaseTestPOC.Services
 {
-    public interface IFireBaseService
+    public interface IFireBaseStorageService
     {
         Task<bool> CreateFireBaseInstance();
 
         Task<string> GetAllImageUrlsFromServer();
+
+        Task<string> GetAnImageUrlFromServer(string fileURL, string fileNameWithOutExtension = "");
 
         Task<string> GetAllImageUrlsFromServer(string fileURL, string fileNameWithOutExtension = "");
 

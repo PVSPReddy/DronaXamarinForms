@@ -14,6 +14,7 @@
     <Folder Include="Services\" />
     <Folder Include="CustomControls\" />
     <Folder Include="Helpers\" />
+    <Folder Include="Services\FirebaseRESTAPIs\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms" Version="3.6.0.264807" />
