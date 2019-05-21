@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using Xamarin.Forms;
 
 namespace FireBaseTestPOC.Services.FirebaseRESTAPIs
@@ -26,8 +28,32 @@ namespace FireBaseTestPOC.Services.FirebaseRESTAPIs
             //client.DefaultRequestHeaders.Add("securitycode", Constants.ServerSecurityCode);
         }
 
-
-
+        //var postData = new StringContent(JsonConvert.SerializeObject(t), Encoding.UTF8, "application/json");
+        public static async Task<string> CreateItemWithPatchAsync(string methodName, T t)
+        {
+            var postData = new StringContent(JsonConvert.SerializeObject(t), Encoding.UTF8, "application/json");
+            //var postData = new StringContent(JsonConvert.SerializeObject(t));
+            string returnVal = "";
+            try
+            {
+                HttpResponseMessage response = await client.PostAsync(methodName, postData);
+                response.EnsureSuccessStatusCode();
+                if (response.IsSuccessStatusCode)
+                {
+                    returnVal = await response.Content.ReadAsStringAsync();
+                    //t = JsonConvert.DeserializeObject<T>(str);
+                }
+            }
+            catch (Exception ex)
+            {
+                var msg = ex.Message;
+                returnVal = null;
+            }
+            var request = JsonConvert.SerializeObject(t);
+            System.Diagnostics.Debug.WriteLine("Request: " + request + "\n");
+            System.Diagnostics.Debug.WriteLine("Response: " + "\n" + ((returnVal != null) ? returnVal : ""));
+            return returnVal;
+        }
 
         /*
         public static async Task<string> CreateOrUpdateItemWithPostAsync(string methodName, T t)
