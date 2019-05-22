@@ -17,6 +17,8 @@
     <Folder Include="Services\FirebaseRESTAPIs\" />
     <Folder Include="Models\" />
     <Folder Include="Models\FirebaseModels\" />
+    <Folder Include="RESTServices\" />
+    <Folder Include="RESTServices\InterfaceLayer\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms" Version="3.6.0.264807" />
