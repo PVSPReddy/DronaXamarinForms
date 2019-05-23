@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using FireBaseTestPOC.CustomControls;
 using FireBaseTestPOC.Models.FirebaseModels;
+using FireBaseTestPOC.RESTServices;
+using FireBaseTestPOC.RESTServices.BusinessLayer;
+using FireBaseTestPOC.RESTServices.InterfaceLayer;
 using Xamarin.Forms;
 
 namespace FireBaseTestPOC.Views
@@ -45,8 +48,22 @@ namespace FireBaseTestPOC.Views
                             requestObject = await GetValues(requestObject);
                             if (requestObject != null)
                             {
-
+                                using (IFireBaseWebServices fireBaseWebServices = new FireBaseWebServices())
+                                {
+                                    var reponse = await fireBaseWebServices.POST_UserDataToDatabase(requestObject);
+                                }
+                                //if (requestObject.aadharCardID != null)
+                                //{
+                                //    using (IFireBaseWebServices fireBaseWebServices = new FireBaseWebServices())
+                                //    {
+                                //        var reponse = fireBaseWebServices.PATCH_UserDataToDatabase(requestObject);
+                                //    }
+                                //}
                             }
+                        }
+                        else
+                        {
+                            await DisplayAlert("Alert", "Some fields are not valid", "OK");
                         }
                         break;
                 }
@@ -67,18 +84,34 @@ namespace FireBaseTestPOC.Views
 
 
                 requestObject = new UsersRequestObject();
-                requestObject.aadharCardID.aadhar_card_no = (Int64.TryParse(entryAadharNumber.Value, out defaultLongValue)) ? Convert.ToInt64(entryAadharNumber.Value) : defaultLongValue;
-                requestObject.aadharCardID.city_current = entryCurrentCity.Value;
-                requestObject.aadharCardID.country_current = entryCurrentCountry.Value;
-                requestObject.aadharCardID.email_id = entryEmailID.Value;
-                requestObject.aadharCardID.first_name = entryFirstname.Value;
-                requestObject.aadharCardID.last_name = entryLastName.Value;
-                requestObject.aadharCardID.mobile_no_alternative = sumDigits;
-                requestObject.aadharCardID.mobile_no_primary = (Int64.TryParse(entryMobileNumber.Value, out defaultLongValue)) ? Convert.ToInt64(entryMobileNumber.Value) : defaultLongValue;
-                requestObject.aadharCardID.pincode_current = (Int32.TryParse(entryCurrentAddressPIN.Value, out defaultIntValue)) ? Convert.ToInt32(entryCurrentAddressPIN.Value) : defaultIntValue;
-                requestObject.aadharCardID.pincode_permanent = (Int32.TryParse(entryPermanentAddressPIN.Value, out defaultIntValue)) ? Convert.ToInt32(entryPermanentAddressPIN.Value) : defaultIntValue;
-                requestObject.aadharCardID.state_current= entryCurrentState.Value;
-                requestObject.aadharCardID.street_address = entryCurrentStreetAddress.Value;
+
+                requestObject.aadhar_card_no = (Int64.TryParse(entryAadharNumber.Value, out defaultLongValue)) ? Convert.ToInt64(entryAadharNumber.Value) : defaultLongValue;
+                requestObject.city_current = entryCurrentCity.Value;
+                requestObject.country_current = entryCurrentCountry.Value;
+                requestObject.email_id = entryEmailID.Value;
+                requestObject.first_name = entryFirstname.Value;
+                requestObject.last_name = entryLastName.Value;
+                requestObject.mobile_no_alternative = sumDigits;
+                requestObject.mobile_no_primary = (Int64.TryParse(entryMobileNumber.Value, out defaultLongValue)) ? Convert.ToInt64(entryMobileNumber.Value) : defaultLongValue;
+                requestObject.pincode_current = (Int32.TryParse(entryCurrentAddressPIN.Value, out defaultIntValue)) ? Convert.ToInt32(entryCurrentAddressPIN.Value) : defaultIntValue;
+                requestObject.pincode_permanent = (Int32.TryParse(entryPermanentAddressPIN.Value, out defaultIntValue)) ? Convert.ToInt32(entryPermanentAddressPIN.Value) : defaultIntValue;
+                requestObject.state_current = entryCurrentState.Value;
+                requestObject.street_address = entryCurrentStreetAddress.Value;
+
+                //requestObject.aadharCardID = new AAdharCardID();
+                //requestObject.aadharCardID.aadhar_card_no = (Int64.TryParse(entryAadharNumber.Value, out defaultLongValue)) ? Convert.ToInt64(entryAadharNumber.Value) : defaultLongValue;
+                //requestObject.aadharCardID.city_current = entryCurrentCity.Value;
+                //requestObject.aadharCardID.country_current = entryCurrentCountry.Value;
+                //requestObject.aadharCardID.email_id = entryEmailID.Value;
+                //requestObject.aadharCardID.first_name = entryFirstname.Value;
+                //requestObject.aadharCardID.last_name = entryLastName.Value;
+                //requestObject.aadharCardID.mobile_no_alternative = sumDigits;
+                //requestObject.aadharCardID.mobile_no_primary = (Int64.TryParse(entryMobileNumber.Value, out defaultLongValue)) ? Convert.ToInt64(entryMobileNumber.Value) : defaultLongValue;
+                //requestObject.aadharCardID.pincode_current = (Int32.TryParse(entryCurrentAddressPIN.Value, out defaultIntValue)) ? Convert.ToInt32(entryCurrentAddressPIN.Value) : defaultIntValue;
+                //requestObject.aadharCardID.pincode_permanent = (Int32.TryParse(entryPermanentAddressPIN.Value, out defaultIntValue)) ? Convert.ToInt32(entryPermanentAddressPIN.Value) : defaultIntValue;
+                //requestObject.aadharCardID.state_current= entryCurrentState.Value;
+                //requestObject.aadharCardID.street_address = entryCurrentStreetAddress.Value;
+
             }
             catch (Exception ex)
             {
@@ -98,6 +131,7 @@ namespace FireBaseTestPOC.Views
                     //stackSingleNumber.IsVisible = !owner.IsToggled;
                     //stackRangeNumbers.IsVisible = owner.IsToggled;
                     stackAlternateMobileNumbers.IsVisible = owner.IsToggled;
+                    stackAddRemoveButton.IsVisible = owner.IsToggled;
                     //if (!owner.IsToggled)
                     //{
                     //    switchSumNumbers.IsToggled = owner.IsToggled;
@@ -202,69 +236,65 @@ namespace FireBaseTestPOC.Views
 
         async Task<bool> Validate()
         {
-            bool isValidate = true;
-            if (string.IsNullOrEmpty(entryFirstname.Value))
+            if (!(await entryFirstname.Validate()))
             {
-                isValidate = false;
                 entryFirstname.BorderColor = Color.Maroon;
+                return false;
             }
-            if (string.IsNullOrEmpty(entryLastName.Value))
+            else if (!(await entryLastName.Validate()))
             {
-                isValidate = false;
                 entryLastName.BorderColor = Color.Maroon;
+                return false;
             }
-            if (string.IsNullOrEmpty(entryMobileNumber.Value))
+            else if (!(await entryMobileNumber.Validate()))
             {
-                isValidate = false;
                 entryMobileNumber.BorderColor = Color.Maroon;
+                return false;
             }
-            if (string.IsNullOrEmpty(entryEmailID.Value))
+            else if (!(await entryEmailID.Validate()))
             {
-                isValidate = false;
                 entryEmailID.BorderColor = Color.Maroon;
+                return false;
             }
-            if (string.IsNullOrEmpty(entryAadharNumber.Value))
+            else if (!(await entryAadharNumber.Validate()))
             {
-                isValidate = false;
                 entryAadharNumber.BorderColor = Color.Maroon;
+                return false;
             }
-            if (string.IsNullOrEmpty(entryPermanentAddressPIN.Value))
+            else if (!(await entryPermanentAddressPIN.Validate()))
             {
-                isValidate = false;
                 entryPermanentAddressPIN.BorderColor = Color.Maroon;
+                return false;
             }
-            if (string.IsNullOrEmpty(entryCurrentStreetAddress.Value))
+            else if (!(await entryCurrentStreetAddress.Validate()))
             {
-                isValidate = false;
                 entryCurrentStreetAddress.BorderColor = Color.Maroon;
+                return false;
             }
-            if (string.IsNullOrEmpty(entryCurrentAddressPIN.Value))
+            else if (!(await entryCurrentAddressPIN.Validate()))
             {
-                isValidate = false;
                 entryCurrentAddressPIN.BorderColor = Color.Maroon;
+                return false;
             }
-            if (string.IsNullOrEmpty(entryCurrentCity.Value))
+            else if (!(await entryCurrentCity.Validate()))
             {
-                isValidate = false;
                 entryCurrentCity.BorderColor = Color.Maroon;
+                return false;
             }
-            if (string.IsNullOrEmpty(entryCurrentState.Value))
+            else if (!(await entryCurrentState.Validate()))
             {
-                isValidate = false;
                 entryCurrentState.BorderColor = Color.Maroon;
+                return false;
             }
-            if (string.IsNullOrEmpty(entryCurrentCountry.Value))
+            else if (!(await entryCurrentCountry.Validate()))
             {
-                isValidate = false;
                 entryCurrentCountry.BorderColor = Color.Maroon;
+                return false;
             }
-            //if ((stackSumDigits.IsVisible) && (entryEndNumber.Value))
-            //{
-            //    isValidate = false;
-            //    entryEndNumber.BorderColor = Color.Maroon;
-            //}
-            return isValidate;
+            else
+            {
+                return true;
+            }
         }
-
     }
 }

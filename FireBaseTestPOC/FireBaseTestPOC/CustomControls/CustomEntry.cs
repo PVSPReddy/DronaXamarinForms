@@ -41,6 +41,18 @@ namespace FireBaseTestPOC.CustomControls
             var ctrl = (CustomEntry)bindable;
             ctrl.AllowValidatedTextOnly = newvalue;
         });
+        public static readonly BindableProperty IsValidProperty = BindableProperty.Create(propertyName: "IsValid", returnType: typeof(bool), declaringType: typeof(CustomEntry), defaultValue: default(bool));
+        public bool IsValid
+        {
+            get
+            {
+                return (bool)GetValue(IsValidProperty);
+            }
+            set
+            {
+                SetValue(IsValidProperty, value);
+            }
+        }
         //public bool ShallCheckValidation
         //{
         //    get
@@ -241,6 +253,7 @@ namespace FireBaseTestPOC.CustomControls
             {
                 var msg = ex.Message + "\n" + ex.StackTrace;
             }
+            IsValid = isValid;
             return isValid;
         }
 
@@ -262,6 +275,7 @@ namespace FireBaseTestPOC.CustomControls
             {
                 var msg = ex.Message + "\n" + ex.StackTrace;
             }
+            IsValid = isValid;
             return isValid;
         }
 

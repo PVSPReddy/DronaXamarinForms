@@ -19,6 +19,7 @@
     <Folder Include="Models\FirebaseModels\" />
     <Folder Include="RESTServices\" />
     <Folder Include="RESTServices\InterfaceLayer\" />
+    <Folder Include="RESTServices\BusinessLayer\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms" Version="3.6.0.264807" />

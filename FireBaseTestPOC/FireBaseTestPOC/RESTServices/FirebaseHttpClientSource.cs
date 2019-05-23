@@ -30,8 +30,7 @@ namespace FireBaseTestPOC.RESTServices
             //client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
-
-        public static async Task<string> FireBasePostDataAddAsync(string methodName, T t)
+        public static async Task<string> FireBasePostDataAsync(string methodName, T t)
         {
             var postData = new StringContent(JsonConvert.SerializeObject(t), Encoding.UTF8, "application/json");
             //var postData = new StringContent(JsonConvert.SerializeObject(t));
@@ -53,23 +52,33 @@ namespace FireBaseTestPOC.RESTServices
                 var msg = ex.Message + "\n" + ex.StackTrace;
                 returnVal = null;
             }
-
-            //try
-            //{
-            //    var req = JsonConvert.SerializeObject(t);
-            //    var resp = returnVal;
-            //    var printString = "MethodName: " + methodName + "\n" + "Request Object: \n" + req + "\n" + "ResponseObject: \n " + resp;
-            //    System.Diagnostics.Debug.WriteLine(printString);
-            //}
-            //catch (Exception ex)
-            //{
-            //    var msg = ex.Message + "\n" + ex.StackTrace;
-            //}
-
             return returnVal;
         }
 
-
+        public static async Task<string> FireBasePatchDataAsync(string methodName, T t)
+        {
+            var postData = new StringContent(JsonConvert.SerializeObject(t), Encoding.UTF8, "application/json");
+            //var postData = new StringContent(JsonConvert.SerializeObject(t));
+            string returnVal = "";
+            try
+            {
+                var response = await FirebaseRESTAPIServices.PatchDataToFirebaseAsync(client, new Uri(FirebaseBaseREST_API_URL), postData);
+                if (response.IsSuccessStatusCode)
+                {
+                    returnVal = await response.Content.ReadAsStringAsync();
+                }
+                else
+                {
+                    returnVal = response.Content.ReadAsStringAsync().Result;
+                }
+            }
+            catch (Exception ex)
+            {
+                var msg = ex.Message + "\n" + ex.StackTrace;
+                returnVal = null;
+            }
+            return returnVal;
+        }
 
         public static async Task<string> CreateOrUpdateItemWithPostAsync(string methodName, T t)
         {

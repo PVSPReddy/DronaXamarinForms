@@ -8,7 +8,7 @@ namespace FireBaseTestPOC.Models.FirebaseModels
 
     }
 
-    public class AAdharCardID
+    public class UsersRequestObject
     {
         public long aadhar_card_no { get; set; }
         public string city_current { get; set; }
@@ -25,8 +25,8 @@ namespace FireBaseTestPOC.Models.FirebaseModels
         public string street_address { get; set; }
     }
 
-    public class UsersRequestObject
-    {
-        public AAdharCardID aadharCardID { get; set; }
-    }
+    //public class UsersRequestObject
+    //{
+    //    public AAdharCardID aadharCardID { get; set; }
+    //}
 }

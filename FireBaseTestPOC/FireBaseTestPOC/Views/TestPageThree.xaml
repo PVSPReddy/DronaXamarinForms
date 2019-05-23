@@ -57,7 +57,7 @@
                                 <CControls:CustomEntryGroup x:Name="entryLastName" CustomPlaceholder="Enter Last Name" Style="{StaticResource entryStyles}" CustomKeyboard="Text">
                                     <x:Arguments><CControls:MainFieldType>EntryField</CControls:MainFieldType></x:Arguments>
                                 </CControls:CustomEntryGroup>
-                                <CControls:CustomEntryGroup x:Name="entryMobileNumber" CustomPlaceholder="Enter Mobile Number" Style="{StaticResource entryStyles}" CustomKeyboard="Text">
+                                <CControls:CustomEntryGroup x:Name="entryMobileNumber" CustomPlaceholder="Enter Mobile Number" AllowableTextLength="10" RegexValidatorString="([0-9]{0,10})" Style="{StaticResource entryStyles}" CustomKeyboard="Numeric">
                                     <x:Arguments><CControls:MainFieldType>EntryField</CControls:MainFieldType></x:Arguments>
                                 </CControls:CustomEntryGroup>
                                 <StackLayout x:Name="stackAlternateMobileNumbersGroup" Grid.Row="1" Grid.Column="0" HorizontalOptions="FillAndExpand" VerticalOptions="Center">
@@ -83,16 +83,16 @@
                                 <CControls:CustomEntryGroup x:Name="entryEmailID" CustomPlaceholder="Enter Email Id" Style="{StaticResource entryStyles}" CustomKeyboard="Text">
                                     <x:Arguments><CControls:MainFieldType>EntryField</CControls:MainFieldType></x:Arguments>
                                 </CControls:CustomEntryGroup>
-                                <CControls:CustomEntryGroup x:Name="entryAadharNumber" CustomPlaceholder="Enter Aadhar Card Number" Style="{StaticResource entryStyles}" CustomKeyboard="Text">
+                                <CControls:CustomEntryGroup x:Name="entryAadharNumber" CustomPlaceholder="Enter Aadhar Card Number" AllowableTextLength="12" RegexValidatorString="([0-9]{0,12})" Style="{StaticResource entryStyles}" CustomKeyboard="Numeric">
                                     <x:Arguments><CControls:MainFieldType>EntryField</CControls:MainFieldType></x:Arguments>
                                 </CControls:CustomEntryGroup>
-                                <CControls:CustomEntryGroup x:Name="entryPermanentAddressPIN" CustomPlaceholder="Enter Permanent Address PIN" Style="{StaticResource entryStyles}" CustomKeyboard="Text">
+                                <CControls:CustomEntryGroup x:Name="entryPermanentAddressPIN" CustomPlaceholder="Enter Permanent Address PIN" AllowableTextLength="6" RegexValidatorString="([0-9]{0,6})" Style="{StaticResource entryStyles}" CustomKeyboard="Numeric">
                                     <x:Arguments><CControls:MainFieldType>EntryField</CControls:MainFieldType></x:Arguments>
                                 </CControls:CustomEntryGroup>
                                 <CControls:CustomEntryGroup x:Name="entryCurrentStreetAddress" CustomPlaceholder="Enter Current Street Address" Style="{StaticResource entryStyles}" CustomKeyboard="Text">
                                     <x:Arguments><CControls:MainFieldType>EntryField</CControls:MainFieldType></x:Arguments>
                                 </CControls:CustomEntryGroup>
-                                <CControls:CustomEntryGroup x:Name="entryCurrentAddressPIN" CustomPlaceholder="Enter Current Address PIN" Style="{StaticResource entryStyles}" CustomKeyboard="Text">
+                                <CControls:CustomEntryGroup x:Name="entryCurrentAddressPIN" CustomPlaceholder="Enter Current Address PIN" AllowableTextLength="6" RegexValidatorString="([0-9]{0,6})" Style="{StaticResource entryStyles}" CustomKeyboard="Numeric">
                                     <x:Arguments><CControls:MainFieldType>EntryField</CControls:MainFieldType></x:Arguments>
                                 </CControls:CustomEntryGroup>
                                 <CControls:CustomEntryGroup x:Name="entryCurrentCity" CustomPlaceholder="Enter Current City" Style="{StaticResource entryStyles}" CustomKeyboard="Text">

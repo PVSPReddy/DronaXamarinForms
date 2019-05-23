@@ -253,7 +253,18 @@ namespace FireBaseTestPOC.CustomControls
             var ctrl = (CustomEntryGroup)bindable;
             ctrl.ShallAddBorder = newvalue;
         });
-
+        public static readonly BindableProperty IsValidProperty = BindableProperty.Create(propertyName: "IsValid", returnType: typeof(bool), declaringType: typeof(CustomEntryGroup), defaultValue: default(bool));
+        public bool IsValid
+        {
+            get
+            {
+                return (bool)GetValue(IsValidProperty);
+            }
+            set
+            {
+                SetValue(IsValidProperty, value);
+            }
+        }
         public CornerEdgeStyle CornerEdgeType
         {
             get
