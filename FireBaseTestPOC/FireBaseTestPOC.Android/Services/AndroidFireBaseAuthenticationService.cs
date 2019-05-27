@@ -12,11 +12,11 @@ namespace FireBaseTestPOC.Droid.Services
 {
     public class AndroidFireBaseAuthenticationService : Java.Lang.Object, IFireBaseAuthenticationService, IOnSuccessListener, IOnCompleteListener, IOnFailureListener
     {
-        //FirebaseAuth authInstance;
+        FirebaseAuth authInstance;
         public AndroidFireBaseAuthenticationService()
         {
             Firebase.FirebaseApp fireBaseApp = Firebase.FirebaseApp.Instance;
-            //authInstance = FirebaseAuth.GetInstance(fireBaseApp);
+            authInstance = FirebaseAuth.GetInstance(fireBaseApp);
         }
 
         public async Task<bool> AuthenticateUser()
@@ -24,7 +24,7 @@ namespace FireBaseTestPOC.Droid.Services
             bool isAuthenticated = false;
             try
             {
-                /*
+
                 FirebaseUser currentUser = authInstance.CurrentUser;
                 if (currentUser == null)
                 {
@@ -32,9 +32,17 @@ namespace FireBaseTestPOC.Droid.Services
                 }
                 else
                 {
+                    var eee1 = currentUser.Email;
+                    var eee2 = currentUser.DisplayName;
+                    var eee3 = currentUser.IsEmailVerified;
+                    var eee4 = currentUser.PhoneNumber; 
+                    var eee5 = currentUser.PhotoUrl;
+                    var eee6 = currentUser.Uid;
+
+
                     //var sdf = currentUser.
                 }
-                */
+
                 //AuthCredential authCredential = AuthCredential.;
                 //authInstance.SignInWithCredentialAsync()
 
@@ -104,4 +112,3 @@ namespace FireBaseTestPOC.Droid.Services
         }
     }
 }
-
