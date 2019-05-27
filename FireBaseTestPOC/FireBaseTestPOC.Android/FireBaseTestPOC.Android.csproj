@@ -58,6 +58,7 @@
     <Compile Include="Services\AndroidCameraGalleryService.cs" />
     <Compile Include="Services\AndroidConversionService.cs" />
     <Compile Include="Services\AndroidFirebaseDatabaseService.cs" />
+    <Compile Include="Services\AndroidFireBaseAuthenticationService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

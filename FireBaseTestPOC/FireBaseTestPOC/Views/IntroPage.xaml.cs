@@ -22,8 +22,8 @@ namespace FireBaseTestPOC.Views
                 //DependencyService.Get<IFireBaseService>().GetAllImageUrlsFromServer();
                 //Navigation.PushModalAsync(new BikeNumberSelectionPage());
                 //Navigation.PushModalAsync(new TestPages());
-                //Navigation.PushModalAsync(new TestPageTwo());
-                Navigation.PushModalAsync(new TestPageThree());
+                Navigation.PushModalAsync(new TestPageTwo());
+                //Navigation.PushModalAsync(new TestPageThree());
             }
             catch (Exception ex)
             {

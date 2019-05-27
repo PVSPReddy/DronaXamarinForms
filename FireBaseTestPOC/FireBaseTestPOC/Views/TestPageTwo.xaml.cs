@@ -8,9 +8,11 @@ namespace FireBaseTestPOC.Views
     public partial class TestPageTwo : ContentPage
     {
         string localFileURL = "";
+        IFireBaseAuthenticationService fireBaseAuthenticationService;
         public TestPageTwo()
         {
             InitializeComponent();//FireBaseTestImageOne.png
+            fireBaseAuthenticationService = DependencyService.Get<IFireBaseAuthenticationService>();
             DependencyService.Get<ICameraGalleryService>().PictureActionCompleted += (object sender, IPictureActionArgs e) =>
             {
                 try
@@ -109,6 +111,9 @@ namespace FireBaseTestPOC.Views
                         break;
                     case "Gallery":
                         DependencyService.Get<ICameraGalleryService>().SelectImage();
+                        break;
+                    case "User Authentication":
+                        fireBaseAuthenticationService.AuthenticateUser();
                         break;
                     default:
                         break;
