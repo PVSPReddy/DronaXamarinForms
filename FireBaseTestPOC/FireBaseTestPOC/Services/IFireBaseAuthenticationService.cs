@@ -5,6 +5,8 @@ namespace FireBaseTestPOC.Services
 {
     public interface IFireBaseAuthenticationService
     {
-        Task<bool> AuthenticateUser();
+        Task<bool> AuthenticateUserWithEmailAndPassword();
+
+        Task<bool> AuthenticateUserWithGoogleAccount();
     }
 }

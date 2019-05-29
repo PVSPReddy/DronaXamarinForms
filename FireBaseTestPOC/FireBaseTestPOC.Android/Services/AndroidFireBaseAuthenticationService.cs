@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Android.Content;
+using Android.Gms.Auth.Api.SignIn;
 using Android.Gms.Tasks;
 using Firebase.Auth;
 using FireBaseTestPOC.Droid.Services;
@@ -19,7 +21,7 @@ namespace FireBaseTestPOC.Droid.Services
             authInstance = FirebaseAuth.GetInstance(fireBaseApp);
         }
 
-        public async Task<bool> AuthenticateUser()
+        public async Task<bool> AuthenticateUserWithEmailAndPassword()
         {
             bool isAuthenticated = false;
             try
@@ -61,6 +63,48 @@ namespace FireBaseTestPOC.Droid.Services
                 //        .setAvailableProviders(providers)
                 //        .build(),
                 //RC_SIGN_IN);
+            }
+            catch (System.Exception ex)
+            {
+                var msg = ex.Message + "\n" + ex.StackTrace;
+                System.Diagnostics.Debug.WriteLine(msg);
+            }
+            return isAuthenticated;
+        }
+
+        public async Task<bool> AuthenticateUserWithGoogleAccount()
+        {
+            bool isAuthenticated = false;
+            try
+            {
+
+                FirebaseUser currentUser = authInstance.CurrentUser;
+
+                //Android.Gms.Auth.Api.SignIn.GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DefaultSignIn).RequestIdToken("").
+                Android.Gms.Auth.Api.SignIn.GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DefaultSignIn).RequestEmail().Build();
+
+                //GoogleSignInAccount.
+
+                //var mGoogleSignInClient = GoogleSignInAccount.lient(this, gso);
+
+                //Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+                //startActivityForResult(signInIntent, RC_SIGN_IN);
+
+
+
+                if (currentUser == null)
+                {
+                    authInstance.CreateUserWithEmailAndPassword("pvsivapr@gmail.com", "sivaprasadreddy").AddOnSuccessListener(this).AddOnFailureListener(this).AddOnCompleteListener(this);
+                }
+                else
+                {
+                    var eee1 = currentUser.Email;
+                    var eee2 = currentUser.DisplayName;
+                    var eee3 = currentUser.IsEmailVerified;
+                    var eee4 = currentUser.PhoneNumber;
+                    var eee5 = currentUser.PhotoUrl;
+                    var eee6 = currentUser.Uid;
+                }
             }
             catch (System.Exception ex)
             {

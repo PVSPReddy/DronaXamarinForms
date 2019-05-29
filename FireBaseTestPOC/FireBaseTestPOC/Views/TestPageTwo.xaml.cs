@@ -112,8 +112,11 @@ namespace FireBaseTestPOC.Views
                     case "Gallery":
                         DependencyService.Get<ICameraGalleryService>().SelectImage();
                         break;
-                    case "User Authentication":
-                        fireBaseAuthenticationService.AuthenticateUser();
+                    case "User Authentication With Email and Password":
+                        fireBaseAuthenticationService.AuthenticateUserWithEmailAndPassword();
+                        break;
+                    case "User Authentication With Google":
+                        fireBaseAuthenticationService.AuthenticateUserWithGoogleAccount();
                         break;
                     default:
                         break;
